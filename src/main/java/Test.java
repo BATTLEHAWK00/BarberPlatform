@@ -1,4 +1,6 @@
+import bean.Order;
 import bean.User;
+import dao.OrderMapper;
 import dao.UserMapper;
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
@@ -7,6 +9,7 @@ import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.math.BigDecimal;
 
 public class Test {
     public static void main(String[] args) throws IOException {
@@ -15,11 +18,13 @@ public class Test {
         SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
         try (SqlSession session = sqlSessionFactory.openSession(true)) {
             UserMapper mapper = session.getMapper(UserMapper.class);
-            System.out.println(mapper.getUserByPhone("321321").toString());
-            mapper.deleteUser(1);
-            for (var i : mapper.getUserList()) {
-                System.out.println(i.toString());
-            }
+            OrderMapper orderMapper=session.getMapper(OrderMapper.class);
+            Order order=new Order();
+            order.setOwnerid(4);
+            order.setSponsorid(1);
+            order.setPrice(new BigDecimal(123));
+            order.setState(0);
+            orderMapper.createOrder(order);
         }
     }
 }

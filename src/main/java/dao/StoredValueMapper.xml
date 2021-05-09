@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="dao.StoredValueMapper">
+    <insert id="writeRechargeLog" parameterType="bean.StoredValueLog">
+        INSERT INTO storedvalue_log
+        (userid,recharge_amount,recharge_time,type,remark)
+        VALUES
+        (#{userid},#{recharge_amount},#{recharge_time},#{type},#{remark})
+    </insert>
+
+    <update id="updateValue">
+        UPDATE user
+        SET balance=#{value}
+        WHERE id=#{id}
+    </update>
+    <select id="getRechargeLogList" resultType="bean.StoredValueLog">
+        SELECT * FROM storedvalue_log
+    </select>
+    <select id="getRechargeLogListByUser" resultType="bean.StoredValueLog">
+        SELECT * FROM storedvalue_log WHERE userid=#{userid}
+    </select>
+</mapper>
