@@ -15,7 +15,8 @@ public class User {
     String passwd;
     String salt;
     String phone;
-    int gender;
+    Integer gender;
+    Date birthdate;
     String remark;
     BigDecimal balance;
     String openid;

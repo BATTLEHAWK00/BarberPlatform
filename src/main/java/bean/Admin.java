@@ -15,6 +15,6 @@ public class Admin {
     String phone;
     String remark;
     Date reg_time;
-    Date last_order;
+    int last_order;
     String openid;
 }

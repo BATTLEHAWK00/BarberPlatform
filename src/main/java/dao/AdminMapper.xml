@@ -10,32 +10,32 @@
         (#{name},#{passwd},#{salt},#{phone},#{remark},now(),#{last_order},#{openid})
     </insert>
     <update id="updatePhone">
-        UPDATE admin
+        UPDATE admins
         SET phone=#{phone}
         WHERE adminid=#{id}
     </update>
     <update id="updatePasswd">
-        UPDATE admin
+        UPDATE admins
         SET passwd=#{passwd},salt=#{salt}
         WHERE adminid=#{id}
     </update>
     <update id="updateOpenID">
-        UPDATE admin
+        UPDATE admins
         SET openid=#{openid}
         WHERE adminid=#{id}
     </update>
     <update id="updateRemark">
-        UPDATE admin
+        UPDATE admins
         SET remark=#{remark}
         WHERE adminid=#{id}
     </update>
     <update id="updateLastOrder">
-        UPDATE admin
-        SET last_order=#{time}
+        UPDATE admins
+        SET last_order=#{orderid}
         WHERE adminid=#{id}
     </update>
     <delete id="deleteAdmin">
-        DELETE FROM admin WHERE adminid=#{id}
+        DELETE FROM admins WHERE adminid=#{id}
     </delete>
     <select id="getAdminByID" resultType="bean.Admin">
         SELECT * FROM admins WHERE adminid=#{id}

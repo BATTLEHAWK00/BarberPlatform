@@ -21,6 +21,5 @@
     </environments>
     <mappers>
         <package name="dao"/>
-<!--        <mapper class="dao.UserMapper"/>-->
     </mappers>
 </configuration>

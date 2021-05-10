@@ -25,7 +25,7 @@ public interface AdminMapper {
 
     void updateRemark(@Param("id") int id, @Param("remark") String remark);
 
-    void updateLastOrder(@Param("id") int id, @Param("time") Date time);
+    void updateLastOrder(@Param("id") int id, @Param("orderid") int orderid);
 
     void deleteAdmin(int id);
 }

@@ -29,5 +29,8 @@ public interface UserMapper {
     void updateGender(@Param("id") int id, @Param("gender") int gender);
 
     void updateLastConsume(@Param("id") int id, @Param("time") Date time);
+
     void deleteUser(int id);
+
+    void updateBirthDate(@Param("id") int id, @Param("birthdate") Date birthdate);
 }

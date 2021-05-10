@@ -5,9 +5,9 @@
 <mapper namespace="dao.UserMapper">
     <insert id="registerUser" parameterType="bean.User">
         INSERT INTO users
-        (username,passwd,salt,phone,gender,remark,openid,lastconsume_time,reg_time)
+        (username,passwd,salt,phone,birthdate,gender,remark,openid,lastconsume_time,reg_time)
         VALUES
-        (#{username},#{passwd},#{salt},#{phone},#{gender},#{remark},#{openid},null,now())
+        (#{username},#{passwd},#{salt},#{phone},#{birthdate},#{gender},#{remark},#{openid},null,now())
     </insert>
     <update id="updatePasswd">
         UPDATE users
@@ -39,6 +39,11 @@
         SET lastconsume_time=#{time}
         WHERE userid=#{id}
     </update>
+    <update id="updateBirthDate">
+        UPDATE users
+        SET birthdate=#{birthdate}
+        WHERE userid=#{id}
+    </update>
     <delete id="deleteUser">
         DELETE FROM users WHERE userid=#{id}
     </delete>
@@ -52,6 +57,6 @@
         SELECT * FROM users WHERE phone=#{phone}
     </select>
     <select id="getUserList" resultType="bean.User">
-        SELECT * FROM users
+        SELECT * FROM v_user
     </select>
 </mapper>
