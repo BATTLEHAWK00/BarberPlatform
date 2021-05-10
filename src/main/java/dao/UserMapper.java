@@ -6,6 +6,7 @@ import org.apache.ibatis.annotations.Param;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 public interface UserMapper {
     User getUserByID(int id);
@@ -13,6 +14,8 @@ public interface UserMapper {
     User getUserByUsername(String username);
 
     User getUserByPhone(String phone);
+
+    Map<String,Object> getUserPasswd(int id);
 
     List<User> getUserList();
 

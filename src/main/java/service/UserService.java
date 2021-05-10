@@ -20,4 +20,6 @@ public interface UserService {
     List<User> getUserList() throws ServiceException;
 
     void deleteUser(int id) throws ServiceException;
+
+    boolean verifyPasswd(int id,String passwd) throws ServiceException;
 }

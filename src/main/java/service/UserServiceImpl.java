@@ -80,4 +80,14 @@ public class UserServiceImpl implements UserService {
         userMapper.deleteUser(id);
     }
 
+    @Override
+    public boolean verifyPasswd(int id, String passwd) throws ServiceException {
+        if (userMapper.getUserByID(id) == null) {
+            throw new ServiceException("用户不存在!", 400);
+        }
+        Map<String, Object> mp = userMapper.getUserPasswd(id);
+        String passwd_md5 = SecurityUtil.getInstance().getSaltMD5(passwd, (String) mp.get("salt"));
+        return passwd_md5.equals(mp.get("passwd"));
+    }
+
 }

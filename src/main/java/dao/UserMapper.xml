@@ -59,4 +59,7 @@
     <select id="getUserList" resultType="bean.User">
         SELECT * FROM v_user
     </select>
+    <select id="getUserPasswd" resultType="java.util.Map">
+        SELECT * FROM v_userpasswd WHERE userid=#{id}
+    </select>
 </mapper>

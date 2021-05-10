@@ -87,4 +87,14 @@ public class UserController {
         userService.deleteUser(uid);
         return new Response();
     }
+
+    @RequestMapping(value = "/id/{uid}/passwd/verify", method = {RequestMethod.GET})
+    public Response verifyPasswd(@PathVariable("uid") int uid,
+                                 @RequestParam("passwd") String passwd
+    ) throws ServiceException {
+        Response response = new Response();
+        boolean flag = userService.verifyPasswd(uid, passwd);
+        response.setData(flag);
+        return response;
+    }
 }
