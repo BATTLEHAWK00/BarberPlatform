@@ -4,7 +4,7 @@
       <a-col :xs="0" :md="0" :sm="12" :lg="14" :xl="16"></a-col>
       <a-col :xs="24" :sm="24" :md="12" :lg="10" :xl="6">
         <div class="login-container-form">
-          <div class="login-container-hello">hello!</div>
+          <div class="login-container-hello">你好!</div>
           <div class="login-container-title">欢迎来到 {{ title }}</div>
           <a-form :model="form" @submit="handleSubmit" @submit.prevent>
             <a-form-item>

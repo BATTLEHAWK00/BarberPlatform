@@ -1,8 +1,10 @@
 <template>
   <div class="vab-logo">
-    <vab-icon v-if="logo" :icon="logo"></vab-icon>
-    <span class="anticon"></span>
-    <span>{{ title }}</span>
+    <a href="/">
+      <vab-icon v-if="logo" :icon="logo"></vab-icon>
+      <span class="anticon"></span>
+      <span>{{ title }}</span>
+    </a>
   </div>
 </template>
 
@@ -33,5 +35,8 @@
     color: #fff;
     text-overflow: ellipsis;
     white-space: nowrap;
+  }
+  .vab-logo h3 {
+    color: #fff;
   }
 </style>

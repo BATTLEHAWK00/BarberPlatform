@@ -35,7 +35,7 @@
 
   .fade-transform-enter-from,
   .fade-transform-leave-to {
-    transform: translateX(50px) scale(0.8);
+    transform: translateX(-100px) scale(0.75);
     opacity: 0;
   }
 
