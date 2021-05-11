@@ -26,7 +26,7 @@ export const asyncRoutes = [
     component: Layout,
     redirect: '/index',
     meta: {
-      title: '首页',
+      title: '概览',
       icon: 'home-4-line',
       affix: true,
     },
@@ -36,8 +36,104 @@ export const asyncRoutes = [
         name: 'Index',
         component: () => import('@/views/index'),
         meta: {
-          title: '首页',
+          title: '概览',
           icon: 'home-4-line',
+          affix: true,
+        },
+      },
+    ],
+  },
+  {
+    path: '/user',
+    component: Layout,
+    redirect: '/user/list',
+    meta: {
+      title: '会员管理',
+      icon: 'user-line',
+      affix: true,
+    },
+    children: [
+      {
+        path: 'register',
+        name: 'register',
+        component: () => import('@/views/usermanage/register'),
+        meta: {
+          title: '注册会员',
+          icon: 'user-add-fill',
+          affix: true,
+        },
+      },
+      {
+        path: 'listuser',
+        name: 'listuser',
+        component: () => import('@/views/usermanage/list'),
+        meta: {
+          title: '会员列表',
+          icon: 'file-user-fill',
+          affix: true,
+        },
+      },
+      {
+        path: 'storedvalue',
+        name: 'storedvalue',
+        component: () => import('@/views/usermanage/storedvalue'),
+        meta: {
+          title: '储值管理',
+          icon: 'money-cny-circle-fill',
+          affix: true,
+        },
+      },
+    ],
+  },
+  {
+    path: '/order',
+    component: Layout,
+    redirect: '/order/list',
+    meta: {
+      title: '订单管理',
+      icon: 'file-list-2-line',
+      affix: true,
+    },
+    children: [
+      {
+        path: 'create',
+        name: 'create',
+        component: () => import('@/views/ordermanage/create'),
+        meta: {
+          title: '创建订单',
+          icon: 'menu-add-fill',
+          affix: true,
+        },
+      },
+      {
+        path: 'list',
+        name: 'list',
+        component: () => import('@/views/ordermanage/list'),
+        meta: {
+          title: '订单列表',
+          icon: 'list-check',
+          affix: true,
+        },
+      },
+    ],
+  },
+  {
+    path: '/reservation',
+    component: Layout,
+    redirect: '/reservation/index',
+    meta: {
+      title: '预约管理',
+      icon: 'home-4-line',
+      affix: true,
+    },
+    children: [
+      {
+        path: 'reservation',
+        name: 'reservation',
+        component: () => import('@/views/reservation'),
+        meta: {
+          title: '预约列表',
+          icon: 'bill-line',
           affix: true,
         },
       },
@@ -69,26 +165,6 @@ export const asyncRoutes = [
         meta: {
           title: '图标',
           icon: 'remixicon-line',
-        },
-      },
-    ],
-  },
-  {
-    path: '/test',
-    component: Layout,
-    redirect: '/test/test',
-    meta: {
-      title: '动态路由测试',
-      icon: 'test-tube-line',
-    },
-    children: [
-      {
-        path: 'test',
-        name: 'Test',
-        component: () => import('@/views/test'),
-        meta: {
-          title: '动态路由测试',
-          icon: 'test-tube-line',
         },
       },
     ],

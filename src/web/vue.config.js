@@ -28,7 +28,7 @@ const dayjs = require('dayjs')
 const date = dayjs().format('YYYY_M_D')
 const time = dayjs().format('YYYY-M-D HH:mm:ss')
 process.env.VUE_APP_TITLE = title || '理发店管理系统'
-process.env.VUE_APP_AUTHOR = author || 'chuzhixin'
+process.env.VUE_APP_AUTHOR = author || 'BATTLEHAWK'
 process.env.VUE_APP_UPDATE_TIME = time
 process.env.VUE_APP_VERSION = version
 

@@ -2,7 +2,8 @@
   <div class="vab-avatar">
     <a-dropdown>
       <span class="ant-dropdown-link">
-        <a-avatar :src="avatar" />
+        <!-- <vab-remix-icon icon-class="account-circle-fill"></vab-remix-icon> -->
+        <!-- <a-avatar :src="avatar" /> -->
         {{ username }}
         <DownOutlined />
       </span>

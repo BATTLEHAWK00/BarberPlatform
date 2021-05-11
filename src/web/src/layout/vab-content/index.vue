@@ -25,19 +25,18 @@
 </script>
 
 <style lang="less">
-  .fade-transform-leave-active,
   .fade-transform-enter-active {
-    transition: all 0.2s;
+    transition: all 0.5s;
   }
 
-  .fade-transform-enter {
-    opacity: 0;
-    transform: translateX(-30px);
+  .fade-transform-leave-active {
+    transition: all 0.25s;
   }
 
+  .fade-transform-enter-from,
   .fade-transform-leave-to {
+    transform: translateX(50px) scale(0.8);
     opacity: 0;
-    transform: translateX(30px);
   }
 
   .vab-content {
