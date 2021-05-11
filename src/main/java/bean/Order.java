@@ -5,6 +5,7 @@ import lombok.ToString;
 
 import java.math.BigDecimal;
 import java.util.Date;
+import java.util.List;
 
 @Data
 @ToString
@@ -13,6 +14,7 @@ public class Order {
     int sponsorid;
     int ownerid;
     int state;
+    List<OrderItem> orderItemList;
     Date pay_time;
     int pay_method;
     BigDecimal price;

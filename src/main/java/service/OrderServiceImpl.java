@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
+import java.util.List;
 
 @Service
 public class OrderServiceImpl implements OrderService {
@@ -64,4 +65,46 @@ public class OrderServiceImpl implements OrderService {
         }
         orderMapper.deleteOrderItem(orderid, itemid);
     }
+
+    @Override
+    public Order getOrderByID(int id) throws ServiceException {
+        Order order = orderMapper.getOrderByOrderID(id);
+        if (order == null) {
+            throw new ServiceException("订单不存在!", 400);
+        }
+        order.setOrderItemList(orderMapper.getOrderItemList(id));
+        return order;
+    }
+
+    @Override
+    public List<Order> getOrderList() {
+        List<Order> orderList = orderMapper.getOrderList();
+        for (Order i : orderList) {
+            i.setOrderItemList(orderMapper.getOrderItemList(i.getOrderid()));
+        }
+        return orderList;
+    }
+
+    @Override
+    public List<Order> getOrderListByUser(int id) throws ServiceException {
+        if (userMapper.getUserByID(id) == null) {
+            throw new ServiceException("用户不存在!", 400);
+        }
+        List<Order> orderList = orderMapper.getOrderListByUser(id);
+        for (Order i : orderList) {
+            i.setOrderItemList(orderMapper.getOrderItemList(i.getOrderid()));
+        }
+        return orderList;
+    }
+
+    @Override
+    public void updateItemAmount(int oid, int id, int amount) throws ServiceException {
+        if (orderMapper.getOrderByOrderID(oid) == null) {
+            throw new ServiceException("订单不存在!", 400);
+        } else if (orderMapper.getOrderItem(oid, id) == null) {
+            throw new ServiceException("订单项目不存在!", 400);
+        }
+        orderMapper.updateItemAmount(oid, id, amount);
+    }
+
 }

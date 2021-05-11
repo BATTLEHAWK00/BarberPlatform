@@ -19,6 +19,8 @@ public interface OrderMapper {
 
     void updateOrderState(@Param("id") int id, @Param("state") int state);
 
+    void updateItemAmount(@Param("oid") int oid, @Param("itemid") int itemid, @Param("amount") int amount);
+
     void addOrderItem(OrderItem orderItem);
 
     void deleteOrderItem(@Param("orderid") int orderid, @Param("itemid") int itemid);

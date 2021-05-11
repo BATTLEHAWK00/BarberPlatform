@@ -20,6 +20,11 @@
         SET state=#{state}
         WHERE orderid=#{id}
     </update>
+    <update id="updateItemAmount">
+        UPDATE order_items
+        SET amount=#{amount}
+        WHERE orderid=#{oid} AND itemid=#{itemid}
+    </update>
 
     <delete id="deleteOrderItem">
         DELETE FROM order_items WHERE orderid=#{orderid} AND itemid=#{itemid}
