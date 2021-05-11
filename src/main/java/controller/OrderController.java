@@ -56,9 +56,9 @@ public class OrderController {
     }
 
     @RequestMapping(value = "/id/{oid}/item/{id}", method = {RequestMethod.PUT})
-    public Response delelteItem(@PathVariable("oid") int oid,
-                                @PathVariable("id") int id,
-                                @RequestParam("amount") int amount
+    public Response updateItemAmount(@PathVariable("oid") int oid,
+                                     @PathVariable("id") int id,
+                                     @RequestParam("amount") int amount
     ) throws ServiceException {
         orderService.updateItemAmount(oid, id, amount);
         return new Response();

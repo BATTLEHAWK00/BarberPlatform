@@ -7,13 +7,13 @@
         INSERT INTO storedvalue_log
         (userid,recharge_amount,recharge_time,type,remark)
         VALUES
-        (#{userid},#{recharge_amount},#{recharge_time},#{type},#{remark})
+        (#{userid},#{recharge_amount},now(),#{type},#{remark})
     </insert>
 
     <update id="updateValue">
-        UPDATE user
+        UPDATE users
         SET balance=#{value}
-        WHERE id=#{id}
+        WHERE userid=#{id}
     </update>
     <select id="getRechargeLogList" resultType="bean.StoredValueLog">
         SELECT * FROM storedvalue_log

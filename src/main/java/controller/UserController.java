@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import service.UserService;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.Date;
 import java.util.logging.Logger;
 
 @RestController
@@ -68,10 +69,10 @@ public class UserController {
 
     @RequestMapping(value = "/id/{uid}/birthdate", method = {RequestMethod.PUT, RequestMethod.GET})
     public Response updateBirthDate(@PathVariable("uid") int uid,
-                                    @RequestParam("date") String date
+                                    @RequestParam("date") Date date
     ) throws ServiceException {
         Response response = new Response();
-//        userService.updateBirthDate(uid, date);
+        userService.updateBirthDate(uid, date);
         return response;
     }
 
