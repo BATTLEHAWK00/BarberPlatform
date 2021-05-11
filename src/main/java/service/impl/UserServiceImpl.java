@@ -1,4 +1,4 @@
-package service;
+package service.impl;
 
 import bean.User;
 import dao.UserMapper;
@@ -6,6 +6,7 @@ import exceptions.ServiceException;
 import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import service.UserService;
 import util.SecurityUtil;
 
 import java.util.*;

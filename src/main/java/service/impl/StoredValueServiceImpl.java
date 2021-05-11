@@ -1,4 +1,4 @@
-package service;
+package service.impl;
 
 import bean.StoredValueLog;
 import bean.User;
@@ -8,6 +8,7 @@ import exceptions.ServiceException;
 import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import service.StoredValueService;
 
 import java.math.BigDecimal;
 import java.util.List;
