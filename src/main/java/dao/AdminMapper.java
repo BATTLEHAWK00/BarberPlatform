@@ -3,7 +3,6 @@ package dao;
 import bean.Admin;
 import org.apache.ibatis.annotations.Param;
 
-import java.util.Date;
 import java.util.List;
 
 public interface AdminMapper {

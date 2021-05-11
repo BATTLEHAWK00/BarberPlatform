@@ -1,7 +1,6 @@
 package controller;
 
 import bean.Response;
-import bean.StoredValueLog;
 import exceptions.ServiceException;
 import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;

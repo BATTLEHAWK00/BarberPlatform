@@ -1,10 +1,7 @@
 package service;
 
 import bean.StoredValueLog;
-import dao.StoredValueMapper;
 import exceptions.ServiceException;
-import lombok.Setter;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import java.math.BigDecimal;
 import java.util.List;

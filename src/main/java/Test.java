@@ -1,5 +1,4 @@
 import bean.Order;
-import bean.User;
 import dao.OrderMapper;
 import dao.UserMapper;
 import org.apache.ibatis.io.Resources;

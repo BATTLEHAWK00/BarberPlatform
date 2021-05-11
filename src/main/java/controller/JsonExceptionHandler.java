@@ -3,7 +3,6 @@ package controller;
 import exceptions.BackendException;
 import exceptions.IllegalRequestException;
 import exceptions.InternalException;
-import exceptions.ServiceException;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.HttpRequestMethodNotSupportedException;
 import org.springframework.web.bind.MissingServletRequestParameterException;
