@@ -45,7 +45,7 @@
   import { dependencies, devDependencies } from '*/package.json'
   import { mapActions, mapGetters } from 'vuex'
   import { UserOutlined, LockOutlined } from '@ant-design/icons-vue'
-  import { getList } from '@/api/order.js'
+  import { getList, getListByUID } from '@/api/order.js'
 
   export default {
     name: 'Login',
@@ -84,11 +84,12 @@
       /*  setTimeout(() => {
         this.handleSubmit()
       }, 3000) */
-      console.log(
-        getList().then((res) => {
-          console.log(res)
-        })
-      )
+      getList().then((res) => {
+        console.log(res)
+      })
+      getListByUID(11).then((res) => {
+        console.log(res)
+      })
     },
     methods: {
       ...mapActions({
