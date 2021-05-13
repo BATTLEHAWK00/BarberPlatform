@@ -6,10 +6,10 @@
         <a-button style="margin-left: 10px">重置</a-button>
       </a-form-item> -->
       <a-form-item label="用户名">
-        <a-input v-model="form.username" placeholder="输入姓名" />
+        <a-input v-model:value="form.username" placeholder="输入姓名" />
       </a-form-item>
       <a-form-item label="手机号">
-        <a-input v-model="form.phone" placeholder="输入手机号" />
+        <a-input v-model:value="form.phone" placeholder="输入手机号" />
       </a-form-item>
       <a-form-item label="性别">
         <a-radio-group v-model:value="form.sex" button-style="solid">
@@ -23,6 +23,7 @@
           v-model:value="form.passwd"
           placeholder="输入消费密码"
           allowClear
+          :visibilityToggle="false"
         />
       </a-form-item>
       <a-form-item>

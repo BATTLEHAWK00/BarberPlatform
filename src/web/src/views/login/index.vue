@@ -86,7 +86,7 @@
     },
     methods: {
       ...mapActions({
-        login: 'user/login',
+        login: 'admin/login',
       }),
       handleRoute() {
         return this.redirect === '/404' || this.redirect === '/403'

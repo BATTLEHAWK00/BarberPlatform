@@ -55,7 +55,7 @@ export const asyncRoutes = [
     children: [
       {
         path: 'register',
-        name: 'register',
+        name: 'user-register',
         component: () => import('@/views/usermanage/register'),
         meta: {
           title: '注册会员',
@@ -64,8 +64,8 @@ export const asyncRoutes = [
         },
       },
       {
-        path: 'listuser',
-        name: 'listuser',
+        path: 'list',
+        name: 'user-list',
         component: () => import('@/views/usermanage/list'),
         meta: {
           title: '会员列表',
@@ -75,7 +75,7 @@ export const asyncRoutes = [
       },
       {
         path: 'storedvalue',
-        name: 'storedvalue',
+        name: 'user-storedvalue',
         component: () => import('@/views/usermanage/storedvalue'),
         meta: {
           title: '储值管理',
@@ -97,7 +97,7 @@ export const asyncRoutes = [
     children: [
       {
         path: 'create',
-        name: 'create',
+        name: 'order-create',
         component: () => import('@/views/ordermanage/create'),
         meta: {
           title: '创建订单',
@@ -107,7 +107,7 @@ export const asyncRoutes = [
       },
       {
         path: 'list',
-        name: 'list',
+        name: 'order-list',
         component: () => import('@/views/ordermanage/list'),
         meta: {
           title: '订单列表',
@@ -134,6 +134,38 @@ export const asyncRoutes = [
         meta: {
           title: '预约列表',
           icon: 'bill-line',
+          affix: true,
+        },
+      },
+    ],
+  },
+  {
+    path: '/admin',
+    component: Layout,
+    redirect: '/admin/list',
+    meta: {
+      title: '管理员',
+      icon: 'admin-line',
+      affix: true,
+    },
+    children: [
+      {
+        path: 'register',
+        name: 'admin-register',
+        component: () => import('@/views/adminmanage/register'),
+        meta: {
+          title: '注册管理员',
+          icon: 'user-add-fill',
+          affix: true,
+        },
+      },
+      {
+        path: 'list',
+        name: 'admin-list',
+        component: () => import('@/views/adminmanage/list'),
+        meta: {
+          title: '管理员列表',
+          icon: 'file-user-fill',
           affix: true,
         },
       },

@@ -49,7 +49,6 @@ const instance = axios.create({
 })
 
 /**
- * @author chuzhixin 1204505056@qq.com
  * @description axios请求拦截器
  */
 instance.interceptors.request.use(
