@@ -45,6 +45,7 @@
   import { dependencies, devDependencies } from '*/package.json'
   import { mapActions, mapGetters } from 'vuex'
   import { UserOutlined, LockOutlined } from '@ant-design/icons-vue'
+  import { getList } from '@/api/order.js'
 
   export default {
     name: 'Login',
@@ -83,10 +84,15 @@
       /*  setTimeout(() => {
         this.handleSubmit()
       }, 3000) */
+      console.log(
+        getList().then((res) => {
+          console.log(res)
+        })
+      )
     },
     methods: {
       ...mapActions({
-        login: 'admin/login',
+        login: 'user/login',
       }),
       handleRoute() {
         return this.redirect === '/404' || this.redirect === '/403'

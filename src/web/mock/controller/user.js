@@ -6,7 +6,7 @@ const accessTokens = {
 
 module.exports = [
   {
-    url: '/login',
+    url: '/admin/login',
     type: 'post',
     response(config) {
       const { username } = config.body
@@ -53,7 +53,7 @@ module.exports = [
     },
   },
   {
-    url: '/userInfo',
+    url: '/admin/userInfo',
     type: 'post',
     response(config) {
       const { accessToken } = config.body
@@ -91,7 +91,7 @@ module.exports = [
     },
   },
   {
-    url: '/logout',
+    url: '/admin/logout',
     type: 'post',
     response() {
       return {

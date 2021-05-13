@@ -1,15 +1,5 @@
 <template>
-  <a-table :columns="table.columns" :data-source="table.data">
-    <template #name="{ text }">
-      <a>{{ text }}</a>
-    </template>
-    <template #customTitle>
-      <span>
-        <smile-outlined />
-        会员号
-      </span>
-    </template>
-  </a-table>
+  <a-table :columns="table.columns" :data-source="table.data"></a-table>
 </template>
 
 <script>
@@ -20,9 +10,9 @@
           data: [],
           columns: [
             {
-              dataIndex: '会员号',
-              key: 'userid',
-              slots: { title: 'customTitle', customRender: '会员号' },
+              title: '订单号',
+              dataIndex: 'oid',
+              key: 'oid',
             },
             {
               title: '用户姓名',
@@ -30,20 +20,48 @@
               key: 'username',
             },
             {
-              title: '用户性别',
-              dataIndex: 'sex',
-              key: 'sex',
+              title: '创建者',
+              dataIndex: 'sponsor',
+              key: 'sponsor',
             },
             {
-              title: '手机号',
-              key: 'phone',
-              dataIndex: 'phone',
-              slots: { customRender: 'tags' },
+              title: '创建时间',
+              key: 'create_time',
+              dataIndex: 'create_time',
             },
             {
-              title: 'Action',
+              title: '订单状态',
+              key: 'create_time',
+              dataIndex: 'create_time',
+            },
+            {
+              title: '支付时间',
+              key: 'pay_time',
+              dataIndex: 'pay_time',
+            },
+            {
+              title: '支付方式',
+              key: 'pay_method',
+              dataIndex: 'pay_method',
+            },
+            {
+              title: '原价格',
+              key: 'price',
+              dataIndex: 'price',
+            },
+            {
+              title: '折扣',
+              key: 'discount',
+              dataIndex: 'discount',
+            },
+            {
+              title: '实付金额',
+              key: 'actual_payment',
+              dataIndex: 'actual_payment',
+            },
+            {
+              title: '操作',
               key: 'action',
-              slots: { customRender: 'action' },
             },
           ],
         },

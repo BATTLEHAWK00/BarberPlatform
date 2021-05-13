@@ -5,6 +5,7 @@
         <vab-icon :icon="item.meta.icon"></vab-icon>
       </span>
       <span>{{ item.meta.title }}</span>
+      <a-badge style="margin-left: 5px" :count="item.meta.badgeCount" />
     </template>
     <slot></slot>
   </a-sub-menu>

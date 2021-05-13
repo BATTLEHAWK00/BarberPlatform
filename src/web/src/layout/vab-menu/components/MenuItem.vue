@@ -4,6 +4,7 @@
       <vab-icon :icon="routeChildren.meta.icon"></vab-icon>
     </span>
     <span>{{ routeChildren.meta.title }}</span>
+    <a-badge style="margin-left: 5px" :count="item.meta.badgeCount" />
   </a-menu-item>
 </template>
 

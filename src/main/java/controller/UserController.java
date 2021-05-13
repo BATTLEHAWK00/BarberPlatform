@@ -11,6 +11,7 @@ import service.UserService;
 import java.util.Date;
 import java.util.logging.Logger;
 
+@CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
 @RequestMapping("/user")
 public class UserController {

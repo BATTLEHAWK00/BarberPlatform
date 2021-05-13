@@ -83,6 +83,16 @@ export const asyncRoutes = [
           affix: true,
         },
       },
+      {
+        path: 'storedvaluelog',
+        name: 'user-storedvaluelog',
+        component: () => import('@/views/usermanage/storedvaluelog'),
+        meta: {
+          title: '储值日志',
+          icon: 'checkbox-multiple-fill',
+          affix: true,
+        },
+      },
     ],
   },
   {
@@ -123,8 +133,9 @@ export const asyncRoutes = [
     redirect: '/reservation/index',
     meta: {
       title: '预约管理',
-      icon: 'home-4-line',
+      icon: 'calendar-check-line',
       affix: true,
+      badgeCount: 1,
     },
     children: [
       {
@@ -133,7 +144,40 @@ export const asyncRoutes = [
         component: () => import('@/views/reservation'),
         meta: {
           title: '预约列表',
-          icon: 'bill-line',
+          icon: 'calendar-check-line',
+          affix: true,
+          badgeCount: 1,
+        },
+      },
+    ],
+  },
+  {
+    path: '/finance',
+    component: Layout,
+    redirect: '/finance/charts',
+    meta: {
+      title: '财务报表',
+      icon: 'file-list-3-line',
+      affix: true,
+    },
+    children: [
+      {
+        path: 'finance',
+        name: 'finance-charts',
+        component: () => import('@/views/finance/charts'),
+        meta: {
+          title: '图表概览',
+          icon: 'line-chart-line',
+          affix: true,
+        },
+      },
+      {
+        path: 'list',
+        name: 'finance-list',
+        component: () => import('@/views/ordermanage/list'),
+        meta: {
+          title: '报表详情',
+          icon: 'database-fill',
           affix: true,
         },
       },

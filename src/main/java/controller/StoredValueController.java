@@ -9,6 +9,7 @@ import service.StoredValueService;
 
 import java.math.BigDecimal;
 
+@CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
 @RequestMapping("/storedvalue")
 public class StoredValueController {

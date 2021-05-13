@@ -1,5 +1,4 @@
 /**
- * @author chuzhixin 1204505056@qq.com
  * @description vue.config.js全局配置
  */
 const path = require('path')
@@ -15,11 +14,13 @@ const {
   devPort,
   providePlugin,
   build7z,
-  donation,
 } = require('./src/config')
-const { webpackBarName, webpackBanner, donationConsole } = require('vab-config')
 
-if (donation) donationConsole()
+const { webpackBarName, webpackBanner } = {
+  webpackBarName: 'barber-platform-app',
+  webpackBanner: '',
+}
+
 const { version, author } = require('./package.json')
 const Webpack = require('webpack')
 const WebpackBar = require('webpackbar')
