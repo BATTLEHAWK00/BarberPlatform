@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="dao.SessionMapper">
+    <insert id="createSession" parameterType="bean.Session">
+        INSERT INTO sessions
+        (access_token,adminid,login_time,last_access)
+        VALUES
+        (#{access_token},#{adminid},now(),now())
+    </insert>
+    <delete id="deleteSession">
+        DELETE FROM sessions WHERE access_token=#{accesstoken}
+    </delete>
+
+    <select id="getSessionByAccessToken" resultType="bean.Session">
+        SELECT * FROM sessions WHERE access_token=#{accesstoken}
+    </select>
+
+
+</mapper>

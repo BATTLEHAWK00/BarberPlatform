@@ -28,10 +28,13 @@ export function getUserInfo(accessToken) {
   })
 }
 
-export function logout() {
+export function logout(accessToken) {
   return request({
     url: '/admin/logout',
     method: 'post',
+    data: {
+      [tokenName]: accessToken,
+    },
   })
 }
 

@@ -46,8 +46,8 @@ public class LoginController {
     }
 
     @RequestMapping("/logout")
-    public Response userInfo() {
-        loginService.Logout();
+    public Response LogOut(@RequestHeader("accessToken") String accessToken) {
+        loginService.Logout(accessToken);
         return new Response();
     }
 
