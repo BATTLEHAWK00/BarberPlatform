@@ -1,46 +1,15 @@
 import request from '@/utils/request'
-import { tokenName } from '@/config'
 
-export async function login(data) {
+export function getList() {
   return request({
-    url: '/admin/login',
-    method: 'post',
-    data,
+    url: '/user/list',
+    method: 'get',
   })
 }
 
-export async function socialLogin(data) {
+export function getStoredValueLogs() {
   return request({
-    url: '/socialLogin',
-    method: 'post',
-    data,
-  })
-}
-
-export function getUserInfo(accessToken) {
-  //此处为了兼容mock.js使用data传递accessToken，如果使用mock可以走headers
-  return request({
-    url: '/admin/userInfo',
-    method: 'post',
-    data: {
-      [tokenName]: accessToken,
-    },
-  })
-}
-
-export function logout(accessToken) {
-  return request({
-    url: '/admin/logout',
-    method: 'post',
-    data: {
-      [tokenName]: accessToken,
-    },
-  })
-}
-
-export function register() {
-  return request({
-    url: '/register',
-    method: 'post',
+    url: '/storedvalue/log/list',
+    method: 'get',
   })
 }

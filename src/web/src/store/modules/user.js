@@ -1,7 +1,7 @@
 /**
  * @description 登录、获取用户信息、退出登录、清除accessToken逻辑，不建议修改
  */
-import { getUserInfo, login, logout } from '@/api/user'
+import { getUserInfo, login, logout } from '@/api/admin'
 import {
   getAccessToken,
   removeAccessToken,

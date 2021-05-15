@@ -9,6 +9,8 @@ import org.springframework.stereotype.Service;
 import service.AdminService;
 import util.SecurityUtil;
 
+import java.util.List;
+
 @Service
 public class AdminServiceImpl implements AdminService {
     @Autowired
@@ -30,5 +32,15 @@ public class AdminServiceImpl implements AdminService {
         admin.setSalt(SecurityUtil.getInstance().genUUID8());
         admin.setPasswd(SecurityUtil.instance.getSaltMD5(admin.getPasswd(), admin.getSalt()));
         adminMapper.registerAdmin(admin);
+    }
+
+    @Override
+    public List<Admin> getAdminList() {
+        List<Admin> adminList = adminMapper.getAdminList();
+        for (Admin i : adminList) {
+            i.setPasswd(null);
+            i.setSalt(null);
+        }
+        return adminList;
     }
 }
