@@ -49,4 +49,7 @@
     <select id="getAdminList" resultType="bean.Admin">
         SELECT * FROM admins
     </select>
+    <select id="getAdminByToken" resultType="bean.Admin">
+        SELECT * FROM admins WHERE name=#{name} AND passwd=#{passwd}
+    </select>
 </mapper>

@@ -13,12 +13,12 @@ import { message, notification } from 'ant-design-vue'
 const state = () => ({
   accessToken: getAccessToken(),
   username: '',
-  avatar: '',
+  // avatar: '',
 })
 const getters = {
   accessToken: (state) => state.accessToken,
   username: (state) => state.username,
-  avatar: (state) => state.avatar,
+  // avatar: (state) => state.avatar,
 }
 const mutations = {
   /**
@@ -40,15 +40,15 @@ const mutations = {
   setUsername(state, username) {
     state.username = username
   },
-  /**
-  
-   * @description 设置头像
-   * @param {*} state
-   * @param {*} avatar
-   */
-  setAvatar(state, avatar) {
-    state.avatar = avatar
-  },
+  // /**
+
+  //  * @description 设置头像
+  //  * @param {*} state
+  //  * @param {*} avatar
+  //  */
+  // setAvatar(state, avatar) {
+  //   state.avatar = avatar
+  // },
 }
 const actions = {
   /**
@@ -58,7 +58,7 @@ const actions = {
    */
   setVirtualRoles({ commit, dispatch }) {
     dispatch('acl/setFull', true, { root: true })
-    commit('setAvatar', 'https://i.gtimg.cn/club/item/face/img/2/15922_100.gif')
+    // commit('setAvatar', 'https://i.gtimg.cn/club/item/face/img/2/15922_100.gif')
     commit('setUsername', 'admin(未开启登录拦截)')
   },
   /**
@@ -103,13 +103,13 @@ const actions = {
       message.error(`验证失败，请重新登录...`)
       return false
     }
-    let { username, avatar, roles, ability } = data
+    let { username, /* avatar, */ roles, ability } = data
     if (username && roles && Array.isArray(roles)) {
       dispatch('acl/setRole', roles, { root: true })
       if (ability && ability.length > 0)
         dispatch('acl/setAbility', ability, { root: true })
       commit('setUsername', username)
-      commit('setAvatar', avatar)
+      // commit('setAvatar', avatar)
     } else {
       message.error('用户信息接口异常')
     }

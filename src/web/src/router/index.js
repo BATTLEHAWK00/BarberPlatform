@@ -220,6 +220,7 @@ export const asyncRoutes = [
     component: Layout,
     redirect: '/vab/table',
     alwaysShow: true,
+    hidden: true,
     meta: {
       title: '组件',
       icon: 'apps-line',
@@ -249,6 +250,7 @@ export const asyncRoutes = [
     path: '/error',
     name: 'Error',
     component: Layout,
+    hidden: true,
     redirect: '/error/403',
     meta: {
       title: '错误页',

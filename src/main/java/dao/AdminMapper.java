@@ -14,6 +14,8 @@ public interface AdminMapper {
 
     List<Admin> getAdminList();
 
+    Admin getAdminByToken(@Param("name") String username, @Param("passwd") String passwd);
+
     void registerAdmin(Admin admin);
 
     void updatePhone(@Param("id") int id, @Param("phone") String phone);
