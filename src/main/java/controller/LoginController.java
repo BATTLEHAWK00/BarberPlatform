@@ -1,16 +1,30 @@
 package controller;
 
 import bean.Response;
+import bean.userInfo;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.HashMap;
+import java.util.Map;
 
 @CrossOrigin(origins = "*", maxAge = 3600)
-@Controller
+@RestController
 @RequestMapping("/admin")
 public class LoginController {
-    public Response handleLogin(){
-        return new Response();
+    @RequestMapping("/login")
+    public Response handleLogin() {
+        Map<String, String> mp = new HashMap<>();
+        mp.put("accessToken", "admin-accessToken");
+        return new Response(mp);
+    }
+
+    @RequestMapping("/userInfo")
+    public Response userInfo(@RequestHeader("accessToken") String accessToken) {
+        userInfo userInfo = new userInfo();
+        userInfo.setRoles(new String[]{"admin"});
+        userInfo.setAbility(new String[]{"READ", "WRITE", "DELETE"});
+        userInfo.setUsername("asdasds");
+        return new Response(userInfo);
     }
 }

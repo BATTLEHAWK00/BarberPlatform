@@ -3,7 +3,14 @@
 </template>
 
 <script>
+  import { getList } from '@/api/order.js'
   export default {
+    mounted() {
+      // var that = this
+      getList().then((res) => {
+        this.table.data = res.data
+      })
+    },
     data() {
       return {
         table: {
@@ -11,18 +18,18 @@
           columns: [
             {
               title: '订单号',
-              dataIndex: 'oid',
-              key: 'oid',
+              dataIndex: 'orderid',
+              key: 'orderid',
             },
             {
               title: '用户姓名',
-              dataIndex: 'username',
-              key: 'username',
+              dataIndex: 'ownerid',
+              key: 'ownerid',
             },
             {
               title: '创建者',
-              dataIndex: 'sponsor',
-              key: 'sponsor',
+              dataIndex: 'sponsorid',
+              key: 'sponsorid',
             },
             {
               title: '创建时间',
