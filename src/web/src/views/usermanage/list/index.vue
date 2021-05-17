@@ -1,7 +1,30 @@
 <template>
-  <a-table :columns="table.columns" :data-source="table.data">
-    <template #gender="{ text }">{{ filterGender(text) }}</template>
+  <a-table
+    :columns="table.columns"
+    :data-source="table.data"
+    bordered
+    :loading="table.loading"
+  >
     <template #time="{ text }">{{ filterTimeStamp(text) }}</template>
+    <template #expandedRowRender="{ record }">
+      <a-descriptions :title="record.username" layout="vertical">
+        <a-descriptions-item label="性别">
+          {{ filterGender(record.gender) }}
+        </a-descriptions-item>
+        <a-descriptions-item label="注册时间">
+          {{ filterTimeStamp(record.reg_time) }}
+        </a-descriptions-item>
+        <a-descriptions-item label="电话">
+          {{ record.phone }}
+        </a-descriptions-item>
+        <a-descriptions-item label="备注" span="2">
+          {{ record.remark }}
+        </a-descriptions-item>
+      </a-descriptions>
+    </template>
+    <template #action="{ record }">
+      <a-button type="primary" @click="onEditUser(record)">编辑</a-button>
+    </template>
   </a-table>
 </template>
 
@@ -12,11 +35,11 @@
     mounted() {
       getList().then((res) => {
         this.table.data = res.data
+        this.table.loading = false
       })
     },
     methods: {
       filterGender(gender) {
-        console.log(gender)
         switch (gender) {
           case 0:
             return '男'
@@ -31,12 +54,16 @@
     data() {
       return {
         table: {
+          loading: true,
           data: [],
           columns: [
             {
               title: '会员号',
               dataIndex: 'userid',
               key: 'userid',
+              width: '10%',
+              sorter: (a, b) => a.userid - b.userid,
+              sortDirections: ['descend', 'ascend'],
             },
             {
               title: '用户姓名',
@@ -44,41 +71,24 @@
               key: 'username',
             },
             {
-              title: '用户性别',
-              dataIndex: 'gender',
-              key: 'gender',
-              slots: { customRender: 'gender' },
-            },
-            {
-              title: '手机号',
-              key: 'phone',
-              dataIndex: 'phone',
-            },
-            {
               title: '余额',
               dataIndex: 'balance',
               key: 'balance',
-            },
-            {
-              title: '备注',
-              dataIndex: 'remark',
-              key: 'remark',
+              sorter: (a, b) => a.balance - b.balance,
+              sortDirections: ['descend', 'ascend'],
             },
             {
               title: '上次消费时间',
-              dataIndex: 'lastconsume',
-              key: 'lastconsume',
+              dataIndex: 'lastconsume_time',
+              key: 'lastconsume_time',
               slots: { customRender: 'time' },
-            },
-            {
-              title: '注册时间',
-              dataIndex: 'reg_time',
-              key: 'reg_time',
-              slots: { customRender: 'time' },
+              sorter: (a, b) => a.lastconsume - b.lastconsume,
+              sortDirections: ['descend', 'ascend'],
             },
             {
               title: '操作',
               key: 'action',
+              slots: { customRender: 'action' },
             },
           ],
         },

@@ -45,9 +45,10 @@ export function logout(accessToken) {
   })
 }
 
-export function register() {
+export function register(data) {
   return request({
-    url: '/register',
+    url: '/admin/register',
     method: 'post',
+    data: data,
   })
 }

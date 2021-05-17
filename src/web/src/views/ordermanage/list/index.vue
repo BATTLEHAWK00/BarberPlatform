@@ -4,6 +4,39 @@
     <template #state="{ text }">
       <a-tag color="blue">{{ filterOrderState(text) }}</a-tag>
     </template>
+    <template #expandedRowRender="{ record }">
+      <a-descriptions :title="'订单' + record.orderid">
+        <a-descriptions-item label="用户姓名">
+          {{ record.ownerid }}
+        </a-descriptions-item>
+        <a-descriptions-item label="创建者">
+          {{ record.sponsorid }}
+        </a-descriptions-item>
+        <a-descriptions-item label="订单状态">
+          <a-tag color="blue">
+            {{ filterOrderState(record.state) }}
+          </a-tag>
+        </a-descriptions-item>
+        <a-descriptions-item label="创建时间">
+          {{ filterTimeStamp(record.create_time) }}
+        </a-descriptions-item>
+        <a-descriptions-item label="原价格">
+          {{ filterTimeStamp(record.price) }}
+        </a-descriptions-item>
+        <a-descriptions-item label="折扣">
+          {{ filterTimeStamp(record.discount) }}
+        </a-descriptions-item>
+        <a-descriptions-item label="实付价格">
+          {{ filterTimeStamp(record.actual_payment) }}
+        </a-descriptions-item>
+        <a-descriptions-item label="支付方式">
+          {{ filterTimeStamp(record.pay_method) }}
+        </a-descriptions-item>
+        <a-descriptions-item label="备注">
+          {{ filterTimeStamp(record.remark) }}
+        </a-descriptions-item>
+      </a-descriptions>
+    </template>
   </a-table>
 </template>
 
@@ -45,6 +78,8 @@
               title: '订单号',
               dataIndex: 'orderid',
               key: 'orderid',
+              sorter: (a, b) => a.recharge_time - b.recharge_time,
+              sortDirections: ['descend', 'ascend'],
             },
             {
               title: '用户姓名',
@@ -57,16 +92,12 @@
               key: 'sponsorid',
             },
             {
-              title: '订单状态',
-              key: 'state',
-              dataIndex: 'state',
-              slots: { customRender: 'state' },
-            },
-            {
               title: '创建时间',
               key: 'create_time',
               dataIndex: 'create_time',
               slots: { customRender: 'time' },
+              sorter: (a, b) => a.create_time - b.create_time,
+              sortDirections: ['descend', 'ascend'],
             },
             {
               title: '支付时间',
@@ -75,24 +106,19 @@
               slots: { customRender: 'time' },
             },
             {
-              title: '支付方式',
-              key: 'pay_method',
-              dataIndex: 'pay_method',
-            },
-            {
-              title: '原价格',
-              key: 'price',
-              dataIndex: 'price',
-            },
-            {
-              title: '折扣',
-              key: 'discount',
-              dataIndex: 'discount',
-            },
-            {
               title: '实付金额',
               key: 'actual_payment',
               dataIndex: 'actual_payment',
+              sorter: (a, b) => a.actual_payment - b.actual_payment,
+              sortDirections: ['descend', 'ascend'],
+            },
+            {
+              title: '订单状态',
+              key: 'state',
+              dataIndex: 'state',
+              slots: { customRender: 'state' },
+              sorter: (a, b) => a.state - b.state,
+              sortDirections: ['descend', 'ascend'],
             },
             {
               title: '操作',

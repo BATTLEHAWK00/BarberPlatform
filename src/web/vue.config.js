@@ -37,13 +37,13 @@ const resolve = (dir) => {
   return path.join(__dirname, dir)
 }
 
-const mockServer = () => {
-  if (process.env.NODE_ENV === 'development') {
-    return require('./mock/mockServer.js')
-  } else {
-    return ''
-  }
-}
+// const mockServer = () => {
+//   if (process.env.NODE_ENV === 'development') {
+//     return require('./mock/mockServer.js')
+//   } else {
+//     return ''
+//   }
+// }
 
 module.exports = {
   publicPath,
@@ -71,7 +71,7 @@ module.exports = {
     //     },
     //   },
     // },
-    after: mockServer(),
+    // after: mockServer(),
   },
   configureWebpack() {
     return {
@@ -108,23 +108,23 @@ module.exports = {
     })
 
     config.when(process.env.NODE_ENV !== 'development', (config) => {
-      config.performance.set('hints', false)
+      // config.performance.set('hints', false)
       config.devtool('none')
-      config.optimization.splitChunks({
-        chunks: 'all',
-        cacheGroups: {
-          libs: {
-            name: 'vue-admin-beautiful-libs',
-            test: /[\\/]node_modules[\\/]/,
-            priority: 10,
-            chunks: 'initial',
-          },
-        },
-      })
-      config
-        .plugin('banner')
-        .use(Webpack.BannerPlugin, [`${webpackBanner}${time}`])
-        .end()
+      // config.optimization.splitChunks({
+      //   chunks: 'all',
+      //   cacheGroups: {
+      //     // libs: {
+      //     //   name: 'vue-admin-beautiful-libs',
+      //     //   test: /[\\/]node_modules[\\/]/,
+      //     //   priority: 10,
+      //     //   chunks: 'initial',
+      //     // },
+      //   },
+      // })
+      // config
+      //   .plugin('banner')
+      //   .use(Webpack.BannerPlugin, [`${webpackBanner}${time}`])
+      //   .end()
       config.module
         .rule('images')
         .use('image-webpack-loader')

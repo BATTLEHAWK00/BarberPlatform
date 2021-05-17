@@ -1,6 +1,25 @@
 <template>
-  <a-table :columns="table.columns" :data-source="table.data">
+  <a-table :columns="table.columns" :data-source="table.data" bordered>
     <template #time="{ text }">{{ filterTimeStamp(text) }}</template>
+    <template #expandedRowRender="{ record }">
+      <a-descriptions :title="record.name" layout="vertical">
+        <a-descriptions-item label="电话">
+          {{ record.phone }}
+        </a-descriptions-item>
+        <a-descriptions-item label="注册时间">
+          {{ filterTimeStamp(record.reg_time) }}
+        </a-descriptions-item>
+        <a-descriptions-item label="上一单">
+          {{ record.last_order }}
+        </a-descriptions-item>
+        <a-descriptions-item label="备注" span="2">
+          {{ record.remark }}
+        </a-descriptions-item>
+      </a-descriptions>
+    </template>
+    <template #action="{ record }">
+      <a-button type="primary" @click="onEditUser(record)">编辑</a-button>
+    </template>
   </a-table>
 </template>
 
@@ -25,6 +44,8 @@
               title: '管理员ID',
               dataIndex: 'adminid',
               key: 'adminid',
+              sorter: (a, b) => a.adminid - b.adminid,
+              sortDirections: ['descend', 'ascend'],
             },
             {
               title: '姓名',
@@ -55,6 +76,7 @@
             {
               title: '操作',
               key: 'action',
+              slots: { customRender: 'action' },
             },
           ],
         },

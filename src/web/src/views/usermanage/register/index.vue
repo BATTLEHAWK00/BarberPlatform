@@ -12,7 +12,7 @@
         <a-input v-model:value="form.phone" placeholder="输入手机号" />
       </a-form-item>
       <a-form-item label="性别">
-        <a-radio-group v-model:value="form.sex" button-style="solid">
+        <a-radio-group v-model:value="form.gender" button-style="solid">
           <a-radio-button :value="null">未指定</a-radio-button>
           <a-radio-button :value="0">男</a-radio-button>
           <a-radio-button :value="1">女</a-radio-button>
@@ -35,6 +35,8 @@
 </template>
 
 <script>
+  import { register } from '@/api/user.js'
+  import { Modal } from 'ant-design-vue'
   export default {
     data() {
       return {
@@ -42,12 +44,19 @@
           username: '',
           phone: '',
           passwd: '',
-          sex: null,
+          gender: null,
         },
       }
     },
     methods: {
-      onSubmit() {},
+      onSubmit() {
+        register(this.form).then(() => {
+          Modal.success({
+            title: '注册成功!',
+          })
+          this.onReset()
+        })
+      },
       onReset() {
         this.form.username = ''
         this.form.phone = ''

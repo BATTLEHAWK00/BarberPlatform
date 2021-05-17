@@ -30,7 +30,7 @@
     setup: () => {
       const option = ref({
         title: {
-          text: 'Traffic Sources',
+          text: '营收状况',
           left: 'center',
         },
         tooltip: {
@@ -40,26 +40,20 @@
         legend: {
           orient: 'vertical',
           left: 'left',
-          data: [
-            'Direct',
-            'Email',
-            'Ad Networks',
-            'Video Ads',
-            'Search Engines',
-          ],
+          data: ['洗发', '剪发', '吹发', '染发', '烫发'],
         },
         series: [
           {
-            name: 'Traffic Sources',
+            name: '消费项目',
             type: 'pie',
             radius: '55%',
             center: ['50%', '60%'],
             data: [
-              { value: 335, name: 'Direct' },
-              { value: 310, name: 'Email' },
-              { value: 234, name: 'Ad Networks' },
-              { value: 135, name: 'Video Ads' },
-              { value: 1548, name: 'Search Engines' },
+              { value: 335, name: '洗发' },
+              { value: 310, name: '剪发' },
+              { value: 234, name: '吹发' },
+              { value: 135, name: '染发' },
+              { value: 1548, name: '烫发' },
             ],
             emphasis: {
               itemStyle: {
