@@ -2,21 +2,20 @@
   <a-card title="会员储值">
     <a-form :model="form">
       <a-form-item label="用户">
-        <span>{{ selectedUsername }}</span>
-        <a-button @click="selectUserModal = true">选择用户</a-button>
-        <a-modal
-          v-model:visible="selectUserModal"
-          title="选择用户"
-          @ok="onUserSelect"
-        >
-          <a-table :columns="modal.columns" :data-source="modal.data"></a-table>
-        </a-modal>
+        <a-tag v-if="selectedUsername">
+          【{{ form.userid }}】{{ selectedUsername }}
+        </a-tag>
+        <a-button @click="showModal = true">选择用户</a-button>
+        <user-select-modal
+          v-model:showModal="showModal"
+          @userSelected="onUserSelect"
+        />
       </a-form-item>
       <a-form-item label="储值金额">
         <a-input-number
           :min="0"
           :max="500"
-          :step="0.1"
+          :step="10"
           v-model:value="form.amount"
         />
         <a-radio-group
@@ -30,6 +29,21 @@
           <a-radio-button :value="400">400</a-radio-button>
         </a-radio-group>
       </a-form-item>
+      <a-form-item label="储值密码">
+        <a-input
+          type="password"
+          v-model:value="form.passwd"
+          placeholder="输入密码"
+          allowClear
+        ></a-input>
+      </a-form-item>
+      <a-form-item label="备注">
+        <a-textarea
+          v-model:value="form.remark"
+          placeholder="输入备注(可空)"
+          :auto-size="{ minRows: 1, maxRows: 4 }"
+        />
+      </a-form-item>
       <a-form-item>
         <a-button type="primary" @click="onSubmit">储值</a-button>
         <a-button style="margin-left: 10px" @click="onReset">重置</a-button>
@@ -39,56 +53,53 @@
 </template>
 
 <script>
+  import { verifyPasswd } from '@/api/user.js'
+  import { recharge } from '@/api/storedvalue.js'
+  import { Modal } from 'ant-design-vue'
+  import userSelectModal from '@/views/components/userSelectModal'
   export default {
+    components: {
+      userSelectModal,
+    },
     data() {
       return {
-        selectUserModal: false,
+        showModal: false,
         selectedUsername: '',
         form: {
           userid: null,
           amount: 0,
-        },
-        modal: {
-          data: [],
-          columns: [
-            {
-              title: '会员号',
-              dataIndex: 'userid',
-              key: 'userid',
-              slots: { title: 'customTitle', customRender: '会员号' },
-            },
-            {
-              title: '用户姓名',
-              dataIndex: 'username',
-              key: 'username',
-            },
-            {
-              title: '手机号',
-              key: 'phone',
-              dataIndex: 'phone',
-            },
-            {
-              title: '余额',
-              key: 'balance',
-              dataIndex: 'balance',
-            },
-            {
-              title: '操作',
-              key: 'action',
-              slots: { customRender: 'action' },
-            },
-          ],
+          passwd: '',
+          remark: '',
         },
       }
     },
     methods: {
-      onUserSelect() {
-        this.selectUserModal = false
+      onUserSelect(data) {
+        this.selectedUsername = data.username
+        this.form.userid = data.userid
       },
-      onSubmit() {},
+      onSubmit() {
+        verifyPasswd({
+          uid: this.form.userid,
+          passwd: this.form.passwd,
+        }).then(() => {
+          recharge({
+            uid: this.form.userid,
+            value: this.form.amount,
+            type: 0,
+            remark: this.form.remark,
+          }).then(() => {
+            this.onReset()
+            Modal.success({ title: '储值成功!' })
+          })
+        })
+      },
       onReset() {
         this.form.userid = null
         this.form.amount = 0
+        this.form.passwd = ''
+        this.form.remark = ''
+        this.selectedUsername = ''
       },
     },
   }

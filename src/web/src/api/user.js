@@ -21,3 +21,13 @@ export function register(data) {
     data: data,
   })
 }
+
+export function verifyPasswd(data) {
+  return request({
+    url: '/user/id/' + data.uid + '/passwd/verify',
+    method: 'post',
+    data: {
+      passwd: data.passwd,
+    },
+  })
+}

@@ -16,9 +16,9 @@
         WHERE userid=#{id}
     </update>
     <select id="getRechargeLogList" resultType="bean.StoredValueLog">
-        SELECT * FROM storedvalue_log
+        SELECT * FROM storedvalue_log ORDER BY recharge_time DESC
     </select>
     <select id="getRechargeLogListByUser" resultType="bean.StoredValueLog">
-        SELECT * FROM storedvalue_log WHERE userid=#{userid}
+        SELECT * FROM storedvalue_log WHERE userid=#{userid} ORDER BY recharge_time DESC
     </select>
 </mapper>

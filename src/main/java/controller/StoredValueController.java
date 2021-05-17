@@ -31,7 +31,7 @@ public class StoredValueController {
         return response;
     }
 
-    @RequestMapping(value = "/uid/{uid}/recharge", method = {RequestMethod.PUT, RequestMethod.GET})
+    @RequestMapping(value = "/uid/{uid}/recharge", method = {RequestMethod.PUT, RequestMethod.GET,RequestMethod.POST})
     public Response rechargeValue(@PathVariable("uid") int uid,
                                   @RequestParam("value") BigDecimal value,
                                   @RequestParam("type") int type,

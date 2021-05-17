@@ -1,5 +1,9 @@
 <template>
-  <a-table :columns="table.columns" :data-source="table.data">
+  <a-table
+    :columns="table.columns"
+    :data-source="table.data"
+    :loading="table.loading"
+  >
     <template #time="{ text }">{{ filterTimeStamp(text) }}</template>
     <template #state="{ text }">
       <a-tag color="blue">{{ filterOrderState(text) }}</a-tag>
@@ -48,6 +52,7 @@
       // var that = this
       getList().then((res) => {
         this.table.data = res.data
+        this.table.loading = false
       })
     },
     methods: {
@@ -72,6 +77,7 @@
     data() {
       return {
         table: {
+          loading: true,
           data: [],
           columns: [
             {
@@ -123,6 +129,7 @@
             {
               title: '操作',
               key: 'action',
+              slots: { customRender: 'action' },
             },
           ],
         },

@@ -89,13 +89,13 @@ public class UserController {
         return new Response();
     }
 
-    @RequestMapping(value = "/id/{uid}/passwd/verify", method = {RequestMethod.GET})
+    @RequestMapping(value = "/id/{uid}/passwd/verify", method = {RequestMethod.GET, RequestMethod.POST})
     public Response verifyPasswd(@PathVariable("uid") int uid,
                                  @RequestParam("passwd") String passwd
     ) throws ServiceException {
-        Response response = new Response();
-        boolean flag = userService.verifyPasswd(uid, passwd);
-        response.setData(flag);
-        return response;
+        if (!userService.verifyPasswd(uid, passwd)) {
+            throw new ServiceException("密码错误!", 400);
+        }
+        return new Response();
     }
 }

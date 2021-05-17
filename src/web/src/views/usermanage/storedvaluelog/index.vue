@@ -1,5 +1,10 @@
 <template>
-  <a-table :columns="table.columns" :data-source="table.data" bordered>
+  <a-table
+    :columns="table.columns"
+    :data-source="table.data"
+    :loading="table.loading"
+    bordered
+  >
     <template #time="{ text }">
       {{ filterTimeStamp(text) }}
     </template>
@@ -13,6 +18,7 @@
     mounted() {
       getStoredValueLogs().then((res) => {
         this.table.data = res.data
+        this.table.loading = false
       })
     },
     methods: {
@@ -21,6 +27,7 @@
     data() {
       return {
         table: {
+          loading: true,
           data: [],
           columns: [
             {

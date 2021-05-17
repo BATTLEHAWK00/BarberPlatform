@@ -2,16 +2,10 @@
   <a-form>
     <a-form-item label="选择用户">
       <a-button @click="modal.selectUserModal = true">选择用户</a-button>
-      <a-modal
-        v-model:visible="modal.selectUserModal"
-        title="选择用户"
-        @ok="onUserSelect"
-      >
-        <a-table
-          :columns="modal.columns"
-          :data-source="modal.userData"
-        ></a-table>
-      </a-modal>
+      <user-select-modal
+        v-model:showModal="modal.selectUserModal"
+        @userSelected="onUserSelect"
+      />
     </a-form-item>
     <a-form-item label="备注">
       <a-textarea
@@ -21,7 +15,7 @@
         size="small"
         :maxlength="255"
         :cols="100"
-        :autosize="{ minRows: 1, maxRows: 4 }"
+        :auto-size="{ minRows: 1, maxRows: 4 }"
       />
     </a-form-item>
     <a-form-item label="添加项目">
@@ -50,10 +44,12 @@
 </template>
 
 <script>
+  import userSelectModal from '@/views/components/userSelectModal'
   export default {
+    components: { userSelectModal },
     methods: {
-      onUserSelect() {
-        this.modal.selectUserModal = false
+      onUserSelect(data) {
+        console.log(data)
       },
       onReset() {},
       onSubmit() {},
@@ -70,33 +66,33 @@
             data: [],
             leftColumns: [
               {
-                dataIndex: 'name',
+                dataIndex: 'left_name',
                 title: '名称',
               },
               {
-                dataIndex: 'price',
+                dataIndex: 'left_price',
                 title: '价格',
               },
               {
-                dataIndex: 'remark',
+                dataIndex: 'left_remark',
                 title: '描述',
               },
             ],
             rightColumns: [
               {
-                dataIndex: 'name',
+                dataIndex: 'right_name',
                 title: '名称',
               },
               {
-                dataIndex: 'price',
+                dataIndex: 'right_price',
                 title: '价格',
               },
               {
-                dataIndex: 'amount',
+                dataIndex: 'right_amount',
                 title: '数量',
               },
               {
-                dataIndex: 'remark',
+                dataIndex: 'right_remark',
                 title: '备注',
               },
             ],
