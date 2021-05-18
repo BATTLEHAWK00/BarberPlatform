@@ -10,7 +10,9 @@ import java.util.Date;
 public class OrderItem {
     int orderid;
     int itemid;
-    int sponsor;
+    int sponsorid;
+    String itemname;
+    String sponsor;
     int amount;
     String remark;
     Date add_time;

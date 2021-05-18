@@ -52,3 +52,10 @@ export function updateItemAmount(oid, itemid, params) {
     params,
   })
 }
+
+export function getLastOrder() {
+  return request({
+    url: '/order/lastorder',
+    method: 'get',
+  })
+}

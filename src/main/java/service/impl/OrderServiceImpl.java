@@ -42,14 +42,14 @@ public class OrderServiceImpl implements OrderService {
         }
         orderMapper.createOrder(order);
         userMapper.updateLastConsume(order.getOwnerid(), new Date());
-        adminMapper.updateLastOrder(order.getSponsorid(), order.getOrderid());
+        adminMapper.updateLastOrder(order.getSponsorid(), order.getOid());
     }
 
     @Override
     public void addItem(OrderItem item) throws ServiceException {
         if (orderMapper.getOrderByOrderID(item.getOrderid()) == null) {
             throw new ServiceException("订单不存在!", 400);
-        } else if (adminMapper.getAdminByID(item.getSponsor()) == null) {
+        } else if (adminMapper.getAdminByID(item.getSponsorid()) == null) {
             throw new ServiceException("管理员不存在!", 400);
         } else if (orderMapper.getOrderItem(item.getOrderid(), item.getItemid()) != null) {
             throw new ServiceException("已经添加过该项目!", 400);
@@ -81,7 +81,7 @@ public class OrderServiceImpl implements OrderService {
     public List<Order> getOrderList() {
         List<Order> orderList = orderMapper.getOrderList();
         for (Order i : orderList) {
-            i.setOrderItemList(orderMapper.getOrderItemList(i.getOrderid()));
+            i.setOrderItemList(orderMapper.getOrderItemList(i.getOid()));
         }
         return orderList;
     }
@@ -93,7 +93,7 @@ public class OrderServiceImpl implements OrderService {
         }
         List<Order> orderList = orderMapper.getOrderListByUser(id);
         for (Order i : orderList) {
-            i.setOrderItemList(orderMapper.getOrderItemList(i.getOrderid()));
+            i.setOrderItemList(orderMapper.getOrderItemList(i.getOid()));
         }
         return orderList;
     }
@@ -106,6 +106,11 @@ public class OrderServiceImpl implements OrderService {
             throw new ServiceException("订单项目不存在!", 400);
         }
         orderMapper.updateItemAmount(oid, id, amount);
+    }
+
+    @Override
+    public int getLastOrder() {
+        return orderMapper.getLastOrderID();
     }
 
 }

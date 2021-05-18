@@ -13,7 +13,7 @@
         INSERT INTO order_items
         (orderid,itemid,sponsor,amount,remark,add_time)
         VALUES
-        (#{orderid},#{itemid},#{sponsor},#{amount},#{remark},now())
+        (#{orderid},#{itemid},#{sponsorid},#{amount},#{remark},now())
     </insert>
     <update id="updateOrderState">
         UPDATE orders
@@ -31,18 +31,21 @@
     </delete>
 
     <select id="getOrderList" resultType="bean.Order">
-        SELECT * FROM orders
+        SELECT * FROM v_orders ORDER BY create_time DESC
     </select>
     <select id="getOrderListByUser" resultType="bean.Order">
-        SELECT * FROM orders WHERE ownerid=#{id}
+        SELECT * FROM v_orders WHERE ownerid=#{id} ORDER BY create_time DESC
     </select>
     <select id="getOrderItemList" resultType="bean.OrderItem">
-        SELECT * FROM order_items WHERE orderid=#{id}
+        SELECT * FROM v_order_items WHERE oid=#{id}
     </select>
     <select id="getOrderItem" resultType="bean.OrderItem">
-        SELECT * FROM order_items WHERE orderid=#{orderid} AND itemid=#{itemid}
+        SELECT * FROM v_order_items WHERE oid=#{orderid} AND itemid=#{itemid}
     </select>
     <select id="getOrderByOrderID" resultType="bean.Order">
-        SELECT * FROM orders WHERE orderid=#{id}
+        SELECT * FROM v_orders WHERE oid=#{id}
+    </select>
+    <select id="getLastOrderID" resultType="java.lang.Integer">
+        SELECT MAX(oid) FROM v_orders;
     </select>
 </mapper>

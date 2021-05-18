@@ -1,9 +1,12 @@
 <template>
   <a-form>
     <a-form-item label="选择用户">
-      <a-button @click="modal.selectUserModal = true">选择用户</a-button>
+      <a-tag v-if="selectedUserName">
+        【{{ form.userid }}】{{ selectedUserName }}
+      </a-tag>
+      <a-button @click="selectUserModal = true">选择用户</a-button>
       <user-select-modal
-        v-model:showModal="modal.selectUserModal"
+        v-model:showModal="selectUserModal"
         @userSelected="onUserSelect"
       />
     </a-form-item>
@@ -23,16 +26,48 @@
         :data-source="transfer.data"
         show-search
         :show-select-all="false"
+        :target-keys="transfer.targetKeys"
+        :row-key="(record) => record.itemid"
+        :render="(item) => item.name"
+        style="width: 800px"
+        :filter-option="
+          (inputValue, item) =>
+            item.name.indexOf(inputValue) !== -1 || item.itemid == inputValue
+        "
+        @change="
+          (nextTargetKeys) => {
+            transfer.targetKeys = nextTargetKeys
+          }
+        "
       >
-        <template #children="{ direction }">
+        <template
+          #children="{ direction, filteredItems, selectedKeys, onItemSelect }"
+        >
           <a-table
             :columns="
               direction === 'left'
                 ? transfer.table.leftColumns
                 : transfer.table.rightColumns
             "
-            :data-source="transfer.table.data"
-          />
+            :row-selection="{
+              selectedRowKeys: selectedKeys,
+              onSelect({ key }, selected) {
+                onItemSelect(key, selected)
+              },
+            }"
+            row-key="itemid"
+            :data-source="filteredItems"
+            size="small"
+          >
+            <template #amount="{ record }">
+              <a-input-number
+                v-model:value="record.amount"
+                :min="1"
+                :max="99"
+                :defaultValue="1"
+              />
+            </template>
+          </a-table>
         </template>
       </a-transfer>
     </a-form-item>
@@ -45,90 +80,100 @@
 
 <script>
   import userSelectModal from '@/views/components/userSelectModal'
+  import { Modal } from 'ant-design-vue'
+  import { getList } from '@/api/barberitem.js'
+  import { createOrder, addItem, getLastOrder } from '@/api/order.js'
   export default {
     components: { userSelectModal },
     methods: {
       onUserSelect(data) {
-        console.log(data)
+        this.selectedUserName = data.username
+        this.form.userid = data.userid
       },
       onReset() {},
-      onSubmit() {},
+      onSubmit() {
+        console.log(this.transfer.targetKeys)
+        console.log(this.transfer.data)
+        createOrder({
+          sponsorid: 1,
+          ownerid: this.form.userid,
+          remark: this.form.remark,
+        }).then(() => {
+          this.transfer.targetKeys.forEach((itemid) => {
+            getLastOrder().then((res) => {
+              addItem(res.data.oid, {
+                itemid: itemid,
+                sponsorid: 1,
+                ownerid: this.form.userid,
+                amount: 5,
+              })
+            })
+          })
+          Modal.success({
+            title: '创建成功!',
+          })
+        })
+      },
+      onChange(nextTargetKeys) {
+        console.log(nextTargetKeys)
+        this.transfer.targetKeys = nextTargetKeys
+      },
+    },
+    mounted() {
+      getList().then((res) => {
+        this.transfer.data = res.data
+      })
     },
     data() {
       return {
+        selectUserModal: false,
+        selectedUserName: '',
         form: {
           userid: null,
           remark: '',
         },
         transfer: {
           data: [],
+          targetKeys: [],
           table: {
-            data: [],
             leftColumns: [
               {
-                dataIndex: 'left_name',
+                dataIndex: 'itemid',
+                title: 'ID',
+              },
+              {
+                dataIndex: 'name',
                 title: '名称',
               },
               {
-                dataIndex: 'left_price',
+                dataIndex: 'price',
                 title: '价格',
               },
               {
-                dataIndex: 'left_remark',
+                dataIndex: 'remark',
                 title: '描述',
               },
             ],
             rightColumns: [
               {
-                dataIndex: 'right_name',
+                dataIndex: 'itemid',
+                title: 'ID',
+              },
+              {
+                dataIndex: 'name',
                 title: '名称',
               },
               {
-                dataIndex: 'right_price',
+                dataIndex: 'price',
                 title: '价格',
               },
               {
-                dataIndex: 'right_amount',
+                dataIndex: 'amount',
                 title: '数量',
-              },
-              {
-                dataIndex: 'right_remark',
-                title: '备注',
+                slots: { customRender: 'amount' },
               },
             ],
           },
-        },
-        modal: {
-          userData: {},
-          selectUserModal: false,
-          columns: [
-            {
-              title: '会员号',
-              dataIndex: 'userid',
-              key: 'userid',
-              slots: { title: 'customTitle', customRender: '会员号' },
-            },
-            {
-              title: '用户姓名',
-              dataIndex: 'username',
-              key: 'username',
-            },
-            {
-              title: '手机号',
-              key: 'phone',
-              dataIndex: 'phone',
-            },
-            {
-              title: '余额',
-              key: 'balance',
-              dataIndex: 'balance',
-            },
-            {
-              title: '操作',
-              key: 'action',
-              slots: { customRender: 'action' },
-            },
-          ],
         },
       }
     },

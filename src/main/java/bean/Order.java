@@ -10,9 +10,11 @@ import java.util.List;
 @Data
 @ToString
 public class Order {
-    int orderid;
+    int oid;
     int sponsorid;
     int ownerid;
+    String sponsor;
+    String username;
     int state;
     List<OrderItem> orderItemList;
     Date pay_time;

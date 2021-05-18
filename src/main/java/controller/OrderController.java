@@ -9,6 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import service.OrderService;
 
+import java.util.List;
+
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
 @RequestMapping("/order")
@@ -41,7 +43,7 @@ public class OrderController {
         OrderItem orderItem = new OrderItem();
         orderItem.setOrderid(oid);
         orderItem.setItemid(itemid);
-        orderItem.setSponsor(sponsorid);
+        orderItem.setSponsorid(sponsorid);
         orderItem.setAmount(amount);
         orderItem.setRemark(remark);
         orderService.addItem(orderItem);
@@ -84,6 +86,13 @@ public class OrderController {
     public Response getOrderList() throws ServiceException {
         Response response = new Response();
         response.setData(orderService.getOrderList());
+        return response;
+    }
+
+    @RequestMapping(value = "/lastorder", method = {RequestMethod.GET})
+    public Response getLastOrder() throws ServiceException {
+        Response response = new Response();
+        response.setData(orderService.getOrderByID(orderService.getLastOrder()));
         return response;
     }
 }

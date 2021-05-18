@@ -20,4 +20,6 @@ public interface OrderService {
     List<Order> getOrderListByUser(int id) throws ServiceException;
 
     void updateItemAmount(int oid, int id, int amount) throws ServiceException;
+
+    int getLastOrder();
 }

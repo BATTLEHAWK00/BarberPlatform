@@ -25,6 +25,8 @@ public interface OrderMapper {
 
     void deleteOrderItem(@Param("orderid") int orderid, @Param("itemid") int itemid);
 
+    int getLastOrderID();
+
     OrderItem getOrderItem(@Param("orderid") int orderid, @Param("itemid") int itemid);
 
     Order getOrderByOrderID(int id);

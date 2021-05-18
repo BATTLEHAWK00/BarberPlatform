@@ -7,7 +7,7 @@
         INSERT INTO barber_item
         (name,price,add_time,img,remark)
         VALUES
-        (#{name},#{price},#{add_time},#{img},#{remark})
+        (#{name},#{price},now(),#{img},#{remark})
     </insert>
     <update id="updateItem" parameterType="bean.BarberItem">
         UPDATE barber_item

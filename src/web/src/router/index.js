@@ -128,9 +128,41 @@ export const asyncRoutes = [
     ],
   },
   {
+    path: '/barberitem',
+    component: Layout,
+    redirect: '/barberitem/list',
+    meta: {
+      title: '消费项目管理',
+      icon: 'stack-line',
+      affix: true,
+    },
+    children: [
+      {
+        path: 'create',
+        name: 'barberitem-create',
+        component: () => import('@/views/barberitem/create'),
+        meta: {
+          title: '创建项目',
+          icon: 'menu-add-fill',
+          affix: true,
+        },
+      },
+      {
+        path: 'list',
+        name: 'barberitem-list',
+        component: () => import('@/views/barberitem/list'),
+        meta: {
+          title: '项目列表',
+          icon: 'list-check',
+          affix: true,
+        },
+      },
+    ],
+  },
+  {
     path: '/reservation',
     component: Layout,
-    redirect: '/reservation/index',
+    redirect: '/reservation',
     meta: {
       title: '预约管理',
       icon: 'calendar-check-line',
@@ -139,8 +171,8 @@ export const asyncRoutes = [
     },
     children: [
       {
-        path: 'reservation',
-        name: 'reservation',
+        path: 'list',
+        name: 'reservation-list',
         component: () => import('@/views/reservation'),
         meta: {
           title: '预约列表',

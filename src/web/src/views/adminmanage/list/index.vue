@@ -1,8 +1,18 @@
 <template>
-  <a-table :columns="table.columns" :data-source="table.data" bordered>
+  <a-table
+    :columns="table.columns"
+    :data-source="table.data"
+    :row-selection="{
+      selectedRowKeys: table.selectedRowKeys,
+      onChange: onSelectChange,
+    }"
+    row-key="adminid"
+    :loading="table.loading"
+    bordered
+  >
     <template #time="{ text }">{{ filterTimeStamp(text) }}</template>
     <template #expandedRowRender="{ record }">
-      <a-descriptions :title="record.name" layout="vertical">
+      <a-descriptions :title="record.name" layout="vertical" bordered>
         <a-descriptions-item label="电话">
           {{ record.phone }}
         </a-descriptions-item>
@@ -30,14 +40,21 @@
     mounted() {
       getList().then((res) => {
         this.table.data = res.data
+        this.table.loading = false
       })
     },
     methods: {
       filterTimeStamp,
+      onSelectChange(selectedRowKeys) {
+        console.log('selectedRowKeys changed: ', selectedRowKeys)
+        this.table.selectedRowKeys = selectedRowKeys
+      },
     },
     data() {
       return {
         table: {
+          selectedRowKeys: [],
+          loading: true,
           data: [],
           columns: [
             {

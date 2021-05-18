@@ -41,7 +41,7 @@ public class LoginController {
         userInfo userInfo = new userInfo();
         userInfo.setRoles(new String[]{"admin"});
         userInfo.setAbility(new String[]{"READ", "WRITE", "DELETE"});
-        userInfo.setUsername("asdasds");
+        userInfo.setUsername("admin");
         return new Response(userInfo);
     }
 

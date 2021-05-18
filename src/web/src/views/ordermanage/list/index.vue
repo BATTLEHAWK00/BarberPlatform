@@ -9,12 +9,12 @@
       <a-tag color="blue">{{ filterOrderState(text) }}</a-tag>
     </template>
     <template #expandedRowRender="{ record }">
-      <a-descriptions :title="'订单' + record.orderid">
+      <a-descriptions :title="'订单' + record.oid" bordered>
         <a-descriptions-item label="用户姓名">
-          {{ record.ownerid }}
+          {{ record.username }}
         </a-descriptions-item>
         <a-descriptions-item label="创建者">
-          {{ record.sponsorid }}
+          {{ record.sponsor }}
         </a-descriptions-item>
         <a-descriptions-item label="订单状态">
           <a-tag color="blue">
@@ -25,21 +25,28 @@
           {{ filterTimeStamp(record.create_time) }}
         </a-descriptions-item>
         <a-descriptions-item label="原价格">
-          {{ filterTimeStamp(record.price) }}
+          {{ record.price }}
         </a-descriptions-item>
         <a-descriptions-item label="折扣">
-          {{ filterTimeStamp(record.discount) }}
+          {{ record.discount }}
         </a-descriptions-item>
         <a-descriptions-item label="实付价格">
-          {{ filterTimeStamp(record.actual_payment) }}
+          {{ record.actual_payment }}
         </a-descriptions-item>
         <a-descriptions-item label="支付方式">
-          {{ filterTimeStamp(record.pay_method) }}
+          {{ record.pay_method }}
         </a-descriptions-item>
         <a-descriptions-item label="备注">
-          {{ filterTimeStamp(record.remark) }}
+          {{ record.remark }}
         </a-descriptions-item>
       </a-descriptions>
+    </template>
+    <template #action="{ record }">
+      <div class="actions">
+        <a v-if="record.state === 1">支付</a>
+        <a>修改</a>
+        <a>关闭</a>
+      </div>
     </template>
   </a-table>
 </template>
@@ -82,20 +89,20 @@
           columns: [
             {
               title: '订单号',
-              dataIndex: 'orderid',
-              key: 'orderid',
+              dataIndex: 'oid',
+              key: 'oid',
               sorter: (a, b) => a.recharge_time - b.recharge_time,
               sortDirections: ['descend', 'ascend'],
             },
             {
               title: '用户姓名',
-              dataIndex: 'ownerid',
-              key: 'ownerid',
+              dataIndex: 'username',
+              key: 'username',
             },
             {
               title: '创建者',
-              dataIndex: 'sponsorid',
-              key: 'sponsorid',
+              dataIndex: 'sponsor',
+              key: 'sponsor',
             },
             {
               title: '创建时间',
@@ -138,4 +145,8 @@
   }
 </script>
 
-<style></style>
+<style scoped>
+  .actions a {
+    margin-right: 10px;
+  }
+</style>

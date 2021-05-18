@@ -11,6 +11,7 @@ import java.util.Date;
 public class StoredValueLog {
     int rechargeid;
     int userid;
+    String username;
     BigDecimal recharge_amount;
     Date recharge_time;
     int type;
