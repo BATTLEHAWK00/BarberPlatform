@@ -92,15 +92,13 @@
       },
       onReset() {},
       onSubmit() {
-        console.log(this.transfer.targetKeys)
-        console.log(this.transfer.data)
         createOrder({
           sponsorid: 1,
           ownerid: this.form.userid,
           remark: this.form.remark,
         }).then(() => {
-          this.transfer.targetKeys.forEach((itemid) => {
-            getLastOrder().then((res) => {
+          getLastOrder().then((res) => {
+            this.transfer.targetKeys.forEach((itemid) => {
               addItem(res.data.oid, {
                 itemid: itemid,
                 sponsorid: 1,
@@ -109,6 +107,7 @@
               })
             })
           })
+
           Modal.success({
             title: '创建成功!',
           })

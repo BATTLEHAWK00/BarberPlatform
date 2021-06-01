@@ -1,51 +1,33 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-       xmlns:mvc="http://www.springframework.org/schema/mvc"
        xmlns:context="http://www.springframework.org/schema/context"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-       xmlns:mybatis="http://mybatis.org/schema/mybatis-spring"
-       xsi:schemaLocation="
-        http://www.springframework.org/schema/beans
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
         http://www.springframework.org/schema/beans/spring-beans.xsd
-        http://www.springframework.org/schema/mvc
-        http://www.springframework.org/schema/mvc/spring-mvc.xsd
         http://www.springframework.org/schema/context
         http://www.springframework.org/schema/context/spring-context.xsd
-        http://mybatis.org/schema/mybatis-spring
-        http://mybatis.org/schema/mybatis-spring.xsd ">
+        http://www.springframework.org/schema/tx
+        http://www.springframework.org/schema/tx/spring-tx.xsd">
+    <!-- 配置包扫描 -->
     <context:component-scan base-package="dao"/>
-    <context:component-scan base-package="service"/>
 
-    <context:property-placeholder location="classpath:db.properties"/>
-    <bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource" destroy-method="close">
-        <property name="driverClass" value="${jdbc.driverClass}"/>
-        <property name="jdbcUrl" value="${jdbc.jdbcUrl}"/>
-        <property name="user" value="${jdbc.user}"/>
-        <property name="password" value="${jdbc.password}"/>
-        <property name="minPoolSize" value="${c3p0.minPoolSize}"/>
-        <property name="maxPoolSize" value="${c3p0.maxPoolSize}"/>
-        <property name="maxIdleTime" value="${c3p0.maxIdleTime}"/>
-        <property name="idleConnectionTestPeriod" value="${c3p0.idleConnectionTestPeriod}"/>
-    </bean>
-
+    <!-- 配置SQLSession -->
     <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
         <property name="dataSource" ref="dataSource"/>
-<!--        <property name="mapperLocations" value="classpath:dao/*.xml"/>-->
-
     </bean>
-<!--        <bean id="orderMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">-->
-<!--            <property name="mapperInterface" value="dao.OrderMapper"/>-->
-<!--            <property name="sqlSessionFactory" ref="sqlSessionFactory"/>-->
-<!--        </bean>-->
-<!--    <mybatis:scan base-package="dao"/>-->
 
+    <!-- 配置Mapper扫描 -->
     <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
         <property name="basePackage" value="dao"/>
-        <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory" />
-<!--        <property name="sqlSessionFactory" ref="sqlSessionFactory"/>-->
+        <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"/>
     </bean>
-    <!--    <bean id="transactionManager"-->
-    <!--          class="org.springframework.jdbc.datasource.DataSourceTransactionManager">-->
-    <!--        <property name="dataSource" ref="dataSource"/>-->
-    <!--    </bean>-->
+
+    <!-- 配置事务 -->
+    <bean name="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="dataSource"/>
+    </bean>
+
+    <!-- 配置事务注解 -->
+    <tx:annotation-driven/>
 </beans>

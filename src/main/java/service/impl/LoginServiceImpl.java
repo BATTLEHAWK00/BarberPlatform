@@ -8,6 +8,7 @@ import exceptions.ServiceException;
 import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.RequestHeader;
 import service.LoginService;
 import util.SecurityUtil;
@@ -22,6 +23,7 @@ public class LoginServiceImpl implements LoginService {
     @Setter
     private SessionMapper sessionMapper;
 
+    @Transactional
     @Override
     public String Login(String username, String passwd) throws ServiceException {
         Admin admin = adminMapper.getAdminByName(username);

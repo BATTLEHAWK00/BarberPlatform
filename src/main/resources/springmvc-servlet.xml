@@ -13,7 +13,6 @@
     <mvc:annotation-driven/>
     <mvc:default-servlet-handler />
     <context:component-scan base-package="controller"/>
-<!--    <import resource="applicationContext.xml"/>-->
 
     <!--start:使用Jackson 2.x的配置，需要导入的jar包：jackson-core-xxx.jar、jackson-annotations-xxx.jar、jackson-databind-xxx.jar-->
     <!--通过处理器映射DefaultAnnotationHandlerMapping来开启支持@Controller注解-->

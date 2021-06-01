@@ -11,6 +11,7 @@ import exceptions.ServiceException;
 import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import service.OrderService;
 
 import java.util.Date;
@@ -31,6 +32,7 @@ public class OrderServiceImpl implements OrderService {
     @Setter
     private AdminMapper adminMapper;
 
+    @Transactional
     @Override
     public void createOrder(Order order) throws ServiceException {
         User user = userMapper.getUserByID(order.getOwnerid());
@@ -45,6 +47,7 @@ public class OrderServiceImpl implements OrderService {
         adminMapper.updateLastOrder(order.getSponsorid(), order.getOid());
     }
 
+    @Transactional
     @Override
     public void addItem(OrderItem item) throws ServiceException {
         if (orderMapper.getOrderByOrderID(item.getOrderid()) == null) {
@@ -57,6 +60,7 @@ public class OrderServiceImpl implements OrderService {
         orderMapper.addOrderItem(item);
     }
 
+    @Transactional
     @Override
     public void deleteItem(int orderid, int itemid) throws ServiceException {
         if (orderMapper.getOrderByOrderID(orderid) == null) {
@@ -67,6 +71,7 @@ public class OrderServiceImpl implements OrderService {
         orderMapper.deleteOrderItem(orderid, itemid);
     }
 
+    @Transactional
     @Override
     public Order getOrderByID(int id) throws ServiceException {
         Order order = orderMapper.getOrderByOrderID(id);
@@ -86,6 +91,7 @@ public class OrderServiceImpl implements OrderService {
         return orderList;
     }
 
+    @Transactional
     @Override
     public List<Order> getOrderListByUser(int id) throws ServiceException {
         if (userMapper.getUserByID(id) == null) {
@@ -98,6 +104,7 @@ public class OrderServiceImpl implements OrderService {
         return orderList;
     }
 
+    @Transactional
     @Override
     public void updateItemAmount(int oid, int id, int amount) throws ServiceException {
         if (orderMapper.getOrderByOrderID(oid) == null) {
