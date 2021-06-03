@@ -7,19 +7,19 @@ import exceptions.ServiceException;
 import java.util.List;
 
 public interface OrderService {
-    void createOrder(Order order) throws ServiceException;
+    void createOrder(Order order);
 
-    void addItem(OrderItem item) throws ServiceException;
+    void addItem(OrderItem item);
 
-    void deleteItem(int orderid, int itemid) throws ServiceException;
+    void deleteItem(int orderid, int itemid);
 
-    Order getOrderByID(int id) throws ServiceException;
+    Order getOrderByID(int id);
 
     List<Order> getOrderList();
 
-    List<Order> getOrderListByUser(int id) throws ServiceException;
+    List<Order> getOrderListByUser(int id);
 
-    void updateItemAmount(int oid, int id, int amount) throws ServiceException;
+    void updateItemAmount(int oid, int id, int amount);
 
     int getLastOrder();
 }

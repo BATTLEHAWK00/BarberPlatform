@@ -84,7 +84,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public boolean verifyPasswd(int id, String passwd) throws ServiceException {
+    public boolean verifyPasswd(int id, String passwd) {
         if (userMapper.getUserByID(id) == null) {
             throw new ServiceException("用户不存在!", 400);
         }

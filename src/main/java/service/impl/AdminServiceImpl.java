@@ -6,6 +6,7 @@ import exceptions.ServiceException;
 import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import service.AdminService;
 import util.SecurityUtil;
 
@@ -22,8 +23,9 @@ public class AdminServiceImpl implements AdminService {
         return adminMapper.getAdminByToken(username, passwd);
     }
 
+    @Transactional
     @Override
-    public void createAdmin(Admin admin) throws ServiceException {
+    public void createAdmin(Admin admin) {
         if (adminMapper.getAdminByName(admin.getName()) != null) {
             throw new ServiceException("已有相同名字的管理员注册!", 400);
         } else if (adminMapper.getAdminByPhone(admin.getPhone()) != null) {

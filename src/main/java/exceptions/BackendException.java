@@ -1,6 +1,6 @@
 package exceptions;
 
-public class BackendException extends Exception{
+public class BackendException extends RuntimeException{
     private int status;
 
     public BackendException(String message, int status) {

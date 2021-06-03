@@ -8,6 +8,7 @@ import exceptions.ServiceException;
 import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import service.StoredValueService;
 
 import java.math.BigDecimal;
@@ -32,20 +33,21 @@ public class StoredValueServiceImpl implements StoredValueService {
     }
 
     @Override
-    public List<StoredValueLog> getLogList() throws ServiceException {
+    public List<StoredValueLog> getLogList() {
         return storedValueMapper.getRechargeLogList();
     }
 
     @Override
-    public List<StoredValueLog> getLogListByUser(int uid) throws ServiceException {
+    public List<StoredValueLog> getLogListByUser(int uid) {
         if (userMapper.getUserByID(uid) == null) {
             throw new ServiceException("用户不存在!", 400);
         }
         return storedValueMapper.getRechargeLogListByUser(uid);
     }
 
+    @Transactional
     @Override
-    public void recharge(int uid, BigDecimal amount, int type, String remark) throws ServiceException {
+    public void recharge(int uid, BigDecimal amount, int type, String remark) {
         User user = userMapper.getUserByID(uid);
         if (user == null) {
             throw new ServiceException("用户不存在!", 400);
@@ -59,8 +61,9 @@ public class StoredValueServiceImpl implements StoredValueService {
         storedValueMapper.writeRechargeLog(storedValueLog);
     }
 
+    @Transactional
     @Override
-    public void costValue(int uid, BigDecimal amount, String remark) throws ServiceException {
+    public void costValue(int uid, BigDecimal amount, String remark) {
         User user = userMapper.getUserByID(uid);
         if (user == null) {
             throw new ServiceException("用户不存在!", 400);

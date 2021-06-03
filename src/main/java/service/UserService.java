@@ -7,19 +7,19 @@ import java.util.Date;
 import java.util.List;
 
 public interface UserService {
-    void registerUser(User user) throws ServiceException;
+    void registerUser(User user);
 
-    void updatePasswd(int id, String passwd) throws ServiceException;
+    void updatePasswd(int id, String passwd);
 
-    void updateRemark(int id, String remark) throws ServiceException;
+    void updateRemark(int id, String remark);
 
-    void updateBirthDate(int id, Date birthdate) throws ServiceException;
+    void updateBirthDate(int id, Date birthdate);
 
-    void updatePhone(int id, String phone) throws ServiceException;
+    void updatePhone(int id, String phone);
 
-    List<User> getUserList() throws ServiceException;
+    List<User> getUserList();
 
-    void deleteUser(int id) throws ServiceException;
+    void deleteUser(int id);
 
-    boolean verifyPasswd(int id,String passwd) throws ServiceException;
+    boolean verifyPasswd(int id, String passwd);
 }

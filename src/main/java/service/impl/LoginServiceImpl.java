@@ -25,7 +25,7 @@ public class LoginServiceImpl implements LoginService {
 
     @Transactional
     @Override
-    public String Login(String username, String passwd) throws ServiceException {
+    public String Login(String username, String passwd) {
         Admin admin = adminMapper.getAdminByName(username);
         if (admin == null) {
             throw new ServiceException("用户不存在!", 400);
