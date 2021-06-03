@@ -1,7 +1,6 @@
 package controller;
 
 import bean.Response;
-import exceptions.ServiceException;
 import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;

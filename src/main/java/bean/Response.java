@@ -2,7 +2,6 @@ package bean;
 
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import lombok.Data;
-import lombok.RequiredArgsConstructor;
 import lombok.ToString;
 
 @JsonPropertyOrder({"code", "msg", "data"})

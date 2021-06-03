@@ -1,7 +1,6 @@
 package service;
 
 import bean.Admin;
-import exceptions.ServiceException;
 
 import java.util.List;
 

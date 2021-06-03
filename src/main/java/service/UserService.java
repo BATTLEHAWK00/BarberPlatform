@@ -1,7 +1,6 @@
 package service;
 
 import bean.User;
-import exceptions.ServiceException;
 
 import java.util.Date;
 import java.util.List;

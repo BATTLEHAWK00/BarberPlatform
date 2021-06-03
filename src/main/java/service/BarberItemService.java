@@ -1,7 +1,6 @@
 package service;
 
 import bean.BarberItem;
-import exceptions.ServiceException;
 
 import java.util.List;
 

@@ -2,7 +2,6 @@ package service;
 
 import bean.Order;
 import bean.OrderItem;
-import exceptions.ServiceException;
 
 import java.util.List;
 

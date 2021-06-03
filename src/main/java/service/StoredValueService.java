@@ -1,7 +1,6 @@
 package service;
 
 import bean.StoredValueLog;
-import exceptions.ServiceException;
 
 import java.math.BigDecimal;
 import java.util.List;
