@@ -24,7 +24,7 @@ public class OrderController {
             @RequestParam("sponsorid") int sponsorid,
             @RequestParam("ownerid") int ownerid,
             @RequestParam(value = "remark", required = false) String remark
-    ) throws ServiceException {
+    ) {
         Order order = new Order();
         order.setSponsorid(sponsorid);
         order.setOwnerid(ownerid);
@@ -39,7 +39,7 @@ public class OrderController {
                             @RequestParam("amount") int amount,
                             @RequestParam("sponsorid") int sponsorid,
                             @RequestParam(value = "remark", required = false) String remark
-    ) throws ServiceException {
+    ) {
         OrderItem orderItem = new OrderItem();
         orderItem.setOrderid(oid);
         orderItem.setItemid(itemid);
@@ -53,7 +53,7 @@ public class OrderController {
     @RequestMapping(value = "/id/{oid}/item/{id}", method = {RequestMethod.DELETE})
     public Response delelteItem(@PathVariable("oid") int oid,
                                 @PathVariable("id") int id
-    ) throws ServiceException {
+    ) {
         orderService.deleteItem(oid, id);
         return new Response();
     }
@@ -62,20 +62,20 @@ public class OrderController {
     public Response updateItemAmount(@PathVariable("oid") int oid,
                                      @PathVariable("id") int id,
                                      @RequestParam("amount") int amount
-    ) throws ServiceException {
+    ) {
         orderService.updateItemAmount(oid, id, amount);
         return new Response();
     }
 
     @RequestMapping(value = "/id/{oid}", method = {RequestMethod.GET})
-    public Response getOrderByID(@PathVariable("oid") int oid) throws ServiceException {
+    public Response getOrderByID(@PathVariable("oid") int oid) {
         Response response = new Response();
         response.setData(orderService.getOrderByID(oid));
         return response;
     }
 
     @RequestMapping(value = "/list/uid/{uid}", method = {RequestMethod.GET})
-    public Response getOrderListByUID(@PathVariable("uid") int uid) throws ServiceException {
+    public Response getOrderListByUID(@PathVariable("uid") int uid) {
         Response response = new Response();
         response.setData(orderService.getOrderListByUser(uid));
         return response;
@@ -83,14 +83,14 @@ public class OrderController {
 
 
     @RequestMapping(value = "/list", method = {RequestMethod.GET})
-    public Response getOrderList() throws ServiceException {
+    public Response getOrderList() {
         Response response = new Response();
         response.setData(orderService.getOrderList());
         return response;
     }
 
     @RequestMapping(value = "/lastorder", method = {RequestMethod.GET})
-    public Response getLastOrder() throws ServiceException {
+    public Response getLastOrder() {
         Response response = new Response();
         response.setData(orderService.getOrderByID(orderService.getLastOrder()));
         return response;

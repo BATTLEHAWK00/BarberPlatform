@@ -18,25 +18,25 @@ public class StoredValueController {
     private StoredValueService storedValueService;
 
     @RequestMapping(value = "/log/list", method = {RequestMethod.GET})
-    public Response getStoredValueList() throws ServiceException {
+    public Response getStoredValueList() {
         Response response = new Response();
         response.setData(storedValueService.getLogList());
         return response;
     }
 
     @RequestMapping(value = "/log/list/uid/{uid}", method = {RequestMethod.GET})
-    public Response getStoredValueListByUser(@PathVariable("uid") int uid) throws ServiceException {
+    public Response getStoredValueListByUser(@PathVariable("uid") int uid) {
         Response response = new Response();
         response.setData(storedValueService.getLogListByUser(uid));
         return response;
     }
 
-    @RequestMapping(value = "/uid/{uid}/recharge", method = {RequestMethod.PUT, RequestMethod.GET,RequestMethod.POST})
+    @RequestMapping(value = "/uid/{uid}/recharge", method = {RequestMethod.PUT, RequestMethod.GET, RequestMethod.POST})
     public Response rechargeValue(@PathVariable("uid") int uid,
                                   @RequestParam("value") BigDecimal value,
                                   @RequestParam("type") int type,
                                   @RequestParam(value = "remark", required = false) String remark
-    ) throws ServiceException {
+    ) {
         Response response = new Response();
         storedValueService.recharge(uid, value, type, remark);
         return response;
@@ -46,7 +46,7 @@ public class StoredValueController {
     public Response costValue(@PathVariable("uid") int uid,
                               @RequestParam("value") BigDecimal value,
                               @RequestParam(value = "remark", required = false) String remark
-    ) throws ServiceException {
+    ) {
         Response response = new Response();
         storedValueService.costValue(uid, value, remark);
         return response;

@@ -31,7 +31,7 @@ public class BarberItemController {
             @RequestParam("price") BigDecimal price,
             @RequestParam(value = "img", required = false) String img,
             @RequestParam(value = "remark", required = false) String remark
-    ) throws ServiceException {
+    ) {
         Response response = new Response();
         BarberItem barberItem = new BarberItem();
         barberItem.setName(name);
@@ -45,7 +45,7 @@ public class BarberItemController {
     @RequestMapping(value = "/id/{id}", method = {RequestMethod.DELETE})
     public Response deleteItem(
             @PathVariable("id") int id
-    ) throws ServiceException {
+    ) {
         Response response = new Response();
         barberItemService.deleteItem(id);
         return response;

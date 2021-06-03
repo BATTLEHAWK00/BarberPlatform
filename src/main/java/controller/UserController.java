@@ -27,7 +27,7 @@ public class UserController {
             @RequestParam("phone") String phone,
             @RequestParam(value = "gender", required = false) Integer gender,
             @RequestParam(value = "remark", required = false) String remark
-    ) throws ServiceException {
+    ) {
         logger.info("用户注册:" + username);
         Response response = new Response();
         User user = new User();
@@ -43,7 +43,7 @@ public class UserController {
     @RequestMapping(value = "/id/{uid}/passwd", method = {RequestMethod.PUT, RequestMethod.GET})
     public Response updatePasswd(@PathVariable("uid") int uid,
                                  @RequestParam("passwd") String passwd
-    ) throws ServiceException {
+    ) {
         Response response = new Response();
         userService.updatePasswd(uid, passwd);
         return response;
@@ -52,7 +52,7 @@ public class UserController {
     @RequestMapping(value = "/id/{uid}/remark", method = {RequestMethod.PUT, RequestMethod.GET})
     public Response updateRemark(@PathVariable("uid") int uid,
                                  @RequestParam("remark") String remark
-    ) throws ServiceException {
+    ) {
         Response response = new Response();
         userService.updateRemark(uid, remark);
         return response;
@@ -61,7 +61,7 @@ public class UserController {
     @RequestMapping(value = "/id/{uid}/phone", method = {RequestMethod.PUT, RequestMethod.GET})
     public Response updatePhone(@PathVariable("uid") int uid,
                                 @RequestParam("phone") String phone
-    ) throws ServiceException {
+    ) {
         Response response = new Response();
         userService.updatePhone(uid, phone);
         return response;
@@ -70,21 +70,21 @@ public class UserController {
     @RequestMapping(value = "/id/{uid}/birthdate", method = {RequestMethod.PUT, RequestMethod.GET})
     public Response updateBirthDate(@PathVariable("uid") int uid,
                                     @RequestParam("date") Date date
-    ) throws ServiceException {
+    ) {
         Response response = new Response();
         userService.updateBirthDate(uid, date);
         return response;
     }
 
     @RequestMapping(value = "/list", method = {RequestMethod.GET})
-    public Response getUserList() throws ServiceException {
+    public Response getUserList() {
         Response response = new Response();
         response.setData(userService.getUserList());
         return response;
     }
 
     @RequestMapping(value = "/id/{uid}", method = {RequestMethod.DELETE})
-    public Response deleteUser(@PathVariable("uid") int uid) throws ServiceException {
+    public Response deleteUser(@PathVariable("uid") int uid) {
         userService.deleteUser(uid);
         return new Response();
     }
@@ -92,7 +92,7 @@ public class UserController {
     @RequestMapping(value = "/id/{uid}/passwd/verify", method = {RequestMethod.GET, RequestMethod.POST})
     public Response verifyPasswd(@PathVariable("uid") int uid,
                                  @RequestParam("passwd") String passwd
-    ) throws ServiceException {
+    ) {
         if (!userService.verifyPasswd(uid, passwd)) {
             throw new ServiceException("密码错误!", 400);
         }

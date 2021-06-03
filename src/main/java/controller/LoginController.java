@@ -29,7 +29,7 @@ public class LoginController {
     @RequestMapping(value = "/login", method = {RequestMethod.POST})
     public Response handleLogin(@RequestParam("username") String username,
                                 @RequestParam("password") String passwd
-    ) throws ServiceException {
+    ) {
         Map<String, String> mp = new HashMap<>();
         String token = loginService.Login(username, passwd);
         mp.put("accessToken", token);
@@ -57,7 +57,7 @@ public class LoginController {
             @RequestParam("passwd") String passwd,
             @RequestParam("phone") String phone,
             @RequestParam(value = "remark", required = false) String remark
-    ) throws ServiceException {
+    ) {
         Admin admin = new Admin();
         admin.setName(username);
         admin.setPasswd(passwd);
