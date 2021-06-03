@@ -3,7 +3,7 @@
         PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="dao.UserMapper">
-    <insert id="registerUser" parameterType="bean.User">
+    <insert id="registerUser" parameterType="pojo.User">
         INSERT INTO users
         (username,passwd,salt,phone,birthdate,gender,remark,openid,lastconsume_time,reg_time)
         VALUES
@@ -47,16 +47,16 @@
     <delete id="deleteUser">
         DELETE FROM users WHERE userid=#{id}
     </delete>
-    <select id="getUserByID" resultType="bean.User">
+    <select id="getUserByID" resultType="pojo.User">
         SELECT * FROM users WHERE userid=#{id}
     </select>
-    <select id="getUserByUsername" resultType="bean.User">
+    <select id="getUserByUsername" resultType="pojo.User">
         SELECT * FROM users WHERE username=#{username}
     </select>
-    <select id="getUserByPhone" resultType="bean.User">
+    <select id="getUserByPhone" resultType="pojo.User">
         SELECT * FROM users WHERE phone=#{phone}
     </select>
-    <select id="getUserList" resultType="bean.User">
+    <select id="getUserList" resultType="pojo.User">
         SELECT * FROM v_user
     </select>
     <select id="getUserPasswd" resultType="java.util.Map">

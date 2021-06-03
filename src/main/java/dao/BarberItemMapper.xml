@@ -3,13 +3,13 @@
         PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="dao.BarberItemMapper">
-    <insert id="addItem" parameterType="bean.BarberItem">
+    <insert id="addItem" parameterType="pojo.BarberItem">
         INSERT INTO barber_item
         (name,price,add_time,img,remark)
         VALUES
         (#{name},#{price},now(),#{img},#{remark})
     </insert>
-    <update id="updateItem" parameterType="bean.BarberItem">
+    <update id="updateItem" parameterType="pojo.BarberItem">
         UPDATE barber_item
         SET name=#{name},price=#{price},add_time=#{add_time},img=#{img},#{remark}
     </update>
@@ -17,10 +17,10 @@
         DELETE FROM barber_item WHERE itemid=#{id}
     </delete>
 
-    <select id="getBarberItemList" resultType="bean.BarberItem">
+    <select id="getBarberItemList" resultType="pojo.BarberItem">
         SELECT * FROM barber_item
     </select>
-    <select id="getBarberItemByID" resultType="bean.BarberItem">
+    <select id="getBarberItemByID" resultType="pojo.BarberItem">
         SELECT * FROM barber_item WHERE itemid=#{id}
     </select>
 </mapper>

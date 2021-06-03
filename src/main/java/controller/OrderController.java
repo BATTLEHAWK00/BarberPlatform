@@ -1,7 +1,7 @@
 package controller;
 
-import bean.Order;
-import bean.OrderItem;
+import pojo.Order;
+import pojo.OrderItem;
 import bean.Response;
 import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;

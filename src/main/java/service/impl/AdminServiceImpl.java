@@ -1,6 +1,6 @@
 package service.impl;
 
-import bean.Admin;
+import pojo.Admin;
 import dao.AdminMapper;
 import exceptions.ServiceException;
 import lombok.Setter;

@@ -1,6 +1,6 @@
 package dao;
 
-import bean.Admin;
+import pojo.Admin;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;

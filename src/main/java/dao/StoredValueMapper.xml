@@ -3,7 +3,7 @@
         PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="dao.StoredValueMapper">
-    <insert id="writeRechargeLog" parameterType="bean.StoredValueLog">
+    <insert id="writeRechargeLog" parameterType="pojo.StoredValueLog">
         INSERT INTO storedvalue_log
         (userid,recharge_amount,recharge_time,type,remark)
         VALUES
@@ -15,10 +15,10 @@
         SET balance=#{value}
         WHERE userid=#{id}
     </update>
-    <select id="getRechargeLogList" resultType="bean.StoredValueLog">
+    <select id="getRechargeLogList" resultType="pojo.StoredValueLog">
         SELECT * FROM v_storedvalue_log ORDER BY recharge_time DESC
     </select>
-    <select id="getRechargeLogListByUser" resultType="bean.StoredValueLog">
+    <select id="getRechargeLogListByUser" resultType="pojo.StoredValueLog">
         SELECT * FROM v_storedvalue_log WHERE userid=#{userid} ORDER BY recharge_time DESC
     </select>
 </mapper>

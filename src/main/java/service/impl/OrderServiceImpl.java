@@ -1,9 +1,9 @@
 package service.impl;
 
-import bean.Admin;
-import bean.Order;
-import bean.OrderItem;
-import bean.User;
+import pojo.Admin;
+import pojo.Order;
+import pojo.OrderItem;
+import pojo.User;
 import dao.AdminMapper;
 import dao.OrderMapper;
 import dao.UserMapper;

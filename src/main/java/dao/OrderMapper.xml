@@ -9,7 +9,7 @@
         VALUES
         (#{sponsorid},#{ownerid},#{state},#{pay_time},#{pay_method},#{price},#{discount},#{actual_payment},now(),#{remark})
     </insert>
-    <insert id="addOrderItem" parameterType="bean.OrderItem">
+    <insert id="addOrderItem" parameterType="pojo.OrderItem">
         INSERT INTO order_items
         (orderid,itemid,sponsor,amount,remark,add_time)
         VALUES
@@ -30,19 +30,19 @@
         DELETE FROM order_items WHERE orderid=#{orderid} AND itemid=#{itemid}
     </delete>
 
-    <select id="getOrderList" resultType="bean.Order">
+    <select id="getOrderList" resultType="pojo.Order">
         SELECT * FROM v_orders ORDER BY create_time DESC
     </select>
-    <select id="getOrderListByUser" resultType="bean.Order">
+    <select id="getOrderListByUser" resultType="pojo.Order">
         SELECT * FROM v_orders WHERE ownerid=#{id} ORDER BY create_time DESC
     </select>
-    <select id="getOrderItemList" resultType="bean.OrderItem">
+    <select id="getOrderItemList" resultType="pojo.OrderItem">
         SELECT * FROM v_order_items WHERE oid=#{id}
     </select>
-    <select id="getOrderItem" resultType="bean.OrderItem">
+    <select id="getOrderItem" resultType="pojo.OrderItem">
         SELECT * FROM v_order_items WHERE oid=#{orderid} AND itemid=#{itemid}
     </select>
-    <select id="getOrderByOrderID" resultType="bean.Order">
+    <select id="getOrderByOrderID" resultType="pojo.Order">
         SELECT * FROM v_orders WHERE oid=#{id}
     </select>
     <select id="getLastOrderID" resultType="java.lang.Integer">

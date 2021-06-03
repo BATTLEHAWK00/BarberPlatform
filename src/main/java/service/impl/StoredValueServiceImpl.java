@@ -1,7 +1,7 @@
 package service.impl;
 
-import bean.StoredValueLog;
-import bean.User;
+import pojo.StoredValueLog;
+import pojo.User;
 import dao.StoredValueMapper;
 import dao.UserMapper;
 import exceptions.ServiceException;

@@ -1,6 +1,6 @@
 package service.impl;
 
-import bean.BarberItem;
+import pojo.BarberItem;
 import dao.BarberItemMapper;
 import exceptions.ServiceException;
 import lombok.Setter;

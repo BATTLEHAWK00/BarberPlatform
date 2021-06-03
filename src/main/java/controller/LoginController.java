@@ -1,8 +1,8 @@
 package controller;
 
-import bean.Admin;
+import pojo.Admin;
 import bean.Response;
-import bean.userInfo;
+import pojo.userInfo;
 import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;

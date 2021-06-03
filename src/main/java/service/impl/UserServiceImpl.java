@@ -1,6 +1,6 @@
 package service.impl;
 
-import bean.User;
+import pojo.User;
 import dao.UserMapper;
 import exceptions.ServiceException;
 import lombok.Setter;

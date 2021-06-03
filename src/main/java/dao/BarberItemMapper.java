@@ -1,6 +1,6 @@
 package dao;
 
-import bean.BarberItem;
+import pojo.BarberItem;
 
 import java.util.List;
 

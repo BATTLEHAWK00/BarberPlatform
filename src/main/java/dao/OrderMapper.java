@@ -1,7 +1,7 @@
 package dao;
 
-import bean.Order;
-import bean.OrderItem;
+import pojo.Order;
+import pojo.OrderItem;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Service;
 

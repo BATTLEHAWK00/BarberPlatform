@@ -1,6 +1,6 @@
 package dao;
 
-import bean.StoredValueLog;
+import pojo.StoredValueLog;
 import org.apache.ibatis.annotations.Param;
 
 import java.math.BigDecimal;

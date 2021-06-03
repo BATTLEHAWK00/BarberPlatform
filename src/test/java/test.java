@@ -1,6 +1,3 @@
-import bean.Order;
-import dao.OrderMapper;
-import dao.StoredValueMapper;
 import exceptions.ServiceException;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -10,7 +7,6 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import service.StoredValueService;
 
 import java.math.BigDecimal;
-import java.util.Date;
 
 @RunWith(SpringJUnit4ClassRunner.class)//使用junit4进行测试
 @ContextConfiguration("classpath:applicationContext.xml")//加载配置文件

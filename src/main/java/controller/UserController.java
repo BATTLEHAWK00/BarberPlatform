@@ -1,7 +1,7 @@
 package controller;
 
 import bean.Response;
-import bean.User;
+import pojo.User;
 import exceptions.ServiceException;
 import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;

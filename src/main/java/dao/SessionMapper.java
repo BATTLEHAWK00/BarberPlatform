@@ -1,6 +1,6 @@
 package dao;
 
-import bean.Session;
+import pojo.Session;
 
 public interface SessionMapper {
     Session getSessionByAccessToken(String accesstoken);

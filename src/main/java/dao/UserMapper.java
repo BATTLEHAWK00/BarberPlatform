@@ -1,6 +1,6 @@
 package dao;
 
-import bean.User;
+import pojo.User;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.Date;

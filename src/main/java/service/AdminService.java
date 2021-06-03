@@ -1,8 +1,9 @@
 package service;
 
-import bean.Admin;
+import pojo.Admin;
 
 import java.util.List;
+
 
 public interface AdminService {
     Admin getAdminByToken(String username, String passwd);

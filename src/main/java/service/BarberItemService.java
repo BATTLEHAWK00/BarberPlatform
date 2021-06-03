@@ -1,6 +1,6 @@
 package service;
 
-import bean.BarberItem;
+import pojo.BarberItem;
 
 import java.util.List;
 

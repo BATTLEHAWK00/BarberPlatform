@@ -1,7 +1,7 @@
 package service;
 
-import bean.Order;
-import bean.OrderItem;
+import pojo.Order;
+import pojo.OrderItem;
 
 import java.util.List;
 

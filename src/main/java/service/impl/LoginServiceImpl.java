@@ -1,7 +1,7 @@
 package service.impl;
 
-import bean.Admin;
-import bean.Session;
+import pojo.Admin;
+import pojo.Session;
 import dao.AdminMapper;
 import dao.SessionMapper;
 import exceptions.ServiceException;

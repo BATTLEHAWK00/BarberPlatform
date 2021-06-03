@@ -1,6 +1,6 @@
 package service;
 
-import bean.User;
+import pojo.User;
 
 import java.util.Date;
 import java.util.List;

@@ -1,6 +1,6 @@
 package service;
 
-import bean.StoredValueLog;
+import pojo.StoredValueLog;
 
 import java.math.BigDecimal;
 import java.util.List;
