@@ -17,4 +17,5 @@ public class Admin {
     Date reg_time;
     int last_order;
     String openid;
+    boolean is_superadmin;
 }
