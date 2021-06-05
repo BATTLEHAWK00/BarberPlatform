@@ -1,22 +1,15 @@
 package controller;
 
-import dao.SessionMapper;
 import lombok.Setter;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.ApplicationContextAware;
 import org.springframework.stereotype.Component;
-import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.context.ServletContextAware;
 import pojo.Session;
 import service.SessionService;
 
 import javax.servlet.ServletContext;
-import java.time.Instant;
-import java.util.concurrent.TimeUnit;
 
 @Component
 public class ApplicationInitializer implements ServletContextAware {

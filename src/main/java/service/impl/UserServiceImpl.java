@@ -1,11 +1,11 @@
 package service.impl;
 
-import pojo.User;
 import dao.UserMapper;
 import exceptions.ServiceException;
 import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import pojo.User;
 import service.UserService;
 import util.SecurityUtil;
 

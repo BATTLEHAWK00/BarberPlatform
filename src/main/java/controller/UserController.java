@@ -1,11 +1,11 @@
 package controller;
 
 import bean.Response;
-import pojo.User;
 import exceptions.ServiceException;
 import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import pojo.User;
 import service.UserService;
 
 import java.util.Date;

@@ -2,22 +2,14 @@ package controller.filters;
 
 import bean.Response;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.util.JSONWrappedObject;
-import dao.SessionMapper;
-import exceptions.ServiceException;
 import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.HandlerInterceptor;
-import org.springframework.web.servlet.ModelAndView;
-import pojo.Session;
 import service.SessionService;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.time.Instant;
-import java.util.concurrent.TimeUnit;
 
 public class TokenInterceptor implements HandlerInterceptor {
     @Autowired

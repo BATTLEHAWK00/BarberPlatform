@@ -1,7 +1,5 @@
 package service.impl;
 
-import pojo.Admin;
-import pojo.Session;
 import dao.AdminMapper;
 import dao.SessionMapper;
 import exceptions.ServiceException;
@@ -9,11 +7,12 @@ import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import pojo.Admin;
+import pojo.Session;
 import service.SessionService;
 import util.SecurityUtil;
 
 import java.time.Instant;
-import java.time.temporal.ChronoUnit;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
@@ -43,7 +42,6 @@ public class SessionServiceImpl implements SessionService {
         session.setAccess_token(SecurityUtil.getInstance().genUUID32());
         session.setAdminid(admin.getAdminid());
         sessionMapper.createSession(session);
-        CleanSession();
         return session.getAccess_token();
     }
 
@@ -53,22 +51,6 @@ public class SessionServiceImpl implements SessionService {
             return;
         }
         sessionMapper.deleteSession(accessToken);
-    }
-
-    @Transactional
-    @Override
-    public void CleanSession() {
-        List<Session> sessionList = sessionMapper.getSessionList();
-        for (Session session : sessionList) {
-            if (ChronoUnit.HOURS.between(
-                    session.getLogin_time().toInstant(),
-                    session.getLast_access().toInstant())
-                    > SESSION_TIMEOUT
-            ) {
-                System.out.println(session.getAccess_token());
-                sessionMapper.deleteSession(session.getAccess_token());
-            }
-        }
     }
 
     @Override

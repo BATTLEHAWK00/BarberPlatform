@@ -9,8 +9,6 @@ public interface SessionService {
 
     void Logout(String accessToken);
 
-    void CleanSession();
-
     boolean validateToken(String token);
 
     void updateLastAccessTime(String accessToken);
