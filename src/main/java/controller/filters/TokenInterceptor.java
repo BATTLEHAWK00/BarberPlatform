@@ -9,6 +9,7 @@ import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.HandlerInterceptor;
+import org.springframework.web.servlet.ModelAndView;
 import pojo.Session;
 import service.SessionService;
 
@@ -39,7 +40,7 @@ public class TokenInterceptor implements HandlerInterceptor {
     void return401(HttpServletResponse resp) throws IOException {
         ObjectMapper objectMapper = new ObjectMapper();
         Response response = new Response();
-        response.setMsg("登录失效，请重新登录!");
+        response.setMsg("登录会话失效，请重新登录!");
         response.setCode(401);
         resp.setStatus(401);
         resp.getWriter().print(objectMapper.writeValueAsString(response));

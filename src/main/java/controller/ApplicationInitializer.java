@@ -2,6 +2,8 @@ package controller;
 
 import dao.SessionMapper;
 import lombok.Setter;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
@@ -18,12 +20,14 @@ import java.util.concurrent.TimeUnit;
 
 @Component
 public class ApplicationInitializer implements ServletContextAware {
+    private final Logger logger = LogManager.getLogger(ApplicationInitializer.class);
+
     @Autowired
     @Setter
     private SessionService sessionService;
 
     private void clearOldSessions() {
-        System.out.println("Clean Sessions...");
+        logger.info("Clean Sessions...");
         int cnt = 0;
         for (Session session : sessionService.getSessionList()) {
             if (!sessionService.validateToken(session.getAccess_token())) {
@@ -31,7 +35,7 @@ public class ApplicationInitializer implements ServletContextAware {
                 cnt++;
             }
         }
-        System.out.printf("Clean Sessions Complete(%d cleared out).\n", cnt);
+        logger.info(String.format("Clean Sessions Complete(%d cleared out).\n", cnt));
     }
 
     @Override
