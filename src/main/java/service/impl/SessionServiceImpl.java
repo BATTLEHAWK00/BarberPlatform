@@ -89,4 +89,14 @@ public class SessionServiceImpl implements SessionService {
     public void updateLastAccessTime(String accessToken) {
         sessionMapper.updateLastAccess(accessToken);
     }
+
+    @Override
+    public List<Session> getSessionList() {
+        return sessionMapper.getSessionList();
+    }
+
+    @Override
+    public void deleteSession(String token) {
+        sessionMapper.deleteSession(token);
+    }
 }

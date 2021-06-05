@@ -28,7 +28,7 @@ const handleCode = (code, msg) => {
       store.dispatch('user/resetAll').catch(() => {})
       break
     case 403:
-      router.push({ path: '/401' }).catch(() => {})
+      router.push({ path: '/403' }).catch(() => {})
       break
     default:
       message.error(msg || `后端接口${code}异常`)

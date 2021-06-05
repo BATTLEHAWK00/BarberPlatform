@@ -18,12 +18,6 @@ import java.util.concurrent.TimeUnit;
 
 @Component
 public class ApplicationInitializer implements ServletContextAware {
-    public static final int SESSION_TIMEOUT = 3;
-
-    @Autowired
-    @Setter
-    private SessionMapper sessionMapper;
-
     @Autowired
     @Setter
     private SessionService sessionService;
@@ -31,9 +25,9 @@ public class ApplicationInitializer implements ServletContextAware {
     private void clearOldSessions() {
         System.out.println("Clean Sessions...");
         int cnt = 0;
-        for (Session session : sessionMapper.getSessionList()) {
-            if (sessionService.validateToken(session.getAccess_token())) {
-                sessionMapper.deleteSession(session.getAccess_token());
+        for (Session session : sessionService.getSessionList()) {
+            if (!sessionService.validateToken(session.getAccess_token())) {
+                sessionService.deleteSession(session.getAccess_token());
                 cnt++;
             }
         }

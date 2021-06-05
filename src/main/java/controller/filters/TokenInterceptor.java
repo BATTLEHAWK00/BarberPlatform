@@ -19,34 +19,29 @@ import java.time.Instant;
 import java.util.concurrent.TimeUnit;
 
 public class TokenInterceptor implements HandlerInterceptor {
-    public static final int SESSION_TIMEOUT = 3;
-
-    @Autowired
-    @Setter
-    private SessionMapper sessionMapper;
-
     @Autowired
     @Setter
     private SessionService sessionService;
 
     @Override
     public boolean preHandle(HttpServletRequest req, HttpServletResponse resp, Object handler) throws Exception {
+        resp.setCharacterEncoding("utf-8");
+        resp.setContentType("application/json;charset:utf-8");
         String token = req.getHeader("accessToken");
         if (token == null || !sessionService.validateToken(token)) {
-            return403(resp);
+            return401(resp);
             return false;
         }
         sessionService.updateLastAccessTime(token);
         return true;
     }
 
-    void return403(HttpServletResponse resp) throws IOException {
-        resp.setCharacterEncoding("utf-8");
-        resp.setContentType("application/json;charset:utf-8");
+    void return401(HttpServletResponse resp) throws IOException {
         ObjectMapper objectMapper = new ObjectMapper();
         Response response = new Response();
-        response.setMsg("您没有权限进行此操作!");
-        response.setCode(403);
+        response.setMsg("登录失效，请重新登录!");
+        response.setCode(401);
+        resp.setStatus(401);
         resp.getWriter().print(objectMapper.writeValueAsString(response));
     }
 }
