@@ -18,8 +18,9 @@ public class TokenInterceptor implements HandlerInterceptor {
 
     @Override
     public boolean preHandle(HttpServletRequest req, HttpServletResponse resp, Object handler) throws Exception {
-        resp.setCharacterEncoding("utf-8");
-        resp.setContentType("application/json;charset:utf-8");
+        if ("OPTIONS".equals(req.getMethod().toUpperCase())) {
+            return true;
+        }
         String token = req.getHeader("accessToken");
         if (token == null || !sessionService.validateToken(token)) {
             return401(resp);
@@ -30,6 +31,8 @@ public class TokenInterceptor implements HandlerInterceptor {
     }
 
     void return401(HttpServletResponse resp) throws IOException {
+        resp.setCharacterEncoding("utf-8");
+        resp.setContentType("application/json;charset:utf-8");
         ObjectMapper objectMapper = new ObjectMapper();
         Response response = new Response();
         response.setMsg("登录会话失效，请重新登录!");

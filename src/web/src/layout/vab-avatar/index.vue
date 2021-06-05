@@ -19,8 +19,9 @@
 <script>
   import { recordRoute } from '@/config'
   import { DownOutlined } from '@ant-design/icons-vue'
-
+  import { message } from 'ant-design-vue'
   import { mapGetters } from 'vuex'
+
   export default {
     name: 'VabAvatar',
     components: { DownOutlined },
@@ -39,6 +40,7 @@
         } else {
           this.$router.push('/login')
         }
+        message.success('注销成功!')
       },
     },
   }

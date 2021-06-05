@@ -5,6 +5,8 @@ import pojo.Session;
 import java.util.List;
 
 public interface SessionService {
+    int SESSION_TIMEOUT = 30;
+
     String Login(String username, String passwd);
 
     void Logout(String accessToken);
@@ -16,4 +18,6 @@ public interface SessionService {
     List<Session> getSessionList();
 
     void deleteSession(String token);
+
+    Session getSessionByToken(String token);
 }

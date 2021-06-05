@@ -5,6 +5,7 @@ import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import pojo.Admin;
+import pojo.Session;
 import pojo.userInfo;
 import service.AdminService;
 import service.SessionService;
@@ -34,12 +35,14 @@ public class LoginController {
         return new Response(mp);
     }
 
-    @RequestMapping("/userInfo")
+    @RequestMapping(value = "/userInfo", method = {RequestMethod.GET, RequestMethod.POST})
     public Response userInfo(@RequestHeader("accessToken") String accessToken) {
         userInfo userInfo = new userInfo();
         userInfo.setRoles(new String[]{"admin"});
         userInfo.setAbility(new String[]{"READ", "WRITE", "DELETE"});
-        userInfo.setUsername("admin");
+        Session session = sessionService.getSessionByToken(accessToken);
+        Admin admin = adminService.getAdminByID(session.getAdminid());
+        userInfo.setUsername(admin.getName());
         return new Response(userInfo);
     }
 

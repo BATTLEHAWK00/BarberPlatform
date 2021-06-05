@@ -3,6 +3,7 @@
     :columns="table.columns"
     :data-source="table.data"
     :loading="table.loading"
+    rowKey="rechargeid"
     bordered
   >
     <template #time="{ text }">

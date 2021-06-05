@@ -3,6 +3,7 @@
     :columns="table.columns"
     :data-source="table.data"
     :loading="table.loading"
+    rowKey="oid"
   >
     <template #time="{ text }">{{ filterTimeStamp(text) }}</template>
     <template #state="{ text }">

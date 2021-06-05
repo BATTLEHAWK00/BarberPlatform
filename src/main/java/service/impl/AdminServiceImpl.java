@@ -23,6 +23,11 @@ public class AdminServiceImpl implements AdminService {
         return adminMapper.getAdminByToken(username, passwd);
     }
 
+    @Override
+    public Admin getAdminByID(int adminid) {
+        return adminMapper.getAdminByID(adminid);
+    }
+
     @Transactional
     @Override
     public void createAdmin(Admin admin) {

@@ -18,7 +18,6 @@ import java.util.concurrent.TimeUnit;
 
 @Service
 public class SessionServiceImpl implements SessionService {
-    public static final int SESSION_TIMEOUT = 60;
     @Autowired
     @Setter
     private AdminMapper adminMapper;
@@ -80,5 +79,10 @@ public class SessionServiceImpl implements SessionService {
     @Override
     public void deleteSession(String token) {
         sessionMapper.deleteSession(token);
+    }
+
+    @Override
+    public Session getSessionByToken(String token) {
+        return sessionMapper.getSessionByAccessToken(token);
     }
 }

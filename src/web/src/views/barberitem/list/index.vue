@@ -1,5 +1,10 @@
 <template>
-  <a-table :columns="table.columns" :data-source="table.data" bordered>
+  <a-table
+    :columns="table.columns"
+    :data-source="table.data"
+    rowKey="itemid"
+    bordered
+  >
     <template #time="{ text }">{{ filterTimeStamp(text) }}</template>
     <template #action="{ record }">
       <a-button type="primary" @click="onEditUser(record)">编辑</a-button>

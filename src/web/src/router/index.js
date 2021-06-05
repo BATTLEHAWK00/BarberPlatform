@@ -24,7 +24,6 @@ export const asyncRoutes = [
   {
     path: '/',
     component: Layout,
-    redirect: '/index',
     meta: {
       title: '概览',
       icon: 'home-4-line',
@@ -46,7 +45,6 @@ export const asyncRoutes = [
   {
     path: '/user',
     component: Layout,
-    redirect: '/user/list',
     meta: {
       title: '会员管理',
       icon: 'user-line',
@@ -98,7 +96,6 @@ export const asyncRoutes = [
   {
     path: '/order',
     component: Layout,
-    redirect: '/order/list',
     meta: {
       title: '订单管理',
       icon: 'file-list-2-line',
@@ -130,7 +127,6 @@ export const asyncRoutes = [
   {
     path: '/barberitem',
     component: Layout,
-    redirect: '/barberitem/list',
     meta: {
       title: '消费项目管理',
       icon: 'stack-line',
@@ -162,7 +158,6 @@ export const asyncRoutes = [
   {
     path: '/reservation',
     component: Layout,
-    redirect: '/reservation',
     meta: {
       title: '预约管理',
       icon: 'calendar-check-line',
@@ -186,7 +181,6 @@ export const asyncRoutes = [
   {
     path: '/finance',
     component: Layout,
-    redirect: '/finance/charts',
     meta: {
       title: '财务报表',
       icon: 'file-list-3-line',
@@ -218,7 +212,7 @@ export const asyncRoutes = [
   {
     path: '/admin',
     component: Layout,
-    redirect: '/admin/list',
+    redirect: 'admin/list',
     meta: {
       title: '管理员',
       icon: 'admin-line',

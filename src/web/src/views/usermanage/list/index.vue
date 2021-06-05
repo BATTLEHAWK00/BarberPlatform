@@ -4,6 +4,7 @@
     :data-source="table.data"
     bordered
     :loading="table.loading"
+    rowKey="userid"
   >
     <template #time="{ text }">{{ filterTimeStamp(text) }}</template>
     <template #expandedRowRender="{ record }">

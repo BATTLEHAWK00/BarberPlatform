@@ -16,7 +16,7 @@ const setting = {
   //'/api/',
   baseURL:
     process.env.NODE_ENV === 'development'
-      ? 'http://localhost:8080/BarberPlatform/'
+      ? 'http://localhost:8080/BarberPlatform_war/'
       : './',
   // process.env.NODE_ENV === 'development' ? 'http://localhost:8080/BarberPlatform/' : 'mock-server',
   //标题 （包括初次加载雪花屏的标题 页面的标题 浏览器的标题）
