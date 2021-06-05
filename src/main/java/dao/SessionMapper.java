@@ -12,4 +12,6 @@ public interface SessionMapper {
     void deleteSession(String accesstoken);
 
     List<Session> getSessionList();
+
+    void updateLastAccess(String accesstoken);
 }

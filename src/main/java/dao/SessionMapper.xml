@@ -8,6 +8,11 @@
             (access_token, adminid, login_time, last_access)
         VALUES (#{access_token}, #{adminid}, now(), now())
     </insert>
+    <update id="updateLastAccess">
+        UPDATE sessions
+        SET last_access=now()
+        WHERE access_token = #{accesstoken}
+    </update>
     <delete id="deleteSession">
         DELETE
         FROM sessions

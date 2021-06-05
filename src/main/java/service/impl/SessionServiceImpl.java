@@ -12,12 +12,14 @@ import org.springframework.transaction.annotation.Transactional;
 import service.SessionService;
 import util.SecurityUtil;
 
+import java.time.Instant;
 import java.time.temporal.ChronoUnit;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 @Service
 public class SessionServiceImpl implements SessionService {
-    public static final int SESSION_TIMEOUT = 1;
+    public static final int SESSION_TIMEOUT = 60;
     @Autowired
     @Setter
     private AdminMapper adminMapper;
@@ -67,5 +69,24 @@ public class SessionServiceImpl implements SessionService {
                 sessionMapper.deleteSession(session.getAccess_token());
             }
         }
+    }
+
+    @Override
+    public boolean validateToken(String token) {
+        if (sessionMapper.getSessionByAccessToken(token) == null)
+            return false;
+        Instant lastAccess = sessionMapper.getSessionByAccessToken(token).getLast_access().toInstant();
+        Instant now_time = Instant.now();
+        if (TimeUnit.MINUTES.toChronoUnit().between(lastAccess, now_time) > SESSION_TIMEOUT) {
+            sessionMapper.deleteSession(token);
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+    @Override
+    public void updateLastAccessTime(String accessToken) {
+        sessionMapper.updateLastAccess(accessToken);
     }
 }
