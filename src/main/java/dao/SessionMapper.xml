@@ -5,16 +5,23 @@
 <mapper namespace="dao.SessionMapper">
     <insert id="createSession" parameterType="pojo.Session">
         INSERT INTO sessions
-        (access_token,adminid,login_time,last_access)
-        VALUES
-        (#{access_token},#{adminid},now(),now())
+            (access_token, adminid, login_time, last_access)
+        VALUES (#{access_token}, #{adminid}, now(), now())
     </insert>
     <delete id="deleteSession">
-        DELETE FROM sessions WHERE access_token=#{accesstoken}
+        DELETE
+        FROM sessions
+        WHERE access_token = #{accesstoken}
     </delete>
 
     <select id="getSessionByAccessToken" resultType="pojo.Session">
-        SELECT * FROM sessions WHERE access_token=#{accesstoken}
+        SELECT *
+        FROM sessions
+        WHERE access_token = #{accesstoken}
+    </select>
+    <select id="getSessionList" resultType="pojo.Session">
+        SELECT *
+        FROM sessions
     </select>
 
 

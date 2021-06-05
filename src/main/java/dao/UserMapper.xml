@@ -3,7 +3,7 @@
         PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="dao.UserMapper">
-    <insert id="registerUser" parameterType="pojo.User">
+    <insert id="registerUser" parameterType="pojo.User" useGeneratedKeys="true" keyProperty="userid">
         INSERT INTO users
         (username,passwd,salt,phone,birthdate,gender,remark,openid,lastconsume_time,reg_time)
         VALUES

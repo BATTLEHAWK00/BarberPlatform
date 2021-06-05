@@ -9,11 +9,15 @@ import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import service.LoginService;
+import service.SessionService;
 import util.SecurityUtil;
 
+import java.time.temporal.ChronoUnit;
+import java.util.List;
+
 @Service
-public class LoginServiceImpl implements LoginService {
+public class SessionServiceImpl implements SessionService {
+    public static final int SESSION_TIMEOUT = 1;
     @Autowired
     @Setter
     private AdminMapper adminMapper;
@@ -37,6 +41,7 @@ public class LoginServiceImpl implements LoginService {
         session.setAccess_token(SecurityUtil.getInstance().genUUID32());
         session.setAdminid(admin.getAdminid());
         sessionMapper.createSession(session);
+        CleanSession();
         return session.getAccess_token();
     }
 
@@ -46,5 +51,21 @@ public class LoginServiceImpl implements LoginService {
             return;
         }
         sessionMapper.deleteSession(accessToken);
+    }
+
+    @Transactional
+    @Override
+    public void CleanSession() {
+        List<Session> sessionList = sessionMapper.getSessionList();
+        for (Session session : sessionList) {
+            if (ChronoUnit.HOURS.between(
+                    session.getLogin_time().toInstant(),
+                    session.getLast_access().toInstant())
+                    > SESSION_TIMEOUT
+            ) {
+                System.out.println(session.getAccess_token());
+                sessionMapper.deleteSession(session.getAccess_token());
+            }
+        }
     }
 }

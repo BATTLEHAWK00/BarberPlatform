@@ -7,7 +7,7 @@ import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import service.AdminService;
-import service.LoginService;
+import service.SessionService;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -18,7 +18,7 @@ import java.util.Map;
 public class LoginController {
     @Autowired
     @Setter
-    private LoginService loginService;
+    private SessionService sessionService;
 
     @Autowired
     @Setter
@@ -29,7 +29,7 @@ public class LoginController {
                                 @RequestParam("password") String passwd
     ) {
         Map<String, String> mp = new HashMap<>();
-        String token = loginService.Login(username, passwd);
+        String token = sessionService.Login(username, passwd);
         mp.put("accessToken", token);
         return new Response(mp);
     }
@@ -45,7 +45,7 @@ public class LoginController {
 
     @RequestMapping("/logout")
     public Response LogOut(@RequestHeader("accessToken") String accessToken) {
-        loginService.Logout(accessToken);
+        sessionService.Logout(accessToken);
         return new Response();
     }
 
