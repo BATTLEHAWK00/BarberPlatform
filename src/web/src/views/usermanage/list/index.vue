@@ -27,33 +27,45 @@
       <a-button type="primary" @click="onEditUser(record)">编辑</a-button>
     </template>
   </a-table>
+  <edit-user-modal v-model:showModal="modal.show" :user-data="modal.userData"/>
 </template>
 
 <script>
-  import { getList } from '@/api/user.js'
-  import { filterTimeStamp } from '@/utils/filter.js'
-  export default {
-    mounted() {
-      getList().then((res) => {
-        this.table.data = res.data
-        this.table.loading = false
-      })
+import {getList} from '@/api/user.js'
+import {filterTimeStamp} from '@/utils/filter.js'
+import editUserModal from './components/editUserModal.vue'
+
+export default {
+  components: {editUserModal},
+  mounted() {
+    getList().then((res) => {
+      this.table.data = res.data
+      this.table.loading = false
+    })
+  },
+  methods: {
+    filterGender(gender) {
+      switch (gender) {
+        case 0:
+          return '男'
+        case 1:
+          return '女'
+        default:
+          return '未指定'
+      }
     },
-    methods: {
-      filterGender(gender) {
-        switch (gender) {
-          case 0:
-            return '男'
-          case 1:
-            return '女'
-          default:
-            return '未指定'
-        }
-      },
-      filterTimeStamp,
+    onEditUser(data) {
+      this.modal.userData = data
+      this.modal.show = true
     },
+    filterTimeStamp,
+  },
     data() {
       return {
+        modal: {
+          userData: null,
+          show: false,
+        },
         table: {
           loading: true,
           data: [],

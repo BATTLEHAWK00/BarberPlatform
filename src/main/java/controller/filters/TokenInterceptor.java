@@ -18,7 +18,7 @@ public class TokenInterceptor implements HandlerInterceptor {
 
     @Override
     public boolean preHandle(HttpServletRequest req, HttpServletResponse resp, Object handler) throws Exception {
-        if ("OPTIONS".equals(req.getMethod().toUpperCase())) {
+        if ("OPTIONS".equalsIgnoreCase(req.getMethod())) {
             return true;
         }
         String token = req.getHeader("accessToken");

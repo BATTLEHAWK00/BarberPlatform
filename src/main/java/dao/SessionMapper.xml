@@ -28,6 +28,22 @@
         SELECT *
         FROM sessions
     </select>
-
-
+    <select id="getSessionListByAdminID" resultType="pojo.Session">
+        SELECT *
+        FROM sessions
+        WHERE adminid = #{adminid}
+        ORDER BY last_access
+    </select>
+    <select id="getSessionCountByAdminID" resultType="java.lang.Integer">
+        SELECT COUNT(*)
+        FROM sessions
+        WHERE adminid = #{adminid}
+    </select>
+    <select id="getLastAccessSessionByAdminID" resultType="pojo.Session">
+        SELECT *
+        FROM sessions
+        WHERE adminid = #{adminid}
+        ORDER BY last_access
+        LIMIT 1
+    </select>
 </mapper>

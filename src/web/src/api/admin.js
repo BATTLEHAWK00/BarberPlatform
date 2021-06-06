@@ -1,5 +1,5 @@
 import request from '@/utils/request'
-import { tokenName } from '@/config'
+import {tokenName} from '@/config'
 
 export function getList() {
   return request({
@@ -50,5 +50,19 @@ export function register(data) {
     url: '/admin/register',
     method: 'post',
     data: data,
+  })
+}
+
+export function editAdmin(data) {
+  return request({
+    url: '/admin/id/' + data.adminid + '/update',
+    method: 'post',
+    data: {
+      name: data.name || undefined,
+      phone: data.phone || undefined,
+      gender: data.gender,
+      passwd: data.passwd || undefined,
+      remark: data.remark || undefined,
+    },
   })
 }

@@ -6,27 +6,33 @@ import pojo.Admin;
 import java.util.List;
 
 public interface AdminMapper {
-    Admin getAdminByID(int id);
+	Admin getAdminByID(int id);
 
-    Admin getAdminByName(String name);
+	Admin getAdminByName(String name);
 
-    Admin getAdminByPhone(String phone);
+	Admin getAdminByPhone(String phone);
 
-    List<Admin> getAdminList();
+	List<Admin> getAdminList();
 
-    Admin getAdminByToken(@Param("name") String username, @Param("passwd") String passwd);
+	Admin getAdminByToken(@Param("name") String username, @Param("passwd") String passwd);
 
-    void registerAdmin(Admin admin);
+	void registerAdmin(Admin admin);
 
-    void updatePhone(@Param("id") int id, @Param("phone") String phone);
+	void updatePhone(@Param("id") int id, @Param("phone") String phone);
 
-    void updatePasswd(@Param("id") int id, @Param("passwd") String passwd, @Param("salt") String salt);
+	void updatePasswd(@Param("id") int id, @Param("passwd") String passwd, @Param("salt") String salt);
 
-    void updateOpenID(@Param("id") int id, @Param("openid") String openid);
+	void updateOpenID(@Param("id") int id, @Param("openid") String openid);
 
-    void updateRemark(@Param("id") int id, @Param("remark") String remark);
+	void updateRemark(@Param("id") int id, @Param("remark") String remark);
 
-    void updateLastOrder(@Param("id") int id, @Param("orderid") int orderid);
+	void updateLastOrder(@Param("id") int id, @Param("orderid") int orderid);
 
-    void deleteAdmin(int id);
+	void updateGender(@Param("id") int id, @Param("gender") Integer gender);
+
+	void updateName(@Param("id") int id, @Param("name") String name);
+
+	void deleteAdmin(int id);
+
+
 }

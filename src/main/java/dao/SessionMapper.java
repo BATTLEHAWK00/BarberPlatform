@@ -14,5 +14,10 @@ public interface SessionMapper {
     List<Session> getSessionList();
 
     void updateLastAccess(String accesstoken);
-    
+
+    int getSessionCountByAdminID(int adminid);
+
+    List<Session> getSessionListByAdminID(int adminid);
+
+    Session getLastAccessSessionByAdminID(int adminid);
 }

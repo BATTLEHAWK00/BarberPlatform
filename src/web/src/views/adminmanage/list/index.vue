@@ -1,57 +1,78 @@
 <template>
-  <a-table
-    :columns="table.columns"
-    :data-source="table.data"
-    :row-selection="{
-      selectedRowKeys: table.selectedRowKeys,
-      onChange: onSelectChange,
-    }"
-    row-key="adminid"
-    :loading="table.loading"
-    bordered
-  >
-    <template #time="{ text }">{{ filterTimeStamp(text) }}</template>
-    <template #expandedRowRender="{ record }">
-      <a-descriptions :title="record.name" layout="vertical" bordered>
-        <a-descriptions-item label="电话">
-          {{ record.phone }}
-        </a-descriptions-item>
-        <a-descriptions-item label="注册时间">
-          {{ filterTimeStamp(record.reg_time) }}
-        </a-descriptions-item>
-        <a-descriptions-item label="上一单">
-          {{ record.last_order }}
-        </a-descriptions-item>
-        <a-descriptions-item label="备注" span="2">
-          {{ record.remark }}
-        </a-descriptions-item>
-      </a-descriptions>
-    </template>
-    <template #action="{ record }">
-      <a-button type="primary" @click="onEditUser(record)">编辑</a-button>
-    </template>
-  </a-table>
+  <div>
+    <a-table
+        :columns="table.columns"
+        :data-source="table.data"
+        :loading="table.loading"
+        :row-selection="{
+        selectedRowKeys: table.selectedRowKeys,
+        onChange: onSelectChange,
+      }"
+        bordered
+        row-key="adminid"
+    >
+      <template #time="{ text }">{{ filterTimeStamp(text) }}</template>
+      <template #expandedRowRender="{ record }">
+        <a-descriptions :title="record.name" bordered layout="vertical">
+          <a-descriptions-item label="电话">
+            {{ record.phone }}
+          </a-descriptions-item>
+          <a-descriptions-item label="注册时间">
+            {{ filterTimeStamp(record.reg_time) }}
+          </a-descriptions-item>
+          <a-descriptions-item label="上一单">
+            {{ record.last_order }}
+          </a-descriptions-item>
+          <a-descriptions-item label="备注" span="2">
+            {{ record.remark }}
+          </a-descriptions-item>
+        </a-descriptions>
+      </template>
+      <template #action="{ record }">
+        <a-button type="primary" @click="onEditUser(record)">编辑</a-button>
+      </template>
+    </a-table>
+    <edit-admin-modal
+        v-model:showModal="modal.show"
+        :admin-data="modal.adminData"
+        @updateSuccess="onAdminUpdated"
+    />
+  </div>
 </template>
 
 <script>
-  import { getList } from '@/api/admin.js'
-  import { filterTimeStamp } from '@/utils/filter.js'
-  export default {
-    mounted() {
-      getList().then((res) => {
-        this.table.data = res.data
-        this.table.loading = false
-      })
+import {getList} from '@/api/admin.js'
+import {filterTimeStamp} from '@/utils/filter.js'
+import EditAdminModal from './components/editAdminModal.vue'
+
+export default {
+  components: {EditAdminModal},
+  mounted() {
+    getList().then((res) => {
+      this.table.data = res.data
+      this.table.loading = false
+    })
+  },
+  methods: {
+    onAdminUpdated() {
+      this.$forceUpdate()
     },
-    methods: {
-      filterTimeStamp,
-      onSelectChange(selectedRowKeys) {
-        console.log('selectedRowKeys changed: ', selectedRowKeys)
-        this.table.selectedRowKeys = selectedRowKeys
-      },
+    filterTimeStamp,
+    onSelectChange(selectedRowKeys) {
+      console.log('selectedRowKeys changed: ', selectedRowKeys)
+      this.table.selectedRowKeys = selectedRowKeys
     },
+    onEditUser(data) {
+      this.modal.adminData = data
+      this.modal.show = true
+    },
+  },
     data() {
       return {
+        modal: {
+          adminData: null,
+          show: false,
+        },
         table: {
           selectedRowKeys: [],
           loading: true,

@@ -1,4 +1,4 @@
-import { createRouter, createWebHashHistory } from 'vue-router'
+import {createRouter, createWebHashHistory} from 'vue-router'
 import Layout from '@/layout'
 
 export const constantRoutes = [
@@ -48,7 +48,7 @@ export const asyncRoutes = [
     meta: {
       title: '会员管理',
       icon: 'user-line',
-      affix: true,
+      affix: false,
     },
     children: [
       {
@@ -58,7 +58,7 @@ export const asyncRoutes = [
         meta: {
           title: '注册会员',
           icon: 'user-add-fill',
-          affix: true,
+          affix: false,
         },
       },
       {
@@ -68,7 +68,7 @@ export const asyncRoutes = [
         meta: {
           title: '会员列表',
           icon: 'file-user-fill',
-          affix: true,
+          affix: false,
         },
       },
       {
@@ -78,7 +78,7 @@ export const asyncRoutes = [
         meta: {
           title: '储值管理',
           icon: 'money-cny-circle-fill',
-          affix: true,
+          affix: false,
         },
       },
       {
@@ -88,7 +88,7 @@ export const asyncRoutes = [
         meta: {
           title: '储值日志',
           icon: 'checkbox-multiple-fill',
-          affix: true,
+          affix: false,
         },
       },
     ],
@@ -99,7 +99,7 @@ export const asyncRoutes = [
     meta: {
       title: '订单管理',
       icon: 'file-list-2-line',
-      affix: true,
+      affix: false,
     },
     children: [
       {
@@ -109,7 +109,7 @@ export const asyncRoutes = [
         meta: {
           title: '创建订单',
           icon: 'menu-add-fill',
-          affix: true,
+          affix: false,
         },
       },
       {
@@ -119,7 +119,7 @@ export const asyncRoutes = [
         meta: {
           title: '订单列表',
           icon: 'list-check',
-          affix: true,
+          affix: false,
         },
       },
     ],
@@ -130,7 +130,7 @@ export const asyncRoutes = [
     meta: {
       title: '消费项目管理',
       icon: 'stack-line',
-      affix: true,
+      affix: false,
     },
     children: [
       {
@@ -140,7 +140,7 @@ export const asyncRoutes = [
         meta: {
           title: '创建项目',
           icon: 'menu-add-fill',
-          affix: true,
+          affix: false,
         },
       },
       {
@@ -150,7 +150,7 @@ export const asyncRoutes = [
         meta: {
           title: '项目列表',
           icon: 'list-check',
-          affix: true,
+          affix: false,
         },
       },
     ],
@@ -161,7 +161,7 @@ export const asyncRoutes = [
     meta: {
       title: '预约管理',
       icon: 'calendar-check-line',
-      affix: true,
+      affix: false,
       badgeCount: 1,
     },
     children: [
@@ -172,7 +172,7 @@ export const asyncRoutes = [
         meta: {
           title: '预约列表',
           icon: 'calendar-check-line',
-          affix: true,
+          affix: false,
           badgeCount: 1,
         },
       },
@@ -184,7 +184,7 @@ export const asyncRoutes = [
     meta: {
       title: '财务报表',
       icon: 'file-list-3-line',
-      affix: true,
+      affix: false,
     },
     children: [
       {
@@ -194,7 +194,7 @@ export const asyncRoutes = [
         meta: {
           title: '图表概览',
           icon: 'line-chart-line',
-          affix: true,
+          affix: false,
         },
       },
       {
@@ -204,7 +204,7 @@ export const asyncRoutes = [
         meta: {
           title: '报表详情',
           icon: 'database-fill',
-          affix: true,
+          affix: false,
         },
       },
     ],
@@ -216,7 +216,7 @@ export const asyncRoutes = [
     meta: {
       title: '管理员',
       icon: 'admin-line',
-      affix: true,
+      affix: false,
     },
     children: [
       {
@@ -226,7 +226,7 @@ export const asyncRoutes = [
         meta: {
           title: '注册管理员',
           icon: 'user-add-fill',
-          affix: true,
+          affix: false,
         },
       },
       {
@@ -236,7 +236,7 @@ export const asyncRoutes = [
         meta: {
           title: '管理员列表',
           icon: 'file-user-fill',
-          affix: true,
+          affix: false,
         },
       },
     ],

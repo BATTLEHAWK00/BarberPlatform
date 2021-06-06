@@ -1,5 +1,6 @@
 package pojo;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Data;
 import lombok.ToString;
 
@@ -8,6 +9,7 @@ import java.util.Date;
 
 @ToString
 @Data
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class User {
     int userid;
     String username;

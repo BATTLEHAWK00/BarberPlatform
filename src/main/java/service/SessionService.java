@@ -6,6 +6,7 @@ import java.util.List;
 
 public interface SessionService {
     int SESSION_TIMEOUT = 30;
+	int SESSION_MAX = 3;
 
     String Login(String username, String passwd);
 
