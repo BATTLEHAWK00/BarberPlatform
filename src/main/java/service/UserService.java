@@ -6,19 +6,25 @@ import java.util.Date;
 import java.util.List;
 
 public interface UserService {
-    void registerUser(User user);
+	void registerUser(User user);
 
-    void updatePasswd(int id, String passwd);
+	void updatePasswd(int id, String passwd);
 
-    void updateRemark(int id, String remark);
+	void updateRemark(int id, String remark);
 
-    void updateBirthDate(int id, Date birthdate);
+	void updateBirthDate(int id, Date birthdate);
 
-    void updatePhone(int id, String phone);
+	void updatePhone(int id, String phone);
 
-    List<User> getUserList();
+	void updateName(int id, String name);
 
-    void deleteUser(int id);
+	void updateGender(int id, Integer gender);
 
-    boolean verifyPasswd(int id, String passwd);
+	void updateUser(User user);
+
+	List<User> getUserList();
+
+	void deleteUser(int id);
+
+	boolean verifyPasswd(int id, String passwd);
 }

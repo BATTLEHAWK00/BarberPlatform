@@ -86,4 +86,20 @@ public class AdminServiceImpl implements AdminService {
 	public void updateName(int id, String name) {
 		adminMapper.updateName(id, name);
 	}
+
+	@Transactional
+	@Override
+	public void updateAdmin(Admin admin) {
+		adminMapper.updateGender(admin.getAdminid(), admin.getGender());
+		if (admin.getName() != null)
+			adminMapper.updateName(admin.getAdminid(), admin.getName());
+		if (admin.getPhone() != null)
+			adminMapper.updatePhone(admin.getAdminid(), admin.getPhone());
+		if (admin.getPasswd() != null)
+			updatePasswd(admin.getAdminid(), admin.getPasswd());
+		if (admin.getRemark() != null)
+			adminMapper.updateRemark(admin.getAdminid(), admin.getRemark());
+	}
+
+
 }

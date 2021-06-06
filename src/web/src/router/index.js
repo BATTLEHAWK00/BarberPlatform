@@ -24,6 +24,7 @@ export const asyncRoutes = [
   {
     path: '/',
     component: Layout,
+    redirect: '/index',
     meta: {
       title: '概览',
       icon: 'home-4-line',

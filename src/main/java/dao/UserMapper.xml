@@ -1,65 +1,81 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper
-        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
-        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+		PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+		"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="dao.UserMapper">
-    <insert id="registerUser" parameterType="pojo.User" useGeneratedKeys="true" keyProperty="userid">
-        INSERT INTO users
-        (username,passwd,salt,phone,birthdate,gender,remark,openid,lastconsume_time,reg_time)
-        VALUES
-        (#{username},#{passwd},#{salt},#{phone},#{birthdate},#{gender},#{remark},#{openid},null,now())
-    </insert>
-    <update id="updatePasswd">
-        UPDATE users
-        SET passwd=#{passwd},salt=#{salt}
-        WHERE userid=#{id}
-    </update>
-    <update id="updateRemark">
-        UPDATE users
-        SET remark=#{remark}
-        WHERE userid=#{id}
-    </update>
-    <update id="updatePhone">
-        UPDATE users
-        SET phone=#{phone}
-        WHERE userid=#{id}
-    </update>
-    <update id="updateOpenID">
-        UPDATE users
-        SET openid=#{openid}
-        WHERE userid=#{id}
-    </update>
-    <update id="updateGender">
-        UPDATE users
-        SET gender=#{gender}
-        WHERE userid=#{id}
-    </update>
-    <update id="updateLastConsume">
-        UPDATE users
-        SET lastconsume_time=#{time}
-        WHERE userid=#{id}
-    </update>
-    <update id="updateBirthDate">
-        UPDATE users
-        SET birthdate=#{birthdate}
-        WHERE userid=#{id}
-    </update>
-    <delete id="deleteUser">
-        DELETE FROM users WHERE userid=#{id}
-    </delete>
-    <select id="getUserByID" resultType="pojo.User">
-        SELECT * FROM users WHERE userid=#{id}
-    </select>
-    <select id="getUserByUsername" resultType="pojo.User">
-        SELECT * FROM users WHERE username=#{username}
-    </select>
-    <select id="getUserByPhone" resultType="pojo.User">
-        SELECT * FROM users WHERE phone=#{phone}
-    </select>
-    <select id="getUserList" resultType="pojo.User">
-        SELECT * FROM v_user
-    </select>
-    <select id="getUserPasswd" resultType="java.util.Map">
-        SELECT * FROM v_userpasswd WHERE userid=#{id}
-    </select>
+	<insert id="registerUser" parameterType="pojo.User" useGeneratedKeys="true" keyProperty="userid">
+		INSERT INTO users
+		(username, passwd, salt, phone, birthdate, gender, remark, openid, lastconsume_time, reg_time)
+		VALUES (#{username}, #{passwd}, #{salt}, #{phone}, #{birthdate}, #{gender}, #{remark}, #{openid}, null, now())
+	</insert>
+	<update id="updatePasswd">
+		UPDATE users
+		SET passwd=#{passwd},
+		    salt=#{salt}
+		WHERE userid = #{id}
+	</update>
+	<update id="updateRemark">
+		UPDATE users
+		SET remark=#{remark}
+		WHERE userid = #{id}
+	</update>
+	<update id="updatePhone">
+		UPDATE users
+		SET phone=#{phone}
+		WHERE userid = #{id}
+	</update>
+	<update id="updateOpenID">
+		UPDATE users
+		SET openid=#{openid}
+		WHERE userid = #{id}
+	</update>
+	<update id="updateGender">
+		UPDATE users
+		SET gender=#{gender}
+		WHERE userid = #{id}
+	</update>
+	<update id="updateLastConsume">
+		UPDATE users
+		SET lastconsume_time=#{time}
+		WHERE userid = #{id}
+	</update>
+	<update id="updateBirthDate">
+		UPDATE users
+		SET birthdate=#{birthdate}
+		WHERE userid = #{id}
+	</update>
+	<update id="updateName">
+		UPDATE users
+		SET username=#{name}
+		WHERE userid = #{id}
+	</update>
+	<delete id="deleteUser">
+		DELETE
+		FROM users
+		WHERE userid = #{id}
+	</delete>
+	<select id="getUserByID" resultType="pojo.User">
+		SELECT *
+		FROM users
+		WHERE userid = #{id}
+	</select>
+	<select id="getUserByUsername" resultType="pojo.User">
+		SELECT *
+		FROM users
+		WHERE username = #{username}
+	</select>
+	<select id="getUserByPhone" resultType="pojo.User">
+		SELECT *
+		FROM users
+		WHERE phone = #{phone}
+	</select>
+	<select id="getUserList" resultType="pojo.User">
+		SELECT *
+		FROM v_user
+	</select>
+	<select id="getUserPasswd" resultType="java.util.Map">
+		SELECT *
+		FROM v_userpasswd
+		WHERE userid = #{id}
+	</select>
 </mapper>

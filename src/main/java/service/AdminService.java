@@ -27,4 +27,6 @@ public interface AdminService {
 	void updateGender(int id, Integer gender);
 
 	void updateName(int id, String name);
+
+	void updateAdmin(Admin admin);
 }

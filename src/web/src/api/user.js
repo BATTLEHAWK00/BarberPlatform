@@ -22,6 +22,21 @@ export function register(data) {
   })
 }
 
+export function updateUser(data) {
+  return request({
+    url: '/user/id/' + data.userid + '/update',
+    method: 'post',
+    data: {
+      name: data.username || undefined,
+      gender: data.gender,
+      phone: data.phone || undefined,
+      remark: data.remark || undefined,
+      passwd: data.passwd || undefined,
+      birthdate: data.birthdate ? data.birthdate.valueOf() : undefined,
+    },
+  })
+}
+
 export function verifyPasswd(data) {
   return request({
     url: '/user/id/' + data.uid + '/passwd/verify',

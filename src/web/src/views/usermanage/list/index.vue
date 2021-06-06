@@ -1,33 +1,38 @@
 <template>
-  <a-table
-    :columns="table.columns"
-    :data-source="table.data"
-    bordered
-    :loading="table.loading"
-    rowKey="userid"
-  >
-    <template #time="{ text }">{{ filterTimeStamp(text) }}</template>
-    <template #expandedRowRender="{ record }">
-      <a-descriptions :title="record.username" layout="vertical">
-        <a-descriptions-item label="性别">
-          {{ filterGender(record.gender) }}
-        </a-descriptions-item>
-        <a-descriptions-item label="注册时间">
-          {{ filterTimeStamp(record.reg_time) }}
-        </a-descriptions-item>
-        <a-descriptions-item label="电话">
-          {{ record.phone }}
-        </a-descriptions-item>
-        <a-descriptions-item label="备注" span="2">
-          {{ record.remark }}
-        </a-descriptions-item>
-      </a-descriptions>
-    </template>
-    <template #action="{ record }">
-      <a-button type="primary" @click="onEditUser(record)">编辑</a-button>
-    </template>
-  </a-table>
-  <edit-user-modal v-model:showModal="modal.show" :user-data="modal.userData"/>
+  <div>
+    <a-table
+      :columns="table.columns"
+      :data-source="table.data"
+      :loading="table.loading"
+      bordered
+      rowKey="userid"
+    >
+      <template #time="{ text }">{{ filterTimeStamp(text) }}</template>
+      <template #expandedRowRender="{ record }">
+        <a-descriptions :title="record.username" layout="vertical">
+          <a-descriptions-item label="性别">
+            {{ filterGender(record.gender) }}
+          </a-descriptions-item>
+          <a-descriptions-item label="注册时间">
+            {{ filterTimeStamp(record.reg_time) }}
+          </a-descriptions-item>
+          <a-descriptions-item label="电话">
+            {{ record.phone }}
+          </a-descriptions-item>
+          <a-descriptions-item label="备注" span="2">
+            {{ record.remark }}
+          </a-descriptions-item>
+        </a-descriptions>
+      </template>
+      <template #action="{ record }">
+        <a-button type="primary" @click="onEditUser(record)">编辑</a-button>
+      </template>
+    </a-table>
+    <edit-user-modal
+      v-model:showModal="modal.show"
+      :user-data="modal.userData"
+    />
+  </div>
 </template>
 
 <script>
@@ -36,30 +41,30 @@ import {filterTimeStamp} from '@/utils/filter.js'
 import editUserModal from './components/editUserModal.vue'
 
 export default {
-  components: {editUserModal},
-  mounted() {
-    getList().then((res) => {
-      this.table.data = res.data
-      this.table.loading = false
-    })
-  },
-  methods: {
-    filterGender(gender) {
-      switch (gender) {
-        case 0:
-          return '男'
-        case 1:
-          return '女'
-        default:
-          return '未指定'
-      }
+    components: { editUserModal },
+    mounted() {
+      getList().then((res) => {
+        this.table.data = res.data
+        this.table.loading = false
+      })
     },
-    onEditUser(data) {
-      this.modal.userData = data
-      this.modal.show = true
+    methods: {
+      filterGender(gender) {
+        switch (gender) {
+          case 0:
+            return '男'
+          case 1:
+            return '女'
+          default:
+            return '未指定'
+        }
+      },
+      onEditUser(data) {
+        this.modal.userData = data
+        this.modal.show = true
+      },
+      filterTimeStamp,
     },
-    filterTimeStamp,
-  },
     data() {
       return {
         modal: {

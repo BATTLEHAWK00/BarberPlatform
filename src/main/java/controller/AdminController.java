@@ -3,8 +3,8 @@ package controller;
 import bean.Response;
 import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
+import pojo.Admin;
 import service.AdminService;
 
 @CrossOrigin(origins = "*", maxAge = 3600)
@@ -22,7 +22,6 @@ public class AdminController {
 		return response;
 	}
 
-	@Transactional
 	@RequestMapping(value = "/id/{adminid}/update", method = {RequestMethod.POST})
 	public Response updateAdmin(
 			@PathVariable("adminid") int adminid,
@@ -32,16 +31,14 @@ public class AdminController {
 			@RequestParam(value = "remark", required = false) String remark,
 			@RequestParam(value = "passwd", required = false) String passwd
 	) {
-		if (name != null)
-			adminService.updateName(adminid, name);
-		if (phone != null)
-			adminService.updatePhone(adminid, phone);
-		if (remark != null)
-			adminService.updateRemark(adminid, remark);
-		if (gender != null)
-			adminService.updateGender(adminid, gender);
-		if (passwd != null)
-			adminService.updatePasswd(adminid, passwd);
+		Admin admin = new Admin();
+		admin.setAdminid(adminid);
+		admin.setName(name);
+		admin.setGender(gender);
+		admin.setPhone(phone);
+		admin.setRemark(remark);
+		admin.setPasswd(passwd);
+		adminService.updateAdmin(admin);
 		return new Response();
 	}
 }
