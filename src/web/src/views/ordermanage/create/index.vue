@@ -79,12 +79,15 @@
 </template>
 
 <script>
-  import userSelectModal from '@/views/components/userSelectModal'
-  import { Modal } from 'ant-design-vue'
-  import { getList } from '@/api/barberitem.js'
-  import { createOrder, addItem, getLastOrder } from '@/api/order.js'
-  export default {
-    components: { userSelectModal },
+import {Modal} from 'ant-design-vue'
+import {getList} from '@/api/barberitem.js'
+import {addItem, createOrder, getLastOrder} from '@/api/order.js'
+import userSelectModal from '@/views/components/userSelectModal'
+
+export default {
+    components: {
+      userSelectModal,
+    },
     methods: {
       onUserSelect(data) {
         this.selectedUserName = data.username

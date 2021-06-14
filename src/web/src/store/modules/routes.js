@@ -24,22 +24,22 @@ const mutations = {
 }
 const actions = {
   /**
-  
-   * @description intelligence模式设置路由
-   * @param {*} { commit }
-   * @returns
-   */
+
+     * @description intelligence模式设置路由
+     * @param {*} { commit }
+     * @returns
+     */
   async setRoutes({ commit }) {
     const finallyRoutes = filterRoutes([...constantRoutes, ...asyncRoutes])
     commit('setRoutes', finallyRoutes)
     return [...asyncRoutes]
   },
   /**
-  
-   * @description all模式设置路由
-   * @param {*} { commit }
-   * @returns
-   */
+
+     * @description all模式设置路由
+     * @param {*} { commit }
+     * @returns
+     */
   async setAllRoutes({ commit }) {
     let { data } = await getRouterList()
     if (data[data.length - 1].path !== '*')
@@ -50,11 +50,11 @@ const actions = {
     return [...asyncRoutes]
   },
   /**
-  
-   * @description 画廊布局、综合布局设置路由
-   * @param {*} { commit }
-   * @param accessedRoutes 画廊布局、综合布局设置路由
-   */
+
+     * @description 画廊布局、综合布局设置路由
+     * @param {*} { commit }
+     * @param accessedRoutes 画廊布局、综合布局设置路由
+     */
   setPartialRoutes({ commit }, accessedRoutes) {
     commit('setPartialRoutes', accessedRoutes)
   },

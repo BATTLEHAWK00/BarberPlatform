@@ -9,9 +9,10 @@
 </template>
 
 <script>
-  import VabIcon from '@/layout/vab-icon'
-  import { mapGetters } from 'vuex'
-  export default {
+import VabIcon from '@/layout/vab-icon'
+import {mapGetters} from 'vuex'
+
+export default {
     name: 'VabLogo',
     components: { VabIcon },
     computed: {
@@ -36,6 +37,7 @@
     text-overflow: ellipsis;
     white-space: nowrap;
   }
+
   .vab-logo h3 {
     color: #fff;
   }

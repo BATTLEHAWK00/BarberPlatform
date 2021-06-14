@@ -16,9 +16,10 @@
 </template>
 
 <script>
-  import MenuItem from './components/MenuItem'
-  import Submenu from './components/Submenu'
-  export default {
+import MenuItem from './components/MenuItem'
+import Submenu from './components/Submenu'
+
+export default {
     name: 'VabMenu',
     components: { MenuItem, Submenu },
     props: {

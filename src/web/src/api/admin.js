@@ -1,5 +1,5 @@
 import request from '@/utils/request'
-import {tokenName} from '@/config'
+import { tokenName } from '@/config'
 
 export function getList() {
   return request({

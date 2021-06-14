@@ -12,10 +12,10 @@
     <template #expandedRowRender="{ record }">
       <a-descriptions :title="'订单' + record.oid" bordered>
         <a-descriptions-item label="用户姓名">
-          {{ record.username }}
+          {{ record.user.username }}
         </a-descriptions-item>
         <a-descriptions-item label="创建者">
-          {{ record.sponsor }}
+          {{ record.sponsor.name }}
         </a-descriptions-item>
         <a-descriptions-item label="订单状态">
           <a-tag color="blue">
@@ -23,7 +23,7 @@
           </a-tag>
         </a-descriptions-item>
         <a-descriptions-item label="创建时间">
-          {{ filterTimeStamp(record.create_time) }}
+          {{ filterTimeStamp(record.createTime) }}
         </a-descriptions-item>
         <a-descriptions-item label="原价格">
           {{ record.price }}
@@ -32,10 +32,10 @@
           {{ record.discount }}
         </a-descriptions-item>
         <a-descriptions-item label="实付价格">
-          {{ record.actual_payment }}
+          {{ record.actualPayment }}
         </a-descriptions-item>
         <a-descriptions-item label="支付方式">
-          {{ record.pay_method }}
+          {{ record.payMethod }}
         </a-descriptions-item>
         <a-descriptions-item label="备注">
           {{ record.remark }}
@@ -53,9 +53,10 @@
 </template>
 
 <script>
-  import { getList } from '@/api/order.js'
-  import { filterTimeStamp } from '@/utils/filter.js'
-  export default {
+import {getList} from '@/api/order.js'
+import {filterTimeStamp} from '@/utils/filter.js'
+
+export default {
     mounted() {
       // var that = this
       getList().then((res) => {
@@ -97,32 +98,32 @@
             },
             {
               title: '用户姓名',
-              dataIndex: 'username',
-              key: 'username',
+              dataIndex: 'user.username',
+              key: 'user.username',
             },
             {
               title: '创建者',
-              dataIndex: 'sponsor',
-              key: 'sponsor',
+              dataIndex: 'sponsor.name',
+              key: 'sponsor.name',
             },
             {
               title: '创建时间',
-              key: 'create_time',
-              dataIndex: 'create_time',
+              key: 'createTime',
+              dataIndex: 'createTime',
               slots: { customRender: 'time' },
               sorter: (a, b) => a.create_time - b.create_time,
               sortDirections: ['descend', 'ascend'],
             },
             {
               title: '支付时间',
-              key: 'pay_time',
-              dataIndex: 'pay_time',
+              key: 'payTime',
+              dataIndex: 'payTime',
               slots: { customRender: 'time' },
             },
             {
               title: '实付金额',
-              key: 'actual_payment',
-              dataIndex: 'actual_payment',
+              key: 'actualPayment',
+              dataIndex: 'actualPayment',
               sorter: (a, b) => a.actual_payment - b.actual_payment,
               sortDirections: ['descend', 'ascend'],
             },

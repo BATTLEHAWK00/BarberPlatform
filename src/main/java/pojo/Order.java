@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Data;
 import lombok.ToString;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
@@ -11,19 +12,19 @@ import java.util.List;
 @Data
 @ToString
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class Order {
+public class Order implements Serializable {
     int oid;
-    int sponsorid;
-    int ownerid;
-    String sponsor;
-    String username;
+    int sponsorId;
+    int ownerId;
+    Admin sponsor;
+    User user;
     int state;
     List<OrderItem> orderItemList;
-    Date pay_time;
-    int pay_method;
+    Date payTime;
+    int payMethod;
     BigDecimal price;
     BigDecimal discount;
-    BigDecimal actual_payment;
-    Date create_time;
+    BigDecimal actualPayment;
+    Date createTime;
     String remark;
 }

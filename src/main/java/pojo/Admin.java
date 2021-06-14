@@ -4,21 +4,23 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Data;
 import lombok.ToString;
 
+import java.io.Serializable;
 import java.util.Date;
 
 @Data
 @ToString
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class Admin {
-	int adminid;
+public class Admin implements Serializable {
+	int adminId;
 	String name;
 	String passwd;
 	String salt;
 	String phone;
 	String remark;
 	Integer gender;
-	Date reg_time;
-	int last_order;
-	String openid;
-	boolean is_superadmin;
+	Date regTime;
+	int lastOrderID;
+	Order lastOrder;
+	String openId;
+	boolean isSuperAdmin;
 }

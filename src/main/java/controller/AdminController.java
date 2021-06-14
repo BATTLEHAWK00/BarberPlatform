@@ -32,7 +32,7 @@ public class AdminController {
 			@RequestParam(value = "passwd", required = false) String passwd
 	) {
 		Admin admin = new Admin();
-		admin.setAdminid(adminid);
+		admin.setAdminId(adminid);
 		admin.setName(name);
 		admin.setGender(gender);
 		admin.setPhone(phone);

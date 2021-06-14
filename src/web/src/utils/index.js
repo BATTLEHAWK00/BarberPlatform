@@ -1,5 +1,7 @@
 import { devDependencies } from '../../package.json'
+
 if (!devDependencies['vab-config']) document.body.innerHTML = ''
+
 /**
 
  * @description 格式化时间

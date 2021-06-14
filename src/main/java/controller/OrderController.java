@@ -23,8 +23,8 @@ public class OrderController {
             @RequestParam(value = "remark", required = false) String remark
     ) {
         Order order = new Order();
-        order.setSponsorid(sponsorid);
-        order.setOwnerid(ownerid);
+        order.setSponsorId(sponsorid);
+        order.setOwnerId(ownerid);
         order.setRemark(remark);
         orderService.createOrder(order);
         return new Response();
@@ -38,9 +38,9 @@ public class OrderController {
                             @RequestParam(value = "remark", required = false) String remark
     ) {
         OrderItem orderItem = new OrderItem();
-        orderItem.setOrderid(oid);
-        orderItem.setItemid(itemid);
-        orderItem.setSponsorid(sponsorid);
+        orderItem.setOrderId(oid);
+        orderItem.setItemId(itemid);
+        orderItem.setSponsorId(sponsorid);
         orderItem.setAmount(amount);
         orderItem.setRemark(remark);
         orderService.addItem(orderItem);

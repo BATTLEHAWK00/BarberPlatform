@@ -39,13 +39,13 @@ public class SessionServiceImpl implements SessionService {
 		if (adminMapper.getAdminByToken(username, passwd_md5) == null) {
 			throw new ServiceException("用户名或密码错误!", 400);
 		}
-		if (sessionMapper.getSessionCountByAdminID(admin.getAdminid()) >= SESSION_MAX) {
-			Session session = sessionMapper.getLastAccessSessionByAdminID(admin.getAdminid());
+		if (sessionMapper.getSessionCountByAdminID(admin.getAdminId()) >= SESSION_MAX) {
+			Session session = sessionMapper.getLastAccessSessionByAdminID(admin.getAdminId());
 			sessionMapper.deleteSession(session.getAccess_token());
 		}
 		Session session = new Session();
 		session.setAccess_token(SecurityUtil.getInstance().genUUID32());
-		session.setAdminid(admin.getAdminid());
+		session.setAdminid(admin.getAdminId());
 		sessionMapper.createSession(session);
 		return session.getAccess_token();
 	}

@@ -96,9 +96,10 @@
   </a-card>
 </template>
 <script>
-  import { ArrowUpOutlined, ArrowDownOutlined } from '@ant-design/icons-vue'
-  import { mapGetters } from 'vuex'
-  export default {
+import {ArrowDownOutlined, ArrowUpOutlined} from '@ant-design/icons-vue'
+import {mapGetters} from 'vuex'
+
+export default {
     components: {
       ArrowUpOutlined,
       ArrowDownOutlined,

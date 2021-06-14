@@ -22,21 +22,21 @@ const getters = {
 }
 const mutations = {
   /**
-  
-   * @description 设置accessToken
-   * @param {*} state
-   * @param {*} accessToken
-   */
+
+     * @description 设置accessToken
+     * @param {*} state
+     * @param {*} accessToken
+     */
   setAccessToken(state, accessToken) {
     state.accessToken = accessToken
     setAccessToken(accessToken)
   },
   /**
-  
-   * @description 设置用户名
-   * @param {*} state
-   * @param {*} username
-   */
+
+     * @description 设置用户名
+     * @param {*} state
+     * @param {*} username
+     */
   setUsername(state, username) {
     state.username = username
   },
@@ -52,21 +52,21 @@ const mutations = {
 }
 const actions = {
   /**
-  
-   * @description 登录拦截放行时，设置虚拟角色
-   * @param {*} { commit, dispatch }
-   */
+
+     * @description 登录拦截放行时，设置虚拟角色
+     * @param {*} { commit, dispatch }
+     */
   setVirtualRoles({ commit, dispatch }) {
     dispatch('acl/setFull', true, { root: true })
     // commit('setAvatar', 'https://i.gtimg.cn/club/item/face/img/2/15922_100.gif')
     commit('setUsername', 'admin(未开启登录拦截)')
   },
   /**
-  
-   * @description 登录
-   * @param {*} { commit }
-   * @param {*} userInfo
-   */
+
+     * @description 登录
+     * @param {*} { commit }
+     * @param {*} userInfo
+     */
   async login({ commit }, userInfo) {
     const { data } = await login(userInfo)
     const accessToken = data[tokenName]
@@ -92,11 +92,11 @@ const actions = {
     }
   },
   /**
-  
-   * @description 获取用户信息接口 这个接口非常非常重要，如果没有明确底层前逻辑禁止修改此方法，错误的修改可能造成整个框架无法正常使用
-   * @param {*} { commit, dispatch, state }
-   * @returns
-   */
+
+     * @description 获取用户信息接口 这个接口非常非常重要，如果没有明确底层前逻辑禁止修改此方法，错误的修改可能造成整个框架无法正常使用
+     * @param {*} { commit, dispatch, state }
+     * @returns
+     */
   async getUserInfo({ commit, dispatch, state }) {
     const { data } = await getUserInfo(state.accessToken)
     if (!data) {
@@ -116,19 +116,19 @@ const actions = {
   },
 
   /**
-  
-   * @description 退出登录
-   * @param {*} { dispatch }
-   */
+
+     * @description 退出登录
+     * @param {*} { dispatch }
+     */
   async logout({ dispatch }) {
     await logout(state.accessToken)
     await dispatch('resetAll')
   },
   /**
-  
-   * @description 重置accessToken、roles、ability、router等
-   * @param {*} { commit, dispatch }
-   */
+
+     * @description 重置accessToken、roles、ability、router等
+     * @param {*} { commit, dispatch }
+     */
   async resetAll({ dispatch }) {
     await dispatch('setAccessToken', '')
     await dispatch('acl/setFull', false, { root: true })
@@ -137,9 +137,9 @@ const actions = {
     removeAccessToken()
   },
   /**
-  
-   * @description 设置token
-   */
+
+     * @description 设置token
+     */
   setAccessToken({ commit }, accessToken) {
     commit('setAccessToken', accessToken)
   },

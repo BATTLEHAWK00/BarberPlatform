@@ -55,7 +55,7 @@ public class UserServiceImpl implements UserService {
 		User user = userMapper.getUserByID(id);
 		if (user == null) {
 			throw new ServiceException("用户不存在!", 400);
-		} else if (user.getBirthdate() != null) {
+		} else if (user.getBirthDate() != null) {
 			throw new ServiceException("生日不可再更改!", 400);
 		}
 		userMapper.updateBirthDate(id, birthdate);
@@ -91,17 +91,17 @@ public class UserServiceImpl implements UserService {
 	@Transactional
 	@Override
 	public void updateUser(User user) {
-		userMapper.updateGender(user.getUserid(), user.getGender());
+		userMapper.updateGender(user.getUserId(), user.getGender());
 		if (user.getUsername() != null)
-			userMapper.updateName(user.getUserid(), user.getUsername());
+			userMapper.updateName(user.getUserId(), user.getUsername());
 		if (user.getPhone() != null)
-			userMapper.updatePhone(user.getUserid(), user.getPhone());
+			userMapper.updatePhone(user.getUserId(), user.getPhone());
 		if (user.getRemark() != null)
-			userMapper.updateRemark(user.getUserid(), user.getRemark());
+			userMapper.updateRemark(user.getUserId(), user.getRemark());
 		if (user.getPasswd() != null)
-			updatePasswd(user.getUserid(), user.getPasswd());
-		if (user.getBirthdate() != null)
-			userMapper.updateBirthDate(user.getUserid(), user.getBirthdate());
+			updatePasswd(user.getUserId(), user.getPasswd());
+		if (user.getBirthDate() != null)
+			userMapper.updateBirthDate(user.getUserId(), user.getBirthDate());
 	}
 
 	@Override

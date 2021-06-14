@@ -18,10 +18,10 @@
             {{ record.phone }}
           </a-descriptions-item>
           <a-descriptions-item label="注册时间">
-            {{ filterTimeStamp(record.reg_time) }}
+            {{ filterTimeStamp(record.regTime) }}
           </a-descriptions-item>
-          <a-descriptions-item label="上一单">
-            {{ record.last_order }}
+          <a-descriptions-item label="上一单ID">
+            {{ record.lastOrderID }}
           </a-descriptions-item>
           <a-descriptions-item label="备注" span="2">
             {{ record.remark }}
@@ -41,12 +41,13 @@
 </template>
 
 <script>
-  import { getList } from '@/api/admin.js'
-  import { filterTimeStamp } from '@/utils/filter.js'
+import {getList} from '@/api/admin.js'
+import {filterTimeStamp} from '@/utils/filter.js'
+import EditAdminModal from './components/editAdminModal.vue'
 
-  export default {
+export default {
     components: {
-      EditAdminModal: () => import('./components/editAdminModal.vue'),
+      EditAdminModal,
     },
     mounted() {
       getList().then((res) => {
@@ -81,8 +82,8 @@
           columns: [
             {
               title: '管理员ID',
-              dataIndex: 'adminid',
-              key: 'adminid',
+              dataIndex: 'adminId',
+              key: 'adminId',
               sorter: (a, b) => a.adminid - b.adminid,
               sortDirections: ['descend', 'ascend'],
             },
@@ -102,14 +103,9 @@
               dataIndex: 'remark',
             },
             {
-              title: '上一单',
-              key: 'last_order',
-              dataIndex: 'last_order',
-            },
-            {
               title: '注册时间',
-              key: 'reg_time',
-              dataIndex: 'reg_time',
+              key: 'regTime',
+              dataIndex: 'regTime',
               slots: { customRender: 'time' },
             },
             {

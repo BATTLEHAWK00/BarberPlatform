@@ -35,25 +35,25 @@ public class OrderServiceImpl implements OrderService {
     @Transactional
     @Override
     public void createOrder(Order order) throws ServiceException {
-        User user = userMapper.getUserByID(order.getOwnerid());
-        Admin admin = adminMapper.getAdminByID(order.getSponsorid());
+        User user = userMapper.getUserByID(order.getOwnerId());
+        Admin admin = adminMapper.getAdminByID(order.getSponsorId());
         if (user == null) {
             throw new ServiceException("用户不存在!", 400);
         } else if (admin == null) {
             throw new ServiceException("管理员不存在!", 400);
         }
         orderMapper.createOrder(order);
-        userMapper.updateLastConsume(order.getOwnerid(), new Date());
-        adminMapper.updateLastOrder(order.getSponsorid(), order.getOid());
+        userMapper.updateLastConsume(order.getOwnerId(), new Date());
+        adminMapper.updateLastOrder(order.getSponsorId(), order.getOid());
     }
 
     @Override
     public void addItem(OrderItem item) throws ServiceException {
-        if (orderMapper.getOrderByOrderID(item.getOrderid()) == null) {
+        if (orderMapper.getOrderByOrderID(item.getOrderId()) == null) {
             throw new ServiceException("订单不存在!", 400);
-        } else if (adminMapper.getAdminByID(item.getSponsorid()) == null) {
+        } else if (adminMapper.getAdminByID(item.getSponsorId()) == null) {
             throw new ServiceException("管理员不存在!", 400);
-        } else if (orderMapper.getOrderItem(item.getOrderid(), item.getItemid()) != null) {
+        } else if (orderMapper.getOrderItem(item.getOrderId(), item.getItemId()) != null) {
             throw new ServiceException("已经添加过该项目!", 400);
         }
         orderMapper.addOrderItem(item);

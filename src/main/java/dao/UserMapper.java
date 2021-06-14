@@ -26,7 +26,7 @@ public interface UserMapper {
 
 	void updatePhone(@Param("id") int id, @Param("phone") String phone);
 
-	void updateOpenID(@Param("id") int id, @Param("openid") String openid);
+	void updateOpenID(@Param("id") int id, @Param("openId") String openid);
 
 	void updateGender(@Param("id") int id, @Param("gender") int gender);
 
@@ -38,5 +38,5 @@ public interface UserMapper {
 
 	void deleteUser(int id);
 
-	void updateBirthDate(@Param("id") int id, @Param("birthdate") Date birthdate);
+	void updateBirthDate(@Param("id") int id, @Param("birthDate") Date birthdate);
 }

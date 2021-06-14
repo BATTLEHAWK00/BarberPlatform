@@ -9,25 +9,25 @@ import java.util.List;
 
 @Service
 public interface OrderMapper {
-    List<Order> getOrderList();
+	List<Order> getOrderList();
 
-    List<Order> getOrderListByUser(int id);
+	List<Order> getOrderListByUser(int id);
 
-    List<OrderItem> getOrderItemList(int id);
+	List<OrderItem> getOrderItemList(int id);
 
-    void createOrder(Order order);
+	void createOrder(Order order);
 
-    void updateOrderState(@Param("id") int id, @Param("state") int state);
+	void updateOrderState(@Param("id") int id, @Param("state") int state);
 
-    void updateItemAmount(@Param("oid") int oid, @Param("itemid") int itemid, @Param("amount") int amount);
+	void updateItemAmount(@Param("oid") int oid, @Param("itemId") int itemid, @Param("amount") int amount);
 
-    void addOrderItem(OrderItem orderItem);
+	void addOrderItem(OrderItem orderItem);
 
-    void deleteOrderItem(@Param("orderid") int orderid, @Param("itemid") int itemid);
+	void deleteOrderItem(@Param("orderId") int orderid, @Param("itemId") int itemid);
 
-    int getLastOrderID();
+	int getLastOrderID();
 
-    OrderItem getOrderItem(@Param("orderid") int orderid, @Param("itemid") int itemid);
+	OrderItem getOrderItem(@Param("orderId") int orderid, @Param("itemId") int itemid);
 
-    Order getOrderByOrderID(int id);
+	Order getOrderByOrderID(int id);
 }

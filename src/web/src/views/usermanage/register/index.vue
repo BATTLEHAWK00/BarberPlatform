@@ -35,9 +35,10 @@
 </template>
 
 <script>
-  import { register } from '@/api/user.js'
-  import { Modal } from 'ant-design-vue'
-  export default {
+import {register} from '@/api/user.js'
+import {Modal} from 'ant-design-vue'
+
+export default {
     data() {
       return {
         form: {

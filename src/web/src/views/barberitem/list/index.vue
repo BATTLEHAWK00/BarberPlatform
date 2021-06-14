@@ -13,9 +13,10 @@
 </template>
 
 <script>
-  import { getList } from '@/api/barberitem.js'
-  import { filterTimeStamp } from '@/utils/filter.js'
-  export default {
+import {getList} from '@/api/barberitem.js'
+import {filterTimeStamp} from '@/utils/filter.js'
+
+export default {
     mounted() {
       getList().then((res) => {
         this.table.data = res.data
@@ -55,8 +56,8 @@
             },
             {
               title: '添加时间',
-              key: 'add_time',
-              dataIndex: 'add_time',
+              key: 'addTime',
+              dataIndex: 'addTime',
               slots: { customRender: 'time' },
               sorter: (a, b) => a.add_time - b.add_time,
               sortDirections: ['descend', 'ascend'],

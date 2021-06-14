@@ -34,8 +34,9 @@
 </template>
 
 <script>
-  import { filterTimeStamp } from '@/utils/filter.js'
-  export default {
+import {filterTimeStamp} from '@/utils/filter.js'
+
+export default {
     methods: {
       filterTimeStamp,
       getCurrentTime() {

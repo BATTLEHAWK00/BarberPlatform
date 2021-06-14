@@ -22,11 +22,11 @@ public interface AdminMapper {
 
 	void updatePasswd(@Param("id") int id, @Param("passwd") String passwd, @Param("salt") String salt);
 
-	void updateOpenID(@Param("id") int id, @Param("openid") String openid);
+	void updateOpenID(@Param("id") int id, @Param("openId") String openid);
 
 	void updateRemark(@Param("id") int id, @Param("remark") String remark);
 
-	void updateLastOrder(@Param("id") int id, @Param("orderid") int orderid);
+	void updateLastOrder(@Param("id") int id, @Param("orderId") int orderid);
 
 	void updateGender(@Param("id") int id, @Param("gender") Integer gender);
 

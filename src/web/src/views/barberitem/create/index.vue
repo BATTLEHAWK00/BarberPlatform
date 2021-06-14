@@ -36,9 +36,10 @@
 </template>
 
 <script>
-  import { createItem } from '@/api/barberitem.js'
-  import { Modal } from 'ant-design-vue'
-  export default {
+import {createItem} from '@/api/barberitem.js'
+import {Modal} from 'ant-design-vue'
+
+export default {
     data() {
       return {
         form: {

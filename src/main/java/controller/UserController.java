@@ -110,12 +110,12 @@ public class UserController {
 			@RequestParam(value = "birthdate", required = false) String birthdate
 	) {
 		User user = new User();
-		user.setUserid(userid);
+		user.setUserId(userid);
 		user.setUsername(name);
 		user.setPhone(phone);
 		user.setRemark(remark);
 		user.setPasswd(passwd);
-		user.setBirthdate(birthdate == null ? null : new Date(Long.parseLong(birthdate)));
+		user.setBirthDate(birthdate == null ? null : new Date(Long.parseLong(birthdate)));
 		userService.updateUser(user);
 		return new Response();
 	}
