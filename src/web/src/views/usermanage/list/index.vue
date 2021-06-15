@@ -36,11 +36,11 @@
 </template>
 
 <script>
-import {getList} from '@/api/user.js'
-import {filterTimeStamp} from '@/utils/filter.js'
-import editUserModal from './components/editUserModal.vue'
+  import { getList } from '@/api/user.js'
+  import { filterTimeStamp } from '@/utils/filter.js'
+  import editUserModal from './components/editUserModal.vue'
 
-export default {
+  export default {
     components: {
       editUserModal,
     },

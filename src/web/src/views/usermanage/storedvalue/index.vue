@@ -53,12 +53,12 @@
 </template>
 
 <script>
-import {verifyPasswd} from '@/api/user.js'
-import {recharge} from '@/api/storedvalue.js'
-import {Modal} from 'ant-design-vue'
-import userSelectModal from '@/views/components/userSelectModal'
+  import { verifyPasswd } from '@/api/user.js'
+  import { recharge } from '@/api/storedvalue.js'
+  import { Modal } from 'ant-design-vue'
+  import userSelectModal from '@/views/components/userSelectModal'
 
-export default {
+  export default {
     components: {
       userSelectModal,
     },

@@ -7,12 +7,9 @@
 	<resultMap id="orderMap" type="pojo.Order">
 		<id property="oid" column="oid"/>
 		<result property="sponsorId" column="sponsorid"/>
-		<result property="state" column="state"/>
 		<result property="payTime" column="pay_time"/>
 		<result property="payMethod" column="pay_method"/>
-		<result property="price" column="price"/>
 		<result property="discount" column="discount"/>
-		<result property="remark" column="remark"/>
 		<result property="ownerId" column="ownerid"/>
 		<result property="createTime" column="create_time"/>
 		<result property="actualPayment" column="actual_payment"/>
@@ -21,12 +18,10 @@
 		<collection property="orderItemList" column="oid" ofType="pojo.OrderItem" select="getOrderItemList"/>
 	</resultMap>
 	<resultMap id="orderItemMap" type="pojo.OrderItem">
-		<result property="orderId" column="oid"/>
-		<result property="sponsorId" column="sponsorid"/>
+		<id property="orderId" column="oid"/>
+		<id property="itemId" column="itemid"/>
 		<result property="itemId" column="itemid"/>
-		<result property="remark" column="remark"/>
 		<result property="addTime" column="add_time"/>
-		<result property="amount" column="amount"/>
 	</resultMap>
 	<insert id="createOrder" useGeneratedKeys="true" keyProperty="oid" keyColumn="orderid">
 		INSERT INTO orders

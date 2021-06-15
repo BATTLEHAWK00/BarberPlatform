@@ -6,10 +6,10 @@
 </template>
 
 <script>
-import OverView from './components/OverView'
-import {mapGetters} from 'vuex'
+  import OverView from './components/OverView'
+  import { mapGetters } from 'vuex'
 
-export default {
+  export default {
     computed: {
       ...mapGetters({
         title: 'settings/title',

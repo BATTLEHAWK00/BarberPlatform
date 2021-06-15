@@ -12,9 +12,9 @@
 </template>
 
 <script>
-import VabIcon from '@/layout/vab-icon'
+  import VabIcon from '@/layout/vab-icon'
 
-export default {
+  export default {
     name: 'Submenu',
     components: { VabIcon },
     props: {

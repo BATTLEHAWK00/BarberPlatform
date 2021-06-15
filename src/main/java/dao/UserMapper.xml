@@ -3,21 +3,15 @@
 		PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 		"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="dao.UserMapper">
+	<cache/>
 	<resultMap id="userMap" type="pojo.User">
 		<id column="userid" property="userId"/>
-		<result property="passwd" column="passwd"/>
-		<result property="salt" column="salt"/>
-		<result property="username" column="username"/>
-		<result property="phone" column="phone"/>
-		<result property="gender" column="gender"/>
 		<result property="birthDate" column="birthdate"/>
-		<result property="balance" column="balance"/>
-		<result property="remark" column="remark"/>
 		<result property="lastConsumeTime" column="lastconsume_time"/>
 		<result property="regTime" column="reg_time"/>
 		<result property="openId" column="openid"/>
 	</resultMap>
-	<insert id="registerUser" parameterType="pojo.User" useGeneratedKeys="true" keyProperty="userid">
+	<insert id="registerUser" parameterType="pojo.User" useGeneratedKeys="true" keyProperty="userId">
 		INSERT INTO users
 		(username, passwd, salt, phone, birthdate, gender, remark, openid, lastconsume_time, reg_time)
 		VALUES (#{username}, #{passwd}, #{salt}, #{phone}, #{birthdate}, #{gender}, #{remark}, #{openid}, null, now())

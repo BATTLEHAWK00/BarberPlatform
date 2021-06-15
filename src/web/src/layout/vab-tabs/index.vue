@@ -44,10 +44,10 @@
 </template>
 
 <script>
-import {DownOutlined} from '@ant-design/icons-vue'
-import {mapActions, mapGetters} from 'vuex'
+  import { DownOutlined } from '@ant-design/icons-vue'
+  import { mapActions, mapGetters } from 'vuex'
 
-export default {
+  export default {
     name: 'VabTabs',
     components: {
       DownOutlined,

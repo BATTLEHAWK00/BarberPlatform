@@ -42,11 +42,11 @@
 </template>
 
 <script>
-import {getIconList} from '@/api/icon'
-import clip from '@/utils/clipboard'
-import VabIcon from '@/layout/vab-icon'
+  import { getIconList } from '@/api/icon'
+  import clip from '@/utils/clipboard'
+  import VabIcon from '@/layout/vab-icon'
 
-export default {
+  export default {
     name: 'Icon',
     components: { VabIcon },
     data() {

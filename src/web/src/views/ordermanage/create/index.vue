@@ -79,12 +79,12 @@
 </template>
 
 <script>
-import {Modal} from 'ant-design-vue'
-import {getList} from '@/api/barberitem.js'
-import {addItem, createOrder, getLastOrder} from '@/api/order.js'
-import userSelectModal from '@/views/components/userSelectModal'
+  import { Modal } from 'ant-design-vue'
+  import { getList } from '@/api/barberitem.js'
+  import { addItem, createOrder, getLastOrder } from '@/api/order.js'
+  import userSelectModal from '@/views/components/userSelectModal'
 
-export default {
+  export default {
     components: {
       userSelectModal,
     },

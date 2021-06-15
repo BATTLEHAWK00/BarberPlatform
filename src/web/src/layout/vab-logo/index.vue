@@ -9,10 +9,10 @@
 </template>
 
 <script>
-import VabIcon from '@/layout/vab-icon'
-import {mapGetters} from 'vuex'
+  import VabIcon from '@/layout/vab-icon'
+  import { mapGetters } from 'vuex'
 
-export default {
+  export default {
     name: 'VabLogo',
     components: { VabIcon },
     computed: {

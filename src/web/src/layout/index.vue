@@ -53,15 +53,15 @@
   </a-layout>
 </template>
 <script>
-import VabLogo from './vab-logo'
-import VabAvatar from './vab-avatar'
-import VabMenu from './vab-menu'
-import VabTabs from './vab-tabs'
-import VabContent from './vab-content'
-import {mapActions, mapGetters} from 'vuex'
-import {MenuFoldOutlined, MenuUnfoldOutlined} from '@ant-design/icons-vue'
+  import VabLogo from './vab-logo'
+  import VabAvatar from './vab-avatar'
+  import VabMenu from './vab-menu'
+  import VabTabs from './vab-tabs'
+  import VabContent from './vab-content'
+  import { mapActions, mapGetters } from 'vuex'
+  import { MenuFoldOutlined, MenuUnfoldOutlined } from '@ant-design/icons-vue'
 
-export default {
+  export default {
     components: {
       VabLogo,
       VabAvatar,

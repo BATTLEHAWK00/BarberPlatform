@@ -41,11 +41,11 @@
 </template>
 
 <script>
-import {getList} from '@/api/admin.js'
-import {filterTimeStamp} from '@/utils/filter.js'
-import EditAdminModal from './components/editAdminModal.vue'
+  import { getList } from '@/api/admin.js'
+  import { filterTimeStamp } from '@/utils/filter.js'
+  import EditAdminModal from './components/editAdminModal.vue'
 
-export default {
+  export default {
     components: {
       EditAdminModal,
     },

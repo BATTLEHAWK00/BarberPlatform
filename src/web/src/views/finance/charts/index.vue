@@ -3,14 +3,18 @@
 </template>
 
 <script>
-import {use} from 'echarts/core'
-import {CanvasRenderer} from 'echarts/renderers'
-import {PieChart} from 'echarts/charts'
-import {LegendComponent, TitleComponent, TooltipComponent,} from 'echarts/components'
-import VChart from 'vue-echarts'
-import {defineComponent, ref} from 'vue'
+  import { use } from 'echarts/core'
+  import { CanvasRenderer } from 'echarts/renderers'
+  import { PieChart } from 'echarts/charts'
+  import {
+    LegendComponent,
+    TitleComponent,
+    TooltipComponent,
+  } from 'echarts/components'
+  import VChart from 'vue-echarts'
+  import { defineComponent, ref } from 'vue'
 
-use([
+  use([
     CanvasRenderer,
     PieChart,
     TitleComponent,

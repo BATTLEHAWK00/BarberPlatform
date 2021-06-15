@@ -1,49 +1,49 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper
-        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
-        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+		PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+		"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="dao.SessionMapper">
-    <insert id="createSession" parameterType="pojo.Session">
-        INSERT INTO sessions
-            (access_token, adminid, login_time, last_access)
-        VALUES (#{access_token}, #{adminid}, now(), now())
-    </insert>
-    <update id="updateLastAccess">
-        UPDATE sessions
-        SET last_access=now()
-        WHERE access_token = #{accesstoken}
-    </update>
-    <delete id="deleteSession">
-        DELETE
-        FROM sessions
-        WHERE access_token = #{accesstoken}
-    </delete>
-
-    <select id="getSessionByAccessToken" resultType="pojo.Session">
-        SELECT *
-        FROM sessions
-        WHERE access_token = #{accesstoken}
-    </select>
-    <select id="getSessionList" resultType="pojo.Session">
-        SELECT *
-        FROM sessions
-    </select>
-    <select id="getSessionListByAdminID" resultType="pojo.Session">
-        SELECT *
-        FROM sessions
-        WHERE adminid = #{adminid}
-        ORDER BY last_access
-    </select>
-    <select id="getSessionCountByAdminID" resultType="java.lang.Integer">
-        SELECT COUNT(*)
-        FROM sessions
-        WHERE adminid = #{adminid}
-    </select>
-    <select id="getLastAccessSessionByAdminID" resultType="pojo.Session">
-        SELECT *
-        FROM sessions
-        WHERE adminid = #{adminid}
-        ORDER BY last_access
-        LIMIT 1
-    </select>
+	<cache/>
+	<insert id="createSession" parameterType="pojo.Session">
+		INSERT INTO sessions
+			(access_token, adminid, login_time, last_access)
+		VALUES (#{access_token}, #{adminid}, now(), now())
+	</insert>
+	<update id="updateLastAccess">
+		UPDATE sessions
+		SET last_access=now()
+		WHERE access_token = #{accesstoken}
+	</update>
+	<delete id="deleteSession">
+		DELETE
+		FROM sessions
+		WHERE access_token = #{accesstoken}
+	</delete>
+	<select id="getSessionByAccessToken" resultType="pojo.Session">
+		SELECT *
+		FROM sessions
+		WHERE access_token = #{accesstoken}
+	</select>
+	<select id="getSessionList" resultType="pojo.Session">
+		SELECT *
+		FROM sessions
+	</select>
+	<select id="getSessionListByAdminID" resultType="pojo.Session">
+		SELECT *
+		FROM sessions
+		WHERE adminid = #{adminid}
+		ORDER BY last_access
+	</select>
+	<select id="getSessionCountByAdminID" resultType="java.lang.Integer">
+		SELECT COUNT(*)
+		FROM sessions
+		WHERE adminid = #{adminid}
+	</select>
+	<select id="getLastAccessSessionByAdminID" resultType="pojo.Session">
+		SELECT *
+		FROM sessions
+		WHERE adminid = #{adminid}
+		ORDER BY last_access
+		LIMIT 1
+	</select>
 </mapper>

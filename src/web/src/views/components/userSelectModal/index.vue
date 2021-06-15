@@ -21,9 +21,9 @@
 </template>
 
 <script>
-import {getList} from '@/api/user.js'
+  import { getList } from '@/api/user.js'
 
-export default {
+  export default {
     methods: {
       onUserSelect(data) {
         this.$emit('userSelected', data)

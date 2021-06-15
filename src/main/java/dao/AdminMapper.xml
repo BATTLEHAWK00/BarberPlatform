@@ -5,16 +5,9 @@
 <mapper namespace="dao.AdminMapper">
 	<resultMap id="adminMap" type="pojo.Admin">
 		<id property="adminId" column="adminid"/>
-		<result property="name" column="name"/>
-		<result property="passwd" column="passwd"/>
-		<result property="salt" column="salt"/>
-		<result property="gender" column="gender"/>
-		<result property="remark" column="remark"/>
 		<result property="regTime" column="reg_time"/>
-		<result property="passwd" column="passwd"/>
 		<result property="lastOrderID" column="last_order"/>
 		<result property="isSuperAdmin" column="is_superadmin"/>
-		<result property="phone" column="phone"/>
 		<result property="openId" column="openid"/>
 		<association property="lastOrder" column="last_order" select="dao.OrderMapper.getOrderByOrderID"/>
 	</resultMap>

@@ -9,10 +9,10 @@
 </template>
 
 <script>
-import {isExternal} from '@/utils/validate'
-import VabIcon from '@/layout/vab-icon'
+  import { isExternal } from '@/utils/validate'
+  import VabIcon from '@/layout/vab-icon'
 
-export default {
+  export default {
     name: 'MenuItem',
     components: { VabIcon },
     props: {

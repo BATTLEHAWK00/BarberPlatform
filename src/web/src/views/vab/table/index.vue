@@ -9,9 +9,9 @@
   ></a-table>
 </template>
 <script>
-import {getList} from '@/api/table'
+  import { getList } from '@/api/table'
 
-const columns = [
+  const columns = [
     {
       title: 'title',
       dataIndex: 'title',

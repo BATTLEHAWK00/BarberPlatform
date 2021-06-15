@@ -13,10 +13,10 @@
 </template>
 
 <script>
-import {getStoredValueLogs} from '@/api/user.js'
-import {filterTimeStamp} from '@/utils/filter.js'
+  import { getStoredValueLogs } from '@/api/user.js'
+  import { filterTimeStamp } from '@/utils/filter.js'
 
-export default {
+  export default {
     mounted() {
       getStoredValueLogs().then((res) => {
         this.table.data = res.data

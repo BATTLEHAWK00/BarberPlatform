@@ -42,11 +42,11 @@
   </div>
 </template>
 <script>
-import {dependencies, devDependencies} from '*/package.json'
-import {mapActions, mapGetters} from 'vuex'
-import {LockOutlined, UserOutlined} from '@ant-design/icons-vue'
+  import { dependencies, devDependencies } from '*/package.json'
+  import { mapActions, mapGetters } from 'vuex'
+  import { LockOutlined, UserOutlined } from '@ant-design/icons-vue'
 
-export default {
+  export default {
     name: 'Login',
     components: {
       UserOutlined,

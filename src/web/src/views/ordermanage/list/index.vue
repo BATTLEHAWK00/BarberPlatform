@@ -53,10 +53,10 @@
 </template>
 
 <script>
-import {getList} from '@/api/order.js'
-import {filterTimeStamp} from '@/utils/filter.js'
+  import { getList } from '@/api/order.js'
+  import { filterTimeStamp } from '@/utils/filter.js'
 
-export default {
+  export default {
     mounted() {
       // var that = this
       getList().then((res) => {

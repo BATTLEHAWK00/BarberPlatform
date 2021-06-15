@@ -13,10 +13,10 @@
 </template>
 
 <script>
-import {getList} from '@/api/barberitem.js'
-import {filterTimeStamp} from '@/utils/filter.js'
+  import { getList } from '@/api/barberitem.js'
+  import { filterTimeStamp } from '@/utils/filter.js'
 
-export default {
+  export default {
     mounted() {
       getList().then((res) => {
         this.table.data = res.data
