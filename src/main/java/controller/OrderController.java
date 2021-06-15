@@ -1,7 +1,6 @@
 package controller;
 
 import bean.Response;
-import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import pojo.Order;
@@ -12,9 +11,12 @@ import service.OrderService;
 @RestController
 @RequestMapping("/order")
 public class OrderController {
+    private final OrderService orderService;
+
     @Autowired
-    @Setter
-    private OrderService orderService;
+    public OrderController(OrderService orderService) {
+        this.orderService = orderService;
+    }
 
     @RequestMapping(value = "/create", method = {RequestMethod.GET, RequestMethod.POST})
     public Response createOrder(

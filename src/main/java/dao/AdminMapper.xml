@@ -66,12 +66,12 @@
 	</delete>
 	<select id="getAdminByID" resultMap="adminMap">
 		SELECT *
-		FROM v_admins
+		FROM admins
 		WHERE adminid = #{id}
 	</select>
 	<select id="getAdminByName" resultMap="adminMap">
 		SELECT *
-		FROM v_admins
+		FROM admins
 		WHERE name = #{name}
 	</select>
 	<select id="getAdminByPhone" resultMap="adminMap">

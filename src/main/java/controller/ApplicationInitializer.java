@@ -1,6 +1,5 @@
 package controller;
 
-import lombok.Setter;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,9 +14,12 @@ import javax.servlet.ServletContext;
 public class ApplicationInitializer implements ServletContextAware {
     private final Logger logger = LogManager.getLogger(ApplicationInitializer.class);
 
+    private final SessionService sessionService;
+
     @Autowired
-    @Setter
-    private SessionService sessionService;
+    public ApplicationInitializer(SessionService sessionService) {
+        this.sessionService = sessionService;
+    }
 
     private void clearOldSessions() {
         logger.info("Clean Sessions...");

@@ -3,7 +3,6 @@ package service.impl;
 import dao.AdminMapper;
 import dao.SessionMapper;
 import exceptions.ServiceException;
-import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -18,15 +17,14 @@ import java.util.concurrent.TimeUnit;
 
 @Service
 public class SessionServiceImpl implements SessionService {
+	private final AdminMapper adminMapper;
+	private final SessionMapper sessionMapper;
 
 	@Autowired
-	@Setter
-	private AdminMapper adminMapper;
-
-
-	@Autowired
-	@Setter
-	private SessionMapper sessionMapper;
+	public SessionServiceImpl(AdminMapper adminMapper, SessionMapper sessionMapper) {
+		this.adminMapper = adminMapper;
+		this.sessionMapper = sessionMapper;
+	}
 
 	@Transactional
 	@Override

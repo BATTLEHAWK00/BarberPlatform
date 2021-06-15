@@ -1,7 +1,6 @@
 package controller;
 
 import bean.Response;
-import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import pojo.BarberItem;
@@ -13,9 +12,12 @@ import java.math.BigDecimal;
 @RestController
 @RequestMapping("/barberitem")
 public class BarberItemController {
+    private final BarberItemService barberItemService;
+
     @Autowired
-    @Setter
-    private BarberItemService barberItemService;
+    public BarberItemController(BarberItemService barberItemService) {
+        this.barberItemService = barberItemService;
+    }
 
     @RequestMapping("/list")
     public Response getItemList() {

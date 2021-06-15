@@ -2,7 +2,6 @@ package service.impl;
 
 import dao.BarberItemMapper;
 import exceptions.ServiceException;
-import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import pojo.BarberItem;
@@ -12,9 +11,12 @@ import java.util.List;
 
 @Service
 public class BarberItemServiceImpl implements BarberItemService {
+    private final BarberItemMapper barberItemMapper;
+
     @Autowired
-    @Setter
-    private BarberItemMapper barberItemMapper;
+    public BarberItemServiceImpl(BarberItemMapper barberItemMapper) {
+        this.barberItemMapper = barberItemMapper;
+    }
 
     @Override
     public void addItem(BarberItem barberItem) {

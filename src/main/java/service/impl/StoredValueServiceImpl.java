@@ -3,7 +3,6 @@ package service.impl;
 import dao.StoredValueMapper;
 import dao.UserMapper;
 import exceptions.ServiceException;
-import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -16,13 +15,14 @@ import java.util.List;
 
 @Service
 public class StoredValueServiceImpl implements StoredValueService {
-    @Setter
-    @Autowired
-    private StoredValueMapper storedValueMapper;
+    private final StoredValueMapper storedValueMapper;
+    private final UserMapper userMapper;
 
-    @Setter
     @Autowired
-    private UserMapper userMapper;
+    public StoredValueServiceImpl(StoredValueMapper storedValueMapper, UserMapper userMapper) {
+        this.storedValueMapper = storedValueMapper;
+        this.userMapper = userMapper;
+    }
 
     @Override
     public void writeLog(StoredValueLog storedValueLog) throws ServiceException {

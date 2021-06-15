@@ -2,7 +2,6 @@ package controller;
 
 import bean.Response;
 import exceptions.ServiceException;
-import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import pojo.User;
@@ -16,9 +15,13 @@ import java.util.logging.Logger;
 @RequestMapping("/user")
 public class UserController {
 	Logger logger = Logger.getLogger("UserController");
+
+	private final UserService userService;
+
 	@Autowired
-	@Setter
-	private UserService userService;
+	public UserController(UserService userService) {
+		this.userService = userService;
+	}
 
 	@RequestMapping(value = "/register", method = {RequestMethod.GET, RequestMethod.POST})
 	public Response RegisterUser(

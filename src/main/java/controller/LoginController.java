@@ -1,7 +1,6 @@
 package controller;
 
 import bean.Response;
-import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import pojo.Admin;
@@ -17,13 +16,14 @@ import java.util.Map;
 @RestController
 @RequestMapping("/admin")
 public class LoginController {
-    @Autowired
-    @Setter
-    private SessionService sessionService;
+    private final SessionService sessionService;
+    private final AdminService adminService;
 
     @Autowired
-    @Setter
-    private AdminService adminService;
+    public LoginController(SessionService sessionService, AdminService adminService) {
+        this.sessionService = sessionService;
+        this.adminService = adminService;
+    }
 
     @RequestMapping(value = "/login", method = {RequestMethod.POST})
     public Response handleLogin(@RequestParam("username") String username,

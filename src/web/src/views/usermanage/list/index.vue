@@ -1,11 +1,11 @@
 <template>
   <div>
     <a-table
-        :columns="table.columns"
-        :data-source="table.data"
-        :loading="table.loading"
-        bordered
-        rowKey="userid"
+      :columns="table.columns"
+      :data-source="table.data"
+      :loading="table.loading"
+      bordered
+      rowKey="userid"
     >
       <template #time="{ text }">{{ filterTimeStamp(text) }}</template>
       <template #expandedRowRender="{ record }">
@@ -29,8 +29,8 @@
       </template>
     </a-table>
     <edit-user-modal
-        v-model:showModal="modal.show"
-        :user-data="modal.userData"
+      v-model:showModal="modal.show"
+      :user-data="modal.userData"
     />
   </div>
 </template>
@@ -41,80 +41,80 @@ import {filterTimeStamp} from '@/utils/filter.js'
 import editUserModal from './components/editUserModal.vue'
 
 export default {
-  components: {
-    editUserModal,
-  },
-  mounted() {
-    getList().then((res) => {
-      this.table.data = res.data
-      this.table.loading = false
-    })
-  },
-  methods: {
-    filterGender(gender) {
-      switch (gender) {
-        case 0:
-          return '男'
-        case 1:
-          return '女'
-        default:
-          return '未指定'
+    components: {
+      editUserModal,
+    },
+    mounted() {
+      getList().then((res) => {
+        this.table.data = res.data
+        this.table.loading = false
+      })
+    },
+    methods: {
+      filterGender(gender) {
+        switch (gender) {
+          case 0:
+            return '男'
+          case 1:
+            return '女'
+          default:
+            return '未指定'
+        }
+      },
+      onEditUser(data) {
+        this.modal.userData = data
+        this.modal.show = true
+      },
+      filterTimeStamp,
+    },
+    data() {
+      return {
+        modal: {
+          userData: null,
+          show: false,
+        },
+        table: {
+          loading: true,
+          data: [],
+          columns: [
+            {
+              title: '会员号',
+              dataIndex: 'userId',
+              key: 'userId',
+              width: '10%',
+              sorter: (a, b) => a.userid - b.userid,
+              sortDirections: ['descend', 'ascend'],
+            },
+            {
+              title: '用户姓名',
+              dataIndex: 'username',
+              key: 'username',
+            },
+            {
+              title: '余额',
+              dataIndex: 'balance',
+              key: 'balance',
+              sorter: (a, b) => a.balance - b.balance,
+              sortDirections: ['descend', 'ascend'],
+            },
+            {
+              title: '上次消费时间',
+              dataIndex: 'lastConsumeTime',
+              key: 'lastConsumeTime',
+              slots: { customRender: 'time' },
+              sorter: (a, b) => a.lastconsume - b.lastconsume,
+              sortDirections: ['descend', 'ascend'],
+            },
+            {
+              title: '操作',
+              key: 'action',
+              slots: { customRender: 'action' },
+            },
+          ],
+        },
       }
     },
-    onEditUser(data) {
-      this.modal.userData = data
-      this.modal.show = true
-    },
-    filterTimeStamp,
-  },
-  data() {
-    return {
-      modal: {
-        userData: null,
-        show: false,
-      },
-      table: {
-        loading: true,
-        data: [],
-        columns: [
-          {
-            title: '会员号',
-            dataIndex: 'userId',
-            key: 'userId',
-            width: '10%',
-            sorter: (a, b) => a.userid - b.userid,
-            sortDirections: ['descend', 'ascend'],
-          },
-          {
-            title: '用户姓名',
-            dataIndex: 'username',
-            key: 'username',
-          },
-          {
-            title: '余额',
-            dataIndex: 'balance',
-            key: 'balance',
-            sorter: (a, b) => a.balance - b.balance,
-            sortDirections: ['descend', 'ascend'],
-          },
-          {
-            title: '上次消费时间',
-            dataIndex: 'lastConsumeTime',
-            key: 'lastConsumeTime',
-            slots: {customRender: 'time'},
-            sorter: (a, b) => a.lastconsume - b.lastconsume,
-            sortDirections: ['descend', 'ascend'],
-          },
-          {
-            title: '操作',
-            key: 'action',
-            slots: {customRender: 'action'},
-          },
-        ],
-      },
-    }
-  },
-}
+  }
 </script>
 
 <style></style>

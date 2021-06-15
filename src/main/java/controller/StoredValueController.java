@@ -1,7 +1,6 @@
 package controller;
 
 import bean.Response;
-import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import service.StoredValueService;
@@ -12,9 +11,12 @@ import java.math.BigDecimal;
 @RestController
 @RequestMapping("/storedvalue")
 public class StoredValueController {
+    private final StoredValueService storedValueService;
+
     @Autowired
-    @Setter
-    private StoredValueService storedValueService;
+    public StoredValueController(StoredValueService storedValueService) {
+        this.storedValueService = storedValueService;
+    }
 
     @RequestMapping(value = "/log/list", method = {RequestMethod.GET})
     public Response getStoredValueList() {

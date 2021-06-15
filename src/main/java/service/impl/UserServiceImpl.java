@@ -2,7 +2,6 @@ package service.impl;
 
 import dao.UserMapper;
 import exceptions.ServiceException;
-import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -16,9 +15,12 @@ import java.util.Map;
 
 @Service
 public class UserServiceImpl implements UserService {
-	@Setter
+	private final UserMapper userMapper;
+
 	@Autowired
-	private UserMapper userMapper;
+	public UserServiceImpl(UserMapper userMapper) {
+		this.userMapper = userMapper;
+	}
 
 	@Override
 	public void registerUser(User user) throws ServiceException {
@@ -106,8 +108,7 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public List<User> getUserList() throws ServiceException {
-		List<User> userList = userMapper.getUserList();
-		return userList;
+		return userMapper.getUserList();
 	}
 
 	@Override

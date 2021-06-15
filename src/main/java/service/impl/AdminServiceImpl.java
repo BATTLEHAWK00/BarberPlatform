@@ -2,7 +2,6 @@ package service.impl;
 
 import dao.AdminMapper;
 import exceptions.ServiceException;
-import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -14,9 +13,12 @@ import java.util.List;
 
 @Service
 public class AdminServiceImpl implements AdminService {
+	private final AdminMapper adminMapper;
+
 	@Autowired
-	@Setter
-	private AdminMapper adminMapper;
+	public AdminServiceImpl(AdminMapper adminMapper) {
+		this.adminMapper = adminMapper;
+	}
 
 	@Override
 	public Admin getAdminByToken(String username, String passwd) {

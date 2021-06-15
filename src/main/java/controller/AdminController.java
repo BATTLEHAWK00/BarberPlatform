@@ -1,7 +1,6 @@
 package controller;
 
 import bean.Response;
-import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import pojo.Admin;
@@ -11,9 +10,12 @@ import service.AdminService;
 @RestController
 @RequestMapping("/admin")
 public class AdminController {
+	private final AdminService adminService;
+
 	@Autowired
-	@Setter
-	private AdminService adminService;
+	public AdminController(AdminService adminService) {
+		this.adminService = adminService;
+	}
 
 	@RequestMapping("/list")
 	public Response getList() {

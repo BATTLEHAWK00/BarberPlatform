@@ -29,4 +29,5 @@ public interface AdminService {
 	void updateName(int id, String name);
 
 	void updateAdmin(Admin admin);
+
 }
