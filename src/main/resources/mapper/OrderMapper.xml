@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+		PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+		"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.battlehawk233.barberplatform.dao.OrderMapper">
+	<cache/>
+	<resultMap id="orderMap" type="Order">
+		<id property="oid" column="oid"/>
+		<result property="sponsorId" column="sponsorid"/>
+		<result property="payTime" column="pay_time"/>
+		<result property="payMethod" column="pay_method"/>
+		<result property="discount" column="discount"/>
+		<result property="ownerId" column="ownerid"/>
+		<result property="createTime" column="create_time"/>
+		<result property="actualPayment" column="actual_payment"/>
+		<association property="user" column="ownerid" select="dao.UserMapper.getUserByID"/>
+		<association property="sponsor" column="sponsorid" select="dao.AdminMapper.getAdminByID"/>
+		<collection property="orderItemList" column="oid" ofType="OrderItem" select="getOrderItemList"/>
+	</resultMap>
+	<resultMap id="orderItemMap" type="OrderItem">
+		<id property="orderId" column="oid"/>
+		<id property="itemId" column="itemid"/>
+		<result property="itemId" column="itemid"/>
+		<result property="addTime" column="add_time"/>
+	</resultMap>
+	<insert id="createOrder" useGeneratedKeys="true" keyProperty="oid" keyColumn="orderid">
+		INSERT INTO orders
+		(sponsorid, ownerid, state, pay_time, pay_method, price, discount, actual_payment, create_time, remark)
+		VALUES (#{sponsorid}, #{ownerid}, #{state}, #{pay_time}, #{pay_method}, #{price}, #{discount},
+		        #{actual_payment}, now(), #{remark})
+	</insert>
+	<insert id="addOrderItem" parameterType="OrderItem">
+		INSERT INTO order_items
+			(orderid, itemid, sponsor, amount, remark, add_time)
+		VALUES (#{orderId}, #{itemId}, #{sponsorId}, #{amount}, #{remark}, now())
+	</insert>
+	<update id="updateOrderState">
+		UPDATE orders
+		SET state=#{state}
+		WHERE orderid = #{id}
+	</update>
+	<update id="updateItemAmount">
+		UPDATE order_items
+		SET amount=#{amount}
+		WHERE orderid = #{oid}
+		  AND itemid = #{itemid}
+	</update>
+
+	<delete id="deleteOrderItem">
+		DELETE
+		FROM order_items
+		WHERE orderid = #{orderid}
+		  AND itemid = #{itemid}
+	</delete>
+
+	<select id="getOrderList" resultMap="orderMap">
+		SELECT *
+		FROM v_orders
+		ORDER BY create_time DESC
+	</select>
+	<select id="getOrderListByUser" resultMap="orderMap">
+		SELECT *
+		FROM v_orders
+		WHERE ownerid = #{id}
+		ORDER BY create_time DESC
+	</select>
+	<select id="getOrderItemList" resultMap="orderItemMap">
+		SELECT *
+		FROM v_order_items
+		WHERE oid = #{id}
+	</select>
+	<select id="getOrderItem" resultMap="orderItemMap">
+		SELECT *
+		FROM v_order_items
+		WHERE oid = #{orderid}
+		  AND itemid = #{itemid}
+	</select>
+	<select id="getOrderByOrderID" resultMap="orderMap">
+		SELECT *
+		FROM v_orders
+		WHERE oid = #{id}
+	</select>
+	<select id="getLastOrderID" resultType="java.lang.Integer">
+		SELECT MAX(oid)
+		FROM v_orders;
+	</select>
+</mapper>

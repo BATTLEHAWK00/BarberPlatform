@@ -1,0 +1,10 @@
+spring:
+  datasource:
+    username: root
+    password: yxl123456.
+    url: jdbc:mariadb://battlehawk233.cn:10036/barberplatform
+mybatis:
+  type-aliases-package: cn.battlehawk233.barberplatform
+  mapper-locations: classpath:mapper/*.xml
+  configuration:
+    map-underscore-to-camel-case: true
