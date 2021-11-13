@@ -62,12 +62,12 @@ module.exports = {
     },
     // 注释掉的地方是前端配置代理访问后端的示例
     // proxy: {
-    //   [baseURL]: {
+    //   '/*': {
     //     target: `http://你的后端接口地址`,
     //     ws: true,
     //     changeOrigin: true,
     //     pathRewrite: {
-    //       ["^/" + baseURL]: "",
+    //       ['^/' + baseURL]: '',
     //     },
     //   },
     // },

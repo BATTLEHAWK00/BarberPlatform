@@ -32,23 +32,14 @@
         <a-button type="primary" @click="onEditUser(record)">编辑</a-button>
       </template>
     </a-table>
-    <edit-admin-modal
-      v-model:showModal="modal.show"
-      :admin-data="modal.adminData"
-      @updateSuccess="onAdminUpdated"
-    />
   </div>
 </template>
 
 <script>
   import { getList } from '@/api/admin.js'
   import { filterTimeStamp } from '@/utils/filter.js'
-  import EditAdminModal from './components/editAdminModal.vue'
 
   export default {
-    components: {
-      EditAdminModal,
-    },
     mounted() {
       getList().then((res) => {
         this.table.data = res.data

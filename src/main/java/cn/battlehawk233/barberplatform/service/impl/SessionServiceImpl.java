@@ -53,8 +53,9 @@ public class SessionServiceImpl implements SessionService {
 
 	@Override
 	public boolean validateToken(String token) {
-		if (sessionMapper.getSessionByAccessToken(token) == null)
+		if (sessionMapper.getSessionByAccessToken(token) == null) {
 			return false;
+		}
 		Instant lastAccess = sessionMapper.getSessionByAccessToken(token).getLast_access().toInstant();
 		Instant now_time = Instant.now();
 		if (TimeUnit.MINUTES.toChronoUnit().between(lastAccess, now_time) > SESSION_TIMEOUT) {

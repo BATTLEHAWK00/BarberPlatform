@@ -9,7 +9,7 @@
 		<result property="lastOrderID" column="last_order"/>
 		<result property="isSuperAdmin" column="is_superadmin"/>
 		<result property="openId" column="openid"/>
-		<association property="lastOrder" column="last_order" select="dao.OrderMapper.getOrderByOrderID"/>
+		<association property="lastOrder" column="last_order" select="cn.battlehawk233.barberplatform.dao.OrderMapper.getOrderByOrderID"/>
 	</resultMap>
 	<insert id="registerAdmin" parameterType="Admin" useGeneratedKeys="true" keyProperty="adminId">
 		INSERT INTO admins

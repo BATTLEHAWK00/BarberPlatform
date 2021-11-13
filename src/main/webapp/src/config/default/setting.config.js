@@ -15,9 +15,7 @@ const setting = {
   //默认的接口地址 如果是开发环境和生产环境走vab-mock-server，当然你也可以选择自己配置成需要的接口地址
   //'/api/',
   baseURL:
-    process.env.NODE_ENV === 'development'
-      ? 'http://localhost:8080/BarberPlatform_war/'
-      : './',
+    process.env.NODE_ENV === 'development' ? 'http://localhost:8080/' : './',
   // process.env.NODE_ENV === 'development' ? 'http://localhost:8080/BarberPlatform/' : 'mock-server',
   //标题 （包括初次加载雪花屏的标题 页面的标题 浏览器的标题）
   title: '理发店管理系统',

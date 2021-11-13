@@ -28,22 +28,14 @@
         <a-button type="primary" @click="onEditUser(record)">编辑</a-button>
       </template>
     </a-table>
-    <edit-user-modal
-      v-model:showModal="modal.show"
-      :user-data="modal.userData"
-    />
   </div>
 </template>
 
 <script>
   import { getList } from '@/api/user.js'
   import { filterTimeStamp } from '@/utils/filter.js'
-  import editUserModal from './components/editUserModal.vue'
 
   export default {
-    components: {
-      editUserModal,
-    },
     mounted() {
       getList().then((res) => {
         this.table.data = res.data

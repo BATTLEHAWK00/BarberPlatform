@@ -13,9 +13,9 @@
 		<result property="ownerId" column="ownerid"/>
 		<result property="createTime" column="create_time"/>
 		<result property="actualPayment" column="actual_payment"/>
-		<association property="user" column="ownerid" select="dao.UserMapper.getUserByID"/>
-		<association property="sponsor" column="sponsorid" select="dao.AdminMapper.getAdminByID"/>
-		<collection property="orderItemList" column="oid" ofType="OrderItem" select="getOrderItemList"/>
+		<association property="user" column="ownerid" select="cn.battlehawk233.barberplatform.dao.UserMapper.getUserByID"/>
+		<association property="sponsor" column="sponsorid" select="cn.battlehawk233.barberplatform.dao.AdminMapper.getAdminByID"/>
+		<collection property="orderItemList" column="oid" ofType="OrderItem" select="cn.battlehawk233.barberplatform.dao.OrderMapper.getOrderItemList"/>
 	</resultMap>
 	<resultMap id="orderItemMap" type="OrderItem">
 		<id property="orderId" column="oid"/>
