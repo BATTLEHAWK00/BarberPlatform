@@ -38,11 +38,7 @@
         </div>
       </a-col>
     </a-row>
-    <div class="login-container-tips">
-      基于vue{{ dependencies['vue'] }}
-      + ant-design-vue
-      {{ dependencies['ant-design-vue'] }}开发
-    </div>
+    <div class="login-container-tips">理发店管理系统</div>
   </div>
 </template>
 <script>

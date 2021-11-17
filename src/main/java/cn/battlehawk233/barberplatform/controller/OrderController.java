@@ -10,9 +10,9 @@ import cn.battlehawk233.barberplatform.service.OrderService;
 import java.util.List;
 
 @AllArgsConstructor
-@CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
 @RequestMapping("/order")
+@CrossOrigin(origins = "*", maxAge = 3600)
 public class OrderController {
     private final OrderService orderService;
 

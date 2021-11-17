@@ -1,9 +1,13 @@
 package cn.battlehawk233.barberplatform;
 
 import cn.battlehawk233.barberplatform.pojo.Token;
+import lombok.AllArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.ApplicationArguments;
+import org.springframework.boot.ApplicationRunner;
+import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.ServletContextAware;
 import cn.battlehawk233.barberplatform.service.SessionService;
@@ -11,15 +15,11 @@ import cn.battlehawk233.barberplatform.service.SessionService;
 import javax.servlet.ServletContext;
 
 @Component
-public class ApplicationInitializer implements ServletContextAware {
+@AllArgsConstructor
+@Order(1)
+public class ApplicationInitializer implements ApplicationRunner {
     private static final Logger logger = LoggerFactory.getLogger(ApplicationInitializer.class);
-
     private final SessionService sessionService;
-
-    @Autowired
-    public ApplicationInitializer(SessionService sessionService) {
-        this.sessionService = sessionService;
-    }
 
     private void clearOldSessions() {
         logger.info("Clean Sessions...");
@@ -34,7 +34,7 @@ public class ApplicationInitializer implements ServletContextAware {
     }
 
     @Override
-    public void setServletContext(ServletContext servletContext) {
+    public void run(ApplicationArguments args) throws Exception {
         clearOldSessions();
     }
 }

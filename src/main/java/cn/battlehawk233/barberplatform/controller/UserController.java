@@ -13,9 +13,9 @@ import java.util.List;
 import java.util.logging.Logger;
 
 @AllArgsConstructor
-@CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
 @RequestMapping("/user")
+@CrossOrigin(origins = "*", maxAge = 3600)
 public class UserController {
 	final Logger logger = Logger.getLogger("UserController");
 

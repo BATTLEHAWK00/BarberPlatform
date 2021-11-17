@@ -11,9 +11,9 @@ import java.math.BigDecimal;
 import java.util.List;
 
 @AllArgsConstructor
-@CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
 @RequestMapping("/barberitem")
+@CrossOrigin(origins = "*", maxAge = 3600)
 public class BarberItemController {
     private final BarberItemService barberItemService;
 

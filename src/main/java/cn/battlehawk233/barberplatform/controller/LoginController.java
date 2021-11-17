@@ -14,9 +14,9 @@ import java.util.HashMap;
 import java.util.Map;
 
 @AllArgsConstructor
-@CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
 @RequestMapping("/admin")
+@CrossOrigin(origins = "*", maxAge = 3600)
 public class LoginController {
     private final SessionService sessionService;
     private final AdminService adminService;

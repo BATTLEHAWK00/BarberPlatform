@@ -10,9 +10,9 @@ import cn.battlehawk233.barberplatform.service.AdminService;
 import java.util.List;
 
 @AllArgsConstructor
-@CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
 @RequestMapping("/admin")
+@CrossOrigin(origins = "*", maxAge = 3600)
 public class AdminController {
 	private final AdminService adminService;
 
