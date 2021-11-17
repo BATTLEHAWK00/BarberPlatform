@@ -3,6 +3,8 @@ package cn.battlehawk233.barberplatform;
 import cn.battlehawk233.barberplatform.exceptions.BackendException;
 import cn.battlehawk233.barberplatform.exceptions.IllegalRequestException;
 import cn.battlehawk233.barberplatform.exceptions.InternalException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.HttpRequestMethodNotSupportedException;
 import org.springframework.web.bind.MissingRequestHeaderException;
@@ -16,6 +18,8 @@ import org.springframework.web.servlet.view.json.MappingJackson2JsonView;
 
 @ControllerAdvice
 public class JsonExceptionHandler {
+    private static final Logger logger = LoggerFactory.getLogger(JsonExceptionHandler.class);
+
     @ExceptionHandler
     public ModelAndView HandleError(BackendException exception) {
         if (exception instanceof InternalException) {
@@ -42,6 +46,7 @@ public class JsonExceptionHandler {
             return HandleError(new IllegalRequestException(exception.getMessage()));
         }
         exception.printStackTrace();
+        logger.error(String.format("Exception occurred: %s", exception.getMessage()));
         return HandleError(new InternalException("内部错误!"));
     }
 }

@@ -2,6 +2,8 @@ package cn.battlehawk233.barberplatform;
 
 
 import cn.battlehawk233.barberplatform.bean.Response;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.core.MethodParameter;
 import org.springframework.http.MediaType;
 import org.springframework.http.server.ServerHttpRequest;

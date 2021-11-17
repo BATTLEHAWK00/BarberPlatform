@@ -1,8 +1,8 @@
 package cn.battlehawk233.barberplatform;
 
 import cn.battlehawk233.barberplatform.pojo.Token;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.ServletContextAware;
@@ -12,7 +12,7 @@ import javax.servlet.ServletContext;
 
 @Component
 public class ApplicationInitializer implements ServletContextAware {
-    private final Logger logger = LogManager.getLogger(ApplicationInitializer.class);
+    private static final Logger logger = LoggerFactory.getLogger(ApplicationInitializer.class);
 
     private final SessionService sessionService;
 
