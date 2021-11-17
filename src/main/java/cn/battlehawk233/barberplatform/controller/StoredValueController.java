@@ -1,11 +1,13 @@
 package cn.battlehawk233.barberplatform.controller;
 
 import cn.battlehawk233.barberplatform.bean.Response;
+import cn.battlehawk233.barberplatform.pojo.StoredValueLog;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import cn.battlehawk233.barberplatform.service.StoredValueService;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
@@ -19,37 +21,31 @@ public class StoredValueController {
     }
 
     @RequestMapping(value = "/log/list", method = {RequestMethod.GET})
-    public Response getStoredValueList() {
-        Response response = new Response();
-        response.setData(storedValueService.getLogList());
-        return response;
+    public List<StoredValueLog> getStoredValueList() {
+        return storedValueService.getLogList();
     }
 
     @RequestMapping(value = "/log/list/uid/{uid}", method = {RequestMethod.GET})
-    public Response getStoredValueListByUser(@PathVariable("uid") int uid) {
-        Response response = new Response();
-        response.setData(storedValueService.getLogListByUser(uid));
-        return response;
+    public List<StoredValueLog> getStoredValueListByUser(@PathVariable("uid") int uid) {
+        return storedValueService.getLogListByUser(uid);
     }
 
     @RequestMapping(value = "/uid/{uid}/recharge", method = {RequestMethod.PUT, RequestMethod.GET, RequestMethod.POST})
-    public Response rechargeValue(@PathVariable("uid") int uid,
+    public boolean rechargeValue(@PathVariable("uid") int uid,
                                   @RequestParam("value") BigDecimal value,
                                   @RequestParam("type") int type,
                                   @RequestParam(value = "remark", required = false) String remark
     ) {
-        Response response = new Response();
         storedValueService.recharge(uid, value, type, remark);
-        return response;
+        return true;
     }
 
     @RequestMapping(value = "/uid/{uid}/cost", method = {RequestMethod.PUT, RequestMethod.GET})
-    public Response costValue(@PathVariable("uid") int uid,
+    public boolean costValue(@PathVariable("uid") int uid,
                               @RequestParam("value") BigDecimal value,
                               @RequestParam(value = "remark", required = false) String remark
     ) {
-        Response response = new Response();
         storedValueService.costValue(uid, value, remark);
-        return response;
+        return true;
     }
 }

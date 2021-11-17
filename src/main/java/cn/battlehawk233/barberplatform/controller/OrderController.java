@@ -1,11 +1,12 @@
 package cn.battlehawk233.barberplatform.controller;
 
-import cn.battlehawk233.barberplatform.bean.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import cn.battlehawk233.barberplatform.pojo.Order;
 import cn.battlehawk233.barberplatform.pojo.OrderItem;
 import cn.battlehawk233.barberplatform.service.OrderService;
+
+import java.util.List;
 
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
@@ -19,7 +20,7 @@ public class OrderController {
     }
 
     @RequestMapping(value = "/create", method = {RequestMethod.GET, RequestMethod.POST})
-    public Response createOrder(
+    public boolean createOrder(
             @RequestParam("sponsorid") int sponsorid,
             @RequestParam("ownerid") int ownerid,
             @RequestParam(value = "remark", required = false) String remark
@@ -29,11 +30,11 @@ public class OrderController {
         order.setOwnerId(ownerid);
         order.setRemark(remark);
         orderService.createOrder(order);
-        return new Response();
+        return true;
     }
 
     @RequestMapping(value = "/id/{oid}/item", method = {RequestMethod.POST})
-    public Response addItem(@PathVariable("oid") int oid,
+    public boolean addItem(@PathVariable("oid") int oid,
                             @RequestParam("itemid") int itemid,
                             @RequestParam("amount") int amount,
                             @RequestParam("sponsorid") int sponsorid,
@@ -46,52 +47,44 @@ public class OrderController {
         orderItem.setAmount(amount);
         orderItem.setRemark(remark);
         orderService.addItem(orderItem);
-        return new Response();
+        return true;
     }
 
     @RequestMapping(value = "/id/{oid}/item/{id}", method = {RequestMethod.DELETE})
-    public Response delelteItem(@PathVariable("oid") int oid,
+    public boolean delelteItem(@PathVariable("oid") int oid,
                                 @PathVariable("id") int id
     ) {
         orderService.deleteItem(oid, id);
-        return new Response();
+        return true;
     }
 
     @RequestMapping(value = "/id/{oid}/item/{id}", method = {RequestMethod.PUT})
-    public Response updateItemAmount(@PathVariable("oid") int oid,
+    public boolean updateItemAmount(@PathVariable("oid") int oid,
                                      @PathVariable("id") int id,
                                      @RequestParam("amount") int amount
     ) {
         orderService.updateItemAmount(oid, id, amount);
-        return new Response();
+        return true;
     }
 
     @RequestMapping(value = "/id/{oid}", method = {RequestMethod.GET})
-    public Response getOrderByID(@PathVariable("oid") int oid) {
-        Response response = new Response();
-        response.setData(orderService.getOrderByID(oid));
-        return response;
+    public Order getOrderByID(@PathVariable("oid") int oid) {
+        return orderService.getOrderByID(oid);
     }
 
     @RequestMapping(value = "/list/uid/{uid}", method = {RequestMethod.GET})
-    public Response getOrderListByUID(@PathVariable("uid") int uid) {
-        Response response = new Response();
-        response.setData(orderService.getOrderListByUser(uid));
-        return response;
+    public List<Order> getOrderListByUID(@PathVariable("uid") int uid) {
+        return orderService.getOrderListByUser(uid);
     }
 
 
     @RequestMapping(value = "/list", method = {RequestMethod.GET})
-    public Response getOrderList() {
-        Response response = new Response();
-        response.setData(orderService.getOrderList());
-        return response;
+    public List<Order> getOrderList() {
+        return orderService.getOrderList();
     }
 
     @RequestMapping(value = "/lastorder", method = {RequestMethod.GET})
-    public Response getLastOrder() {
-        Response response = new Response();
-        response.setData(orderService.getOrderByID(orderService.getLastOrder()));
-        return response;
+    public Order getLastOrder() {
+        return orderService.getOrderByID(orderService.getLastOrder());
     }
 }

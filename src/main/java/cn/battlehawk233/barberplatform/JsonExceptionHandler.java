@@ -1,4 +1,4 @@
-package cn.battlehawk233.barberplatform.controller;
+package cn.battlehawk233.barberplatform;
 
 import cn.battlehawk233.barberplatform.exceptions.BackendException;
 import cn.battlehawk233.barberplatform.exceptions.IllegalRequestException;
@@ -30,16 +30,17 @@ public class JsonExceptionHandler {
 
     @ExceptionHandler
     public ModelAndView HandleError(Exception exception) {
-        if (exception instanceof MethodArgumentTypeMismatchException)
+        if (exception instanceof MethodArgumentTypeMismatchException) {
             return HandleError(new IllegalRequestException(exception.getMessage()));
-        else if (exception instanceof MissingServletRequestParameterException)
+        } else if (exception instanceof MissingServletRequestParameterException) {
             return HandleError(new IllegalRequestException(exception.getMessage()));
-        else if (exception instanceof NoHandlerFoundException)
+        } else if (exception instanceof NoHandlerFoundException) {
             return HandleError(new IllegalRequestException(exception.getMessage(), 404));
-        else if (exception instanceof HttpRequestMethodNotSupportedException)
+        } else if (exception instanceof HttpRequestMethodNotSupportedException) {
             return HandleError(new IllegalRequestException(exception.getMessage(), 403));
-        else if (exception instanceof MissingRequestHeaderException)
+        } else if (exception instanceof MissingRequestHeaderException) {
             return HandleError(new IllegalRequestException(exception.getMessage()));
+        }
         exception.printStackTrace();
         return HandleError(new InternalException("内部错误!"));
     }

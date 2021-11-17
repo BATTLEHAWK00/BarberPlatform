@@ -1,4 +1,4 @@
-package cn.battlehawk233.barberplatform.controller;
+package cn.battlehawk233.barberplatform;
 
 import cn.battlehawk233.barberplatform.pojo.Token;
 import org.apache.logging.log4j.LogManager;

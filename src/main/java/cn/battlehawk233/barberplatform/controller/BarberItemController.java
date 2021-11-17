@@ -7,6 +7,7 @@ import cn.battlehawk233.barberplatform.pojo.BarberItem;
 import cn.battlehawk233.barberplatform.service.BarberItemService;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
@@ -20,35 +21,31 @@ public class BarberItemController {
     }
 
     @RequestMapping("/list")
-    public Response getItemList() {
-        Response response = new Response();
-        response.setData(barberItemService.getItemList());
-        return response;
+    public List<BarberItem> getItemList() {
+        return barberItemService.getItemList();
     }
 
     @RequestMapping(value = "/", method = {RequestMethod.POST})
-    public Response addItem(
+    public boolean addItem(
             @RequestParam("name") String name,
             @RequestParam("price") BigDecimal price,
             @RequestParam(value = "img", required = false) String img,
             @RequestParam(value = "remark", required = false) String remark
     ) {
-        Response response = new Response();
         BarberItem barberItem = new BarberItem();
         barberItem.setName(name);
         barberItem.setPrice(price);
         barberItem.setImg(img);
         barberItem.setRemark(remark);
         barberItemService.addItem(barberItem);
-        return response;
+        return true;
     }
 
     @RequestMapping(value = "/id/{id}", method = {RequestMethod.DELETE})
-    public Response deleteItem(
+    public boolean deleteItem(
             @PathVariable("id") int id
     ) {
-        Response response = new Response();
         barberItemService.deleteItem(id);
-        return response;
+        return true;
     }
 }

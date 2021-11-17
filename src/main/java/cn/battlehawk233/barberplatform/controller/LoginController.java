@@ -26,34 +26,34 @@ public class LoginController {
     }
 
     @RequestMapping(value = "/login", method = {RequestMethod.POST})
-    public Response handleLogin(@RequestParam("username") String username,
+    public Map<String, String> handleLogin(@RequestParam("username") String username,
                                 @RequestParam("password") String passwd
     ) {
         Map<String, String> mp = new HashMap<>();
         String token = sessionService.Login(username, passwd);
         mp.put("accessToken", token);
-        return new Response(mp);
+        return mp;
     }
 
     @RequestMapping(value = "/userInfo", method = {RequestMethod.GET, RequestMethod.POST})
-    public Response userInfo(@RequestHeader("accessToken") String accessToken) {
+    public userInfo userInfo(@RequestHeader("accessToken") String accessToken) {
         userInfo userInfo = new userInfo();
         userInfo.setRoles(new String[]{"admin"});
         userInfo.setAbility(new String[]{"READ", "WRITE", "DELETE"});
         Token token = sessionService.getSessionByToken(accessToken);
         Admin admin = adminService.getAdminByID(token.getAdminid());
         userInfo.setUsername(admin.getName());
-        return new Response(userInfo);
+        return userInfo;
     }
 
     @RequestMapping("/logout")
-    public Response LogOut(@RequestHeader("accessToken") String accessToken) {
+    public boolean LogOut(@RequestHeader("accessToken") String accessToken) {
         sessionService.Logout(accessToken);
-        return new Response();
+        return true;
     }
 
     @RequestMapping("/register")
-    public Response Register(
+    public boolean Register(
             @RequestParam("username") String username,
             @RequestParam("passwd") String passwd,
             @RequestParam("phone") String phone,
@@ -65,6 +65,6 @@ public class LoginController {
         admin.setPhone(phone);
         admin.setRemark(remark);
         adminService.createAdmin(admin);
-        return new Response();
+        return true;
     }
 }

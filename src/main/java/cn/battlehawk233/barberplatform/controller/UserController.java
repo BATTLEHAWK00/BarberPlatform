@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import cn.battlehawk233.barberplatform.service.UserService;
 
 import java.util.Date;
+import java.util.List;
 import java.util.logging.Logger;
 
 @CrossOrigin(origins = "*", maxAge = 3600)
@@ -24,7 +25,7 @@ public class UserController {
 	}
 
 	@RequestMapping(value = "/register", method = {RequestMethod.GET, RequestMethod.POST})
-	public Response RegisterUser(
+	public boolean RegisterUser(
 			@RequestParam("username") String username,
 			@RequestParam("passwd") String passwd,
 			@RequestParam("phone") String phone,
@@ -32,7 +33,6 @@ public class UserController {
 			@RequestParam(value = "remark", required = false) String remark
 	) {
 		logger.info("用户注册:" + username);
-		Response response = new Response();
 		User user = new User();
 		user.setUsername(username);
 		user.setPasswd(passwd);
@@ -40,70 +40,40 @@ public class UserController {
 		user.setRemark(remark);
 		user.setGender(gender);
 		userService.registerUser(user);
-		return response;
+		return true;
 	}
 
 	@RequestMapping(value = "/id/{uid}/passwd", method = {RequestMethod.PUT, RequestMethod.GET})
-	public Response updatePasswd(@PathVariable("uid") int uid,
+	public boolean updatePasswd(@PathVariable("uid") int uid,
 	                             @RequestParam("passwd") String passwd
 	) {
-		Response response = new Response();
 		userService.updatePasswd(uid, passwd);
-		return response;
-	}
-
-	@RequestMapping(value = "/id/{uid}/remark", method = {RequestMethod.PUT, RequestMethod.GET})
-	public Response updateRemark(@PathVariable("uid") int uid,
-	                             @RequestParam("remark") String remark
-	) {
-		Response response = new Response();
-		userService.updateRemark(uid, remark);
-		return response;
-	}
-
-	@RequestMapping(value = "/id/{uid}/phone", method = {RequestMethod.PUT, RequestMethod.GET})
-	public Response updatePhone(@PathVariable("uid") int uid,
-	                            @RequestParam("phone") String phone
-	) {
-		Response response = new Response();
-		userService.updatePhone(uid, phone);
-		return response;
-	}
-
-	@RequestMapping(value = "/id/{uid}/birthdate", method = {RequestMethod.PUT, RequestMethod.GET})
-	public Response updateBirthDate(@PathVariable("uid") int uid,
-	                                @RequestParam("date") Date date
-	) {
-		Response response = new Response();
-		userService.updateBirthDate(uid, date);
-		return response;
+		return true;
 	}
 
 	@RequestMapping(value = "/list", method = {RequestMethod.GET})
-	public Response getUserList() {
-		Response response = new Response();
-		response.setData(userService.getUserList());
-		return response;
+	public List<User> getUserList() {
+		return userService.getUserList();
 	}
 
 	@RequestMapping(value = "/id/{uid}", method = {RequestMethod.DELETE})
-	public Response deleteUser(@PathVariable("uid") int uid) {
+	public boolean deleteUser(@PathVariable("uid") int uid) {
 		userService.deleteUser(uid);
-		return new Response();
+		return true;
 	}
 
 	@RequestMapping(value = "/id/{uid}/passwd/verify", method = {RequestMethod.GET, RequestMethod.POST})
-	public Response verifyPasswd(@PathVariable("uid") int uid,
+	public boolean verifyPasswd(@PathVariable("uid") int uid,
 	                             @RequestParam("passwd") String passwd
 	) {
 		if (!userService.verifyPasswd(uid, passwd)) {
 			throw new ServiceException("密码错误!", 400);
 		}
-		return new Response();
+		return true;
 	}
 
 	@RequestMapping(value = "/id/{userid}/update", method = {RequestMethod.POST})
-	public Response updateUser(
+	public boolean updateUser(
 			@PathVariable("userid") int userid,
 			@RequestParam(value = "name", required = false) String name,
 			@RequestParam(value = "gender", required = false) Integer gender,
@@ -120,6 +90,6 @@ public class UserController {
 		user.setPasswd(passwd);
 		user.setBirthDate(birthdate == null ? null : new Date(Long.parseLong(birthdate)));
 		userService.updateUser(user);
-		return new Response();
+		return true;
 	}
 }

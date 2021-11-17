@@ -6,6 +6,8 @@ import org.springframework.web.bind.annotation.*;
 import cn.battlehawk233.barberplatform.pojo.Admin;
 import cn.battlehawk233.barberplatform.service.AdminService;
 
+import java.util.List;
+
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
 @RequestMapping("/admin")
@@ -18,14 +20,12 @@ public class AdminController {
 	}
 
 	@RequestMapping("/list")
-	public Response getList() {
-		Response response = new Response();
-		response.setData(adminService.getAdminList());
-		return response;
+	public List<Admin> getList() {
+		return adminService.getAdminList();
 	}
 
 	@RequestMapping(value = "/id/{adminid}/update", method = {RequestMethod.POST})
-	public Response updateAdmin(
+	public boolean updateAdmin(
 			@PathVariable("adminid") int adminid,
 			@RequestParam(value = "name", required = false) String name,
 			@RequestParam(value = "gender", required = false) Integer gender,
@@ -41,6 +41,6 @@ public class AdminController {
 		admin.setRemark(remark);
 		admin.setPasswd(passwd);
 		adminService.updateAdmin(admin);
-		return new Response();
+		return true;
 	}
 }
