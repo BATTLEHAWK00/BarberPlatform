@@ -1,5 +1,6 @@
 package cn.battlehawk233.barberplatform.controller;
 
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import cn.battlehawk233.barberplatform.pojo.Order;
@@ -8,16 +9,12 @@ import cn.battlehawk233.barberplatform.service.OrderService;
 
 import java.util.List;
 
+@AllArgsConstructor
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
 @RequestMapping("/order")
 public class OrderController {
     private final OrderService orderService;
-
-    @Autowired
-    public OrderController(OrderService orderService) {
-        this.orderService = orderService;
-    }
 
     @RequestMapping(value = "/create", method = {RequestMethod.GET, RequestMethod.POST})
     public boolean createOrder(

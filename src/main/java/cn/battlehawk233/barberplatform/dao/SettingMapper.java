@@ -10,4 +10,6 @@ public interface SettingMapper {
     void setValue(@Param("key") String key, @Param("value") String value);
 
     Map<String, String> getSettings();
+
+    void deleteSetting(@Param("key") String key);
 }

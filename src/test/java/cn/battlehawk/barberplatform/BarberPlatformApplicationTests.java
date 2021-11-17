@@ -1,6 +1,8 @@
 package cn.battlehawk.barberplatform;
 
 import cn.battlehawk233.barberplatform.dao.SettingMapper;
+import org.assertj.core.api.Fail;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringBootConfiguration;
@@ -13,8 +15,8 @@ class BarberPlatformApplicationTests {
 
     @Test
     public void testSettingMapper() {
-        settingsMapper.setValue("asd", "111");
-        System.out.println(settingsMapper.getValue("asd"));
-        System.out.println(settingsMapper.getSettings());
+        settingsMapper.setValue("JUnitTest", "JUnitTestValue");
+        Assertions.assertEquals("JUnitTestValue", settingsMapper.getValue("JUnitTest"));
+        settingsMapper.deleteSetting("JUnitTest");
     }
 }

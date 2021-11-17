@@ -1,6 +1,7 @@
 package cn.battlehawk233.barberplatform.controller;
 
 import cn.battlehawk233.barberplatform.bean.Response;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import cn.battlehawk233.barberplatform.pojo.Admin;
@@ -8,16 +9,12 @@ import cn.battlehawk233.barberplatform.service.AdminService;
 
 import java.util.List;
 
+@AllArgsConstructor
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
 @RequestMapping("/admin")
 public class AdminController {
 	private final AdminService adminService;
-
-	@Autowired
-	public AdminController(AdminService adminService) {
-		this.adminService = adminService;
-	}
 
 	@RequestMapping("/list")
 	public List<Admin> getList() {

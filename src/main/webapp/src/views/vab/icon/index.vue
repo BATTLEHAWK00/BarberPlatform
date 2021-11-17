@@ -97,7 +97,6 @@
     .ant-alert {
       margin-bottom: @vab-padding;
     }
-
     .ant-card-body {
       position: relative;
       display: flex;

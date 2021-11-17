@@ -26,7 +26,7 @@ export const asyncRoutes = [
     component: Layout,
     redirect: '/index',
     meta: {
-      title: '概览',
+      title: '首页',
       icon: 'home-4-line',
       affix: true,
     },
@@ -36,208 +36,9 @@ export const asyncRoutes = [
         name: 'Index',
         component: () => import('@/views/index'),
         meta: {
-          title: '概览',
+          title: '首页',
           icon: 'home-4-line',
           affix: true,
-        },
-      },
-    ],
-  },
-  {
-    path: '/user',
-    component: Layout,
-    meta: {
-      title: '会员管理',
-      icon: 'user-line',
-      affix: false,
-    },
-    children: [
-      {
-        path: 'register',
-        name: 'user-register',
-        component: () => import('@/views/usermanage/register'),
-        meta: {
-          title: '注册会员',
-          icon: 'user-add-fill',
-          affix: false,
-        },
-      },
-      {
-        path: 'list',
-        name: 'user-list',
-        component: () => import('@/views/usermanage/list'),
-        meta: {
-          title: '会员列表',
-          icon: 'file-user-fill',
-          affix: false,
-        },
-      },
-      {
-        path: 'storedvalue',
-        name: 'user-storedvalue',
-        component: () => import('@/views/usermanage/storedvalue'),
-        meta: {
-          title: '储值管理',
-          icon: 'money-cny-circle-fill',
-          affix: false,
-        },
-      },
-      {
-        path: 'storedvaluelog',
-        name: 'user-storedvaluelog',
-        component: () => import('@/views/usermanage/storedvaluelog'),
-        meta: {
-          title: '储值日志',
-          icon: 'checkbox-multiple-fill',
-          affix: false,
-        },
-      },
-    ],
-  },
-  {
-    path: '/order',
-    component: Layout,
-    meta: {
-      title: '订单管理',
-      icon: 'file-list-2-line',
-      affix: false,
-    },
-    children: [
-      {
-        path: 'create',
-        name: 'order-create',
-        component: () => import('@/views/ordermanage/create'),
-        meta: {
-          title: '创建订单',
-          icon: 'menu-add-fill',
-          affix: false,
-        },
-      },
-      {
-        path: 'list',
-        name: 'order-list',
-        component: () => import('@/views/ordermanage/list'),
-        meta: {
-          title: '订单列表',
-          icon: 'list-check',
-          affix: false,
-        },
-      },
-    ],
-  },
-  {
-    path: '/barberitem',
-    component: Layout,
-    meta: {
-      title: '消费项目管理',
-      icon: 'stack-line',
-      affix: false,
-    },
-    children: [
-      {
-        path: 'create',
-        name: 'barberitem-create',
-        component: () => import('@/views/barberitem/create'),
-        meta: {
-          title: '创建项目',
-          icon: 'menu-add-fill',
-          affix: false,
-        },
-      },
-      {
-        path: 'list',
-        name: 'barberitem-list',
-        component: () => import('@/views/barberitem/list'),
-        meta: {
-          title: '项目列表',
-          icon: 'list-check',
-          affix: false,
-        },
-      },
-    ],
-  },
-  {
-    path: '/reservation',
-    component: Layout,
-    meta: {
-      title: '预约管理',
-      icon: 'calendar-check-line',
-      affix: false,
-      badgeCount: 1,
-    },
-    children: [
-      {
-        path: 'list',
-        name: 'reservation-list',
-        component: () => import('@/views/reservation'),
-        meta: {
-          title: '预约列表',
-          icon: 'calendar-check-line',
-          affix: false,
-          badgeCount: 1,
-        },
-      },
-    ],
-  },
-  {
-    path: '/finance',
-    component: Layout,
-    meta: {
-      title: '财务报表',
-      icon: 'file-list-3-line',
-      affix: false,
-    },
-    children: [
-      {
-        path: 'finance',
-        name: 'finance-charts',
-        component: () => import('@/views/finance/charts'),
-        meta: {
-          title: '图表概览',
-          icon: 'line-chart-line',
-          affix: false,
-        },
-      },
-      {
-        path: 'list',
-        name: 'finance-list',
-        component: () => import('@/views/ordermanage/list'),
-        meta: {
-          title: '报表详情',
-          icon: 'database-fill',
-          affix: false,
-        },
-      },
-    ],
-  },
-  {
-    path: '/admin',
-    component: Layout,
-    redirect: 'admin/list',
-    meta: {
-      title: '管理员',
-      icon: 'admin-line',
-      affix: false,
-    },
-    children: [
-      {
-        path: 'register',
-        name: 'admin-register',
-        component: () => import('@/views/adminmanage/register'),
-        meta: {
-          title: '注册管理员',
-          icon: 'user-add-fill',
-          affix: false,
-        },
-      },
-      {
-        path: 'list',
-        name: 'admin-list',
-        component: () => import('@/views/adminmanage/list'),
-        meta: {
-          title: '管理员列表',
-          icon: 'file-user-fill',
-          affix: false,
         },
       },
     ],
@@ -247,7 +48,6 @@ export const asyncRoutes = [
     component: Layout,
     redirect: '/vab/table',
     alwaysShow: true,
-    hidden: true,
     meta: {
       title: '组件',
       icon: 'apps-line',
@@ -274,10 +74,29 @@ export const asyncRoutes = [
     ],
   },
   {
+    path: '/test',
+    component: Layout,
+    redirect: '/test/test',
+    meta: {
+      title: '动态路由测试',
+      icon: 'test-tube-line',
+    },
+    children: [
+      {
+        path: 'test',
+        name: 'Test',
+        component: () => import('@/views/test'),
+        meta: {
+          title: '动态路由测试',
+          icon: 'test-tube-line',
+        },
+      },
+    ],
+  },
+  {
     path: '/error',
     name: 'Error',
     component: Layout,
-    hidden: true,
     redirect: '/error/403',
     meta: {
       title: '错误页',

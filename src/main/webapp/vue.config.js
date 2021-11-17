@@ -1,4 +1,5 @@
 /**
+ * @author chuzhixin 1204505056@qq.com
  * @description vue.config.js全局配置
  */
 const path = require('path')
@@ -14,13 +15,11 @@ const {
   devPort,
   providePlugin,
   build7z,
+  donation,
 } = require('./src/config')
+const { webpackBarName, webpackBanner, donationConsole } = require('vab-config')
 
-const { webpackBarName, webpackBanner } = {
-  webpackBarName: 'barber-platform-app',
-  webpackBanner: '',
-}
-
+if (donation) donationConsole()
 const { version, author } = require('./package.json')
 const Webpack = require('webpack')
 const WebpackBar = require('webpackbar')
@@ -28,8 +27,8 @@ const FileManagerPlugin = require('filemanager-webpack-plugin')
 const dayjs = require('dayjs')
 const date = dayjs().format('YYYY_M_D')
 const time = dayjs().format('YYYY-M-D HH:mm:ss')
-process.env.VUE_APP_TITLE = title || '理发店管理系统'
-process.env.VUE_APP_AUTHOR = author || 'BATTLEHAWK'
+process.env.VUE_APP_TITLE = title || 'vue-admin-beautiful'
+process.env.VUE_APP_AUTHOR = author || 'chuzhixin'
 process.env.VUE_APP_UPDATE_TIME = time
 process.env.VUE_APP_VERSION = version
 
@@ -37,13 +36,13 @@ const resolve = (dir) => {
   return path.join(__dirname, dir)
 }
 
-// const mockServer = () => {
-//   if (process.env.NODE_ENV === 'development') {
-//     return require('./mock/mockServer.js')
-//   } else {
-//     return ''
-//   }
-// }
+const mockServer = () => {
+  if (process.env.NODE_ENV === 'development') {
+    return require('./mock/mockServer.js')
+  } else {
+    return ''
+  }
+}
 
 module.exports = {
   publicPath,
@@ -62,12 +61,12 @@ module.exports = {
     },
     // 注释掉的地方是前端配置代理访问后端的示例
     // proxy: {
-    //   '/*': {
+    //   [baseURL]: {
     //     target: `http://你的后端接口地址`,
     //     ws: true,
     //     changeOrigin: true,
     //     pathRewrite: {
-    //       ['^/' + baseURL]: '',
+    //       ["^/" + baseURL]: "",
     //     },
     //   },
     // },
@@ -108,31 +107,31 @@ module.exports = {
     })
 
     config.when(process.env.NODE_ENV !== 'development', (config) => {
-      // config.performance.set('hints', false)
+      config.performance.set('hints', false)
       config.devtool('none')
-      // config.optimization.splitChunks({
-      //   chunks: 'all',
-      //   cacheGroups: {
-      //     // libs: {
-      //     //   name: 'vue-admin-beautiful-libs',
-      //     //   test: /[\\/]node_modules[\\/]/,
-      //     //   priority: 10,
-      //     //   chunks: 'initial',
-      //     // },
-      //   },
-      // })
-      // config
-      //   .plugin('banner')
-      //   .use(Webpack.BannerPlugin, [`${webpackBanner}${time}`])
-      //   .end()
-      config.module
-        .rule('images')
-        .use('image-webpack-loader')
-        .loader('image-webpack-loader')
-        .options({
-          bypassOnDebug: true,
-        })
+      config.optimization.splitChunks({
+        chunks: 'all',
+        cacheGroups: {
+          libs: {
+            name: 'vue-admin-beautiful-libs',
+            test: /[\\/]node_modules[\\/]/,
+            priority: 10,
+            chunks: 'initial',
+          },
+        },
+      })
+      config
+        .plugin('banner')
+        .use(Webpack.BannerPlugin, [`${webpackBanner}${time}`])
         .end()
+      // config.module
+      //   .rule('images')
+      //   .use('image-webpack-loader')
+      //   .loader('image-webpack-loader')
+      //   .options({
+      //     bypassOnDebug: true,
+      //   })
+      //   .end()
     })
 
     if (build7z) {

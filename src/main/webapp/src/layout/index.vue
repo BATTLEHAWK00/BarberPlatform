@@ -59,7 +59,7 @@
   import VabTabs from './vab-tabs'
   import VabContent from './vab-content'
   import { mapActions, mapGetters } from 'vuex'
-  import { MenuFoldOutlined, MenuUnfoldOutlined } from '@ant-design/icons-vue'
+  import { MenuUnfoldOutlined, MenuFoldOutlined } from '@ant-design/icons-vue'
 
   export default {
     components: {
@@ -134,22 +134,18 @@
       left: 0;
       height: 100vh;
       overflow: auto;
-
       .vab-menu {
         height: calc(100vh - @vab-header-height);
       }
     }
-
     .vab-layout {
       padding-left: 250px;
       transition: all 0.2s;
     }
-
     .vab-mobile-layout {
       padding-left: 0;
       transition: all 0.2s;
     }
-
     .vab-collapse {
       .vab-logo .anticon + span {
         display: inline-block;
@@ -157,13 +153,11 @@
         opacity: 0;
         transition: all 0.2s;
       }
-
       & + .vab-layout {
         padding-left: 81px;
         transition: all 0.2s;
       }
     }
-
     .vab-mask {
       position: fixed;
       top: 0;
@@ -177,23 +171,19 @@
       background: #000;
       opacity: 0.5;
     }
-
     .vab-mobile {
       position: fixed !important;
       z-index: 999;
-
       &.vab-collapse {
         width: 0 !important;
         min-width: 0 !important;
         max-width: 0 !important;
-
         * {
           display: none !important;
           width: 0 !important;
           min-width: 0 !important;
           max-width: 0 !important;
         }
-
         .ant-menu-item,
         .ant-menu-submenu {
           display: none !important;
@@ -201,24 +191,20 @@
           min-width: 0 !important;
           max-width: 0 !important;
         }
-
         & + .vab-layout {
           padding-left: 0px !important;
           transition: all 0.2s;
         }
       }
     }
-
     .vab-header {
       padding: 0;
       background: #fff;
-
       .ant-col + .ant-col {
         display: flex;
         justify-content: flex-end;
         padding: 0 @vab-padding;
       }
-
       .trigger {
         height: @vab-header-height;
         padding: 0 @vab-padding;
@@ -226,7 +212,6 @@
         line-height: @vab-header-height;
         cursor: pointer;
         transition: color 0.3s;
-
         &:hover {
           color: #1890ff;
         }

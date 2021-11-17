@@ -1,6 +1,7 @@
 package cn.battlehawk233.barberplatform.controller;
 
 import cn.battlehawk233.barberplatform.bean.Response;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import cn.battlehawk233.barberplatform.pojo.BarberItem;
@@ -9,16 +10,12 @@ import cn.battlehawk233.barberplatform.service.BarberItemService;
 import java.math.BigDecimal;
 import java.util.List;
 
+@AllArgsConstructor
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
 @RequestMapping("/barberitem")
 public class BarberItemController {
     private final BarberItemService barberItemService;
-
-    @Autowired
-    public BarberItemController(BarberItemService barberItemService) {
-        this.barberItemService = barberItemService;
-    }
 
     @RequestMapping("/list")
     public List<BarberItem> getItemList() {

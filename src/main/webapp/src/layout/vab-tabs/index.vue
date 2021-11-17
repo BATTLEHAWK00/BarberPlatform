@@ -46,7 +46,6 @@
 <script>
   import { DownOutlined } from '@ant-design/icons-vue'
   import { mapActions, mapGetters } from 'vuex'
-
   export default {
     name: 'VabTabs',
     components: {
@@ -180,22 +179,18 @@
   .vab-tabs {
     padding: 0 @vab-margin;
     background: #ffffff;
-
     &-left-panel {
       float: left;
       width: calc(100% - 52px - @vab-margin - @vab-margin);
     }
-
     &-right-panel {
       float: left;
       width: 52px;
     }
-
     .ant-tabs {
       &-bar {
         margin: 0 !important;
       }
-
       &-tab {
         height: 32px !important;
         margin-right: 5px !important;
@@ -203,16 +198,13 @@
         background: #ffffff !important;
         border: 1px solid #dedede !important;
       }
-
       &-tab-prev,
       &-tab-next {
         height: 32px !important;
         line-height: 32px !important;
       }
-
       &-tab-active {
         border: 1px solid #1890ff !important;
-
         .ant-tabs-close-x {
           color: #1890ff !important;
         }

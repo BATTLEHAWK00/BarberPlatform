@@ -6,6 +6,7 @@ import cn.battlehawk233.barberplatform.exceptions.ServiceException;
 import cn.battlehawk233.barberplatform.pojo.Token;
 import cn.battlehawk233.barberplatform.service.SessionService;
 import cn.battlehawk233.barberplatform.util.SecurityUtil;
+import cn.hutool.core.util.IdUtil;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -28,7 +29,7 @@ public class SessionServiceImpl implements SessionService {
 		if (admin == null) {
 			throw new ServiceException("用户不存在!", 400);
 		}
-		String passwd_md5 = SecurityUtil.getInstance().getSaltMD5(passwd, admin.getSalt());
+		String passwd_md5 = SecurityUtil.getInstance().getDigestWithSalt(passwd, admin.getSalt());
 		if (adminMapper.getAdminByToken(username, passwd_md5) == null) {
 			throw new ServiceException("用户名或密码错误!", 400);
 		}
@@ -37,7 +38,7 @@ public class SessionServiceImpl implements SessionService {
 			sessionMapper.deleteSession(token.getAccess_token());
 		}
 		Token token = new Token();
-		token.setAccess_token(SecurityUtil.getInstance().genUUID32());
+		token.setAccess_token(IdUtil.simpleUUID());
 		token.setAdminid(admin.getAdminId());
 		sessionMapper.createSession(token);
 		return token.getAccess_token();

@@ -2,6 +2,7 @@ package cn.battlehawk233.barberplatform.controller;
 
 import cn.battlehawk233.barberplatform.bean.Response;
 import cn.battlehawk233.barberplatform.pojo.StoredValueLog;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import cn.battlehawk233.barberplatform.service.StoredValueService;
@@ -9,16 +10,12 @@ import cn.battlehawk233.barberplatform.service.StoredValueService;
 import java.math.BigDecimal;
 import java.util.List;
 
+@AllArgsConstructor
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
 @RequestMapping("/storedvalue")
 public class StoredValueController {
     private final StoredValueService storedValueService;
-
-    @Autowired
-    public StoredValueController(StoredValueService storedValueService) {
-        this.storedValueService = storedValueService;
-    }
 
     @RequestMapping(value = "/log/list", method = {RequestMethod.GET})
     public List<StoredValueLog> getStoredValueList() {

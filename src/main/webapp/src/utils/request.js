@@ -16,7 +16,7 @@ import { message } from 'ant-design-vue'
 let loadingInstance
 
 /**
-
+ * @author chuzhixin 1204505056@qq.com
  * @description 处理code异常
  * @param {*} code
  * @param {*} msg
@@ -28,7 +28,7 @@ const handleCode = (code, msg) => {
       store.dispatch('user/resetAll').catch(() => {})
       break
     case 403:
-      router.push({ path: '/403' }).catch(() => {})
+      router.push({ path: '/401' }).catch(() => {})
       break
     default:
       message.error(msg || `后端接口${code}异常`)
@@ -37,7 +37,7 @@ const handleCode = (code, msg) => {
 }
 
 /**
-
+ * @author chuzhixin 1204505056@qq.com
  * @description axios初始化
  */
 const instance = axios.create({
@@ -49,6 +49,7 @@ const instance = axios.create({
 })
 
 /**
+ * @author chuzhixin 1204505056@qq.com
  * @description axios请求拦截器
  */
 instance.interceptors.request.use(
@@ -72,7 +73,7 @@ instance.interceptors.request.use(
 )
 
 /**
-
+ * @author chuzhixin 1204505056@qq.com
  * @description axios响应拦截器
  */
 instance.interceptors.response.use(
@@ -91,31 +92,31 @@ instance.interceptors.response.use(
     } else {
       handleCode(code, msg)
       return Promise.reject(
-        '请求异常拦截:' + JSON.stringify({ url: config.url, code, msg }) ||
-          'Error'
+        'vue-admin-beautiful请求异常拦截:' +
+          JSON.stringify({ url: config.url, code, msg }) || 'Error'
       )
     }
   },
   (error) => {
     if (loadingInstance) loadingInstance.close()
-    const { response, msg } = error
+    const { response, message } = error
     if (error.response && error.response.data) {
       const { status, data } = response
-      handleCode(status, data.msg || msg)
+      handleCode(status, data.msg || message)
       return Promise.reject(error)
     } else {
-      let msg = error.message
-      if (msg === 'Network Error') {
-        msg = '后端接口连接异常'
+      let { message } = error
+      if (message === 'Network Error') {
+        message = '后端接口连接异常'
       }
-      if (msg.includes('timeout')) {
-        msg = '后端接口请求超时'
+      if (message.includes('timeout')) {
+        message = '后端接口请求超时'
       }
-      if (msg.includes('Request failed with status code')) {
-        const code = msg.substr(msg.length - 3)
-        msg = '后端接口' + code + '异常'
+      if (message.includes('Request failed with status code')) {
+        const code = message.substr(message.length - 3)
+        message = '后端接口' + code + '异常'
       }
-      message.error(msg || `后端接口未知异常`)
+      message.error(message || `后端接口未知异常`)
       return Promise.reject(error)
     }
   }

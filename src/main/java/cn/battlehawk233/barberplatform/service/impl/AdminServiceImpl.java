@@ -1,10 +1,10 @@
 package cn.battlehawk233.barberplatform.service.impl;
 
-import cn.battlehawk233.barberplatform.ApplicationInitializer;
 import cn.battlehawk233.barberplatform.dao.AdminMapper;
 import cn.battlehawk233.barberplatform.exceptions.ServiceException;
 import cn.battlehawk233.barberplatform.service.AdminService;
 import cn.battlehawk233.barberplatform.util.SecurityUtil;
+import cn.hutool.core.util.IdUtil;
 import lombok.AllArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -40,8 +40,8 @@ public class AdminServiceImpl implements AdminService {
         } else if (adminMapper.getAdminByPhone(admin.getPhone()) != null) {
             throw new ServiceException("已有相同手机号注册!", 400);
         }
-        admin.setSalt(SecurityUtil.getInstance().genUUID8());
-        admin.setPasswd(SecurityUtil.instance.getSaltMD5(admin.getPasswd(), admin.getSalt()));
+        admin.setSalt(IdUtil.simpleUUID());
+        admin.setPasswd(SecurityUtil.instance.getDigestWithSalt(admin.getPasswd(), admin.getSalt()));
         adminMapper.registerAdmin(admin);
     }
 
@@ -62,8 +62,8 @@ public class AdminServiceImpl implements AdminService {
 
     @Override
     public void updatePasswd(int id, String passwd) {
-        String salt = SecurityUtil.getInstance().genUUID8();
-        adminMapper.updatePasswd(id, SecurityUtil.getInstance().getSaltMD5(passwd, salt), salt);
+        String salt = IdUtil.fastUUID();
+        adminMapper.updatePasswd(id, SecurityUtil.getInstance().getDigestWithSalt(passwd, salt), salt);
     }
 
     @Override

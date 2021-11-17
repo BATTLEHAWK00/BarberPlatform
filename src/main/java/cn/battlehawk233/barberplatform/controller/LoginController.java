@@ -3,6 +3,7 @@ package cn.battlehawk233.barberplatform.controller;
 import cn.battlehawk233.barberplatform.bean.Response;
 import cn.battlehawk233.barberplatform.pojo.Token;
 import cn.battlehawk233.barberplatform.pojo.userInfo;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import cn.battlehawk233.barberplatform.pojo.Admin;
@@ -12,18 +13,13 @@ import cn.battlehawk233.barberplatform.service.SessionService;
 import java.util.HashMap;
 import java.util.Map;
 
+@AllArgsConstructor
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
 @RequestMapping("/admin")
 public class LoginController {
     private final SessionService sessionService;
     private final AdminService adminService;
-
-    @Autowired
-    public LoginController(SessionService sessionService, AdminService adminService) {
-        this.sessionService = sessionService;
-        this.adminService = adminService;
-    }
 
     @RequestMapping(value = "/login", method = {RequestMethod.POST})
     public Map<String, String> handleLogin(@RequestParam("username") String username,

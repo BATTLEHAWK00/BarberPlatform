@@ -1,25 +1,25 @@
 <template>
   <div class="vab-logo">
-    <a href="/">
-      <vab-icon v-if="logo" :icon="logo"></vab-icon>
-      <span class="anticon"></span>
-      <span>{{ title }}</span>
-    </a>
+    <vab-icon v-if="logo" :icon="logo"></vab-icon>
+    <span class="anticon"></span>
+    <span>{{ title }}</span>
   </div>
 </template>
 
 <script>
+  import { computed } from 'vue'
   import VabIcon from '@/layout/vab-icon'
-  import { mapGetters } from 'vuex'
+  import { useStore } from 'vuex'
 
   export default {
     name: 'VabLogo',
     components: { VabIcon },
-    computed: {
-      ...mapGetters({
-        logo: 'settings/logo',
-        title: 'settings/title',
-      }),
+    setup() {
+      const store = useStore()
+      return {
+        logo: computed(() => store.getters['settings/logo']),
+        title: computed(() => store.getters['settings/title']),
+      }
     },
   }
 </script>
@@ -36,9 +36,5 @@
     color: #fff;
     text-overflow: ellipsis;
     white-space: nowrap;
-  }
-
-  .vab-logo h3 {
-    color: #fff;
   }
 </style>

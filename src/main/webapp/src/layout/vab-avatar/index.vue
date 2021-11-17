@@ -2,13 +2,13 @@
   <div class="vab-avatar">
     <a-dropdown>
       <span class="ant-dropdown-link">
-        <!-- <vab-remix-icon icon-class="account-circle-fill"></vab-remix-icon> -->
-        <!-- <a-avatar :src="avatar" /> -->
+        <a-avatar :src="avatar" />
         {{ username }}
         <DownOutlined />
       </span>
       <template v-slot:overlay>
         <a-menu>
+          <a-menu-item @click="buy">付费版购买</a-menu-item>
           <a-menu-item @click="logout">退出登录</a-menu-item>
         </a-menu>
       </template>
@@ -19,29 +19,39 @@
 <script>
   import { recordRoute } from '@/config'
   import { DownOutlined } from '@ant-design/icons-vue'
-  import { message } from 'ant-design-vue'
-  import { mapGetters } from 'vuex'
+
+  import { useStore } from 'vuex'
+  import { computed } from 'vue'
+  import { useRoute, useRouter } from 'vue-router'
 
   export default {
     name: 'VabAvatar',
     components: { DownOutlined },
-    computed: {
-      ...mapGetters({
-        avatar: 'user/avatar',
-        username: 'user/username',
-      }),
-    },
-    methods: {
-      async logout() {
-        await this.$store.dispatch('user/logout')
+    setup() {
+      const store = useStore()
+      const router = useRouter()
+      const route = useRoute()
+
+      const logout = async () => {
+        await store.dispatch('user/logout')
         if (recordRoute) {
-          const fullPath = this.$route.fullPath
-          this.$router.push(`/login?redirect=${fullPath}`)
+          const fullPath = route.fullPath
+          router.push(`/login?redirect=${fullPath}`)
         } else {
-          this.$router.push('/login')
+          router.push('/login')
         }
-        message.success('注销成功!')
-      },
+      }
+
+      const buy = () => {
+        window.open('http://vue-admin-beautiful.com/authorization/')
+      }
+
+      return {
+        avatar: computed(() => store.getters['user/avatar']),
+        username: computed(() => store.getters['user/username']),
+        logout,
+        buy,
+      }
     },
   }
 </script>

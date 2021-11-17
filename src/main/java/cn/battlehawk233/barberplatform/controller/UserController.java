@@ -3,6 +3,7 @@ package cn.battlehawk233.barberplatform.controller;
 import cn.battlehawk233.barberplatform.bean.Response;
 import cn.battlehawk233.barberplatform.exceptions.ServiceException;
 import cn.battlehawk233.barberplatform.pojo.User;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import cn.battlehawk233.barberplatform.service.UserService;
@@ -11,6 +12,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.logging.Logger;
 
+@AllArgsConstructor
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
 @RequestMapping("/user")
@@ -18,11 +20,6 @@ public class UserController {
 	final Logger logger = Logger.getLogger("UserController");
 
 	private final UserService userService;
-
-	@Autowired
-	public UserController(UserService userService) {
-		this.userService = userService;
-	}
 
 	@RequestMapping(value = "/register", method = {RequestMethod.GET, RequestMethod.POST})
 	public boolean RegisterUser(

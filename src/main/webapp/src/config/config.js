@@ -5,5 +5,6 @@ const config = {
   layout: 'vertical',
   donation: false,
   templateFolder: 'project',
+  title: '理发店管理系统',
 }
 module.exports = config

@@ -18,7 +18,6 @@
 <script>
   import MenuItem from './components/MenuItem'
   import Submenu from './components/Submenu'
-
   export default {
     name: 'VabMenu',
     components: { MenuItem, Submenu },

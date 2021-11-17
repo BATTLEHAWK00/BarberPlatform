@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div id="vue-admin-beautiful">
     <a-config-provider :locale="locale">
       <router-view />
     </a-config-provider>

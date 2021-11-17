@@ -8,6 +8,11 @@
         VALUES (#{key}, #{value})
         ON DUPLICATE KEY UPDATE `value` = #{value};
     </insert>
+    <delete id="deleteSetting">
+        DELETE
+        FROM settings
+        WHERE `key` = #{key}
+    </delete>
     <select id="getValue" resultType="java.lang.String">
         SELECT value
         FROM settings

@@ -5,8 +5,8 @@ import cn.battlehawk233.barberplatform.exceptions.ServiceException;
 import cn.battlehawk233.barberplatform.pojo.User;
 import cn.battlehawk233.barberplatform.service.UserService;
 import cn.battlehawk233.barberplatform.util.SecurityUtil;
-import cn.hutool.Hutool;
-import cn.hutool.core.util.HashUtil;
+import cn.hutool.core.util.IdUtil;
+import cn.hutool.crypto.SecureUtil;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -22,10 +22,11 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public void registerUser(User user) throws ServiceException {
-		user.setSalt(SecurityUtil.getInstance().genUUID8());
-		user.setPasswd(SecurityUtil.getInstance().getSaltMD5(user.getPasswd(), user.getSalt()));
-		if (userMapper.getUserByPhone(user.getPhone()) != null)
+		user.setSalt(IdUtil.simpleUUID());
+		user.setPasswd(SecurityUtil.getInstance().getDigestWithSalt(user.getPasswd(), user.getSalt()));
+		if (userMapper.getUserByPhone(user.getPhone()) != null) {
 			throw new ServiceException("手机号已被注册!", 400);
+		}
 		userMapper.registerUser(user);
 	}
 
@@ -34,12 +35,12 @@ public class UserServiceImpl implements UserService {
 		User user = userMapper.getUserByID(id);
 		if (user == null) {
 			throw new ServiceException("用户不存在!", 400);
-		} else if (user.getPasswd().equals(SecurityUtil.getInstance().getSaltMD5(passwd, user.getSalt()))) {
+		} else if (user.getPasswd().equals(SecurityUtil.getInstance().getDigestWithSalt(passwd, user.getSalt()))) {
 			throw new ServiceException("新密码和原密码相同!", 400);
 		}
-		String salt = SecurityUtil.getInstance().genUUID8();
-		String passwd_md5 = SecurityUtil.getInstance().getSaltMD5(passwd, salt);
-		userMapper.updatePasswd(id, passwd_md5, salt);
+		String salt = IdUtil.simpleUUID();
+		String passwdMd5 = SecurityUtil.getInstance().getDigestWithSalt(passwd, salt);
+		userMapper.updatePasswd(id, passwdMd5, salt);
 	}
 
 	@Override
@@ -93,16 +94,21 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public void updateUser(User user) {
 		userMapper.updateGender(user.getUserId(), user.getGender());
-		if (user.getUsername() != null)
+		if (user.getUsername() != null) {
 			userMapper.updateName(user.getUserId(), user.getUsername());
-		if (user.getPhone() != null)
+		}
+		if (user.getPhone() != null) {
 			userMapper.updatePhone(user.getUserId(), user.getPhone());
-		if (user.getRemark() != null)
+		}
+		if (user.getRemark() != null) {
 			userMapper.updateRemark(user.getUserId(), user.getRemark());
-		if (user.getPasswd() != null)
+		}
+		if (user.getPasswd() != null) {
 			updatePasswd(user.getUserId(), user.getPasswd());
-		if (user.getBirthDate() != null)
+		}
+		if (user.getBirthDate() != null) {
 			userMapper.updateBirthDate(user.getUserId(), user.getBirthDate());
+		}
 	}
 
 	@Override
@@ -124,7 +130,7 @@ public class UserServiceImpl implements UserService {
 			throw new ServiceException("用户不存在!", 400);
 		}
 		Map<String, Object> mp = userMapper.getUserPasswd(id);
-		String passwd_md5 = SecurityUtil.getInstance().getSaltMD5(passwd, (String) mp.get("salt"));
+		String passwd_md5 = SecurityUtil.getInstance().getDigestWithSalt(passwd, (String) mp.get("salt"));
 		return passwd_md5.equals(mp.get("passwd"));
 	}
 
