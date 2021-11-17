@@ -5,6 +5,8 @@ import cn.battlehawk233.barberplatform.exceptions.ServiceException;
 import cn.battlehawk233.barberplatform.pojo.User;
 import cn.battlehawk233.barberplatform.service.UserService;
 import cn.battlehawk233.barberplatform.util.SecurityUtil;
+import cn.hutool.Hutool;
+import cn.hutool.core.util.HashUtil;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -27,6 +29,7 @@ public class UserServiceImpl implements UserService {
 		userMapper.registerUser(user);
 	}
 
+	@Override
 	public void updatePasswd(int id, String passwd) throws ServiceException {
 		User user = userMapper.getUserByID(id);
 		if (user == null) {
