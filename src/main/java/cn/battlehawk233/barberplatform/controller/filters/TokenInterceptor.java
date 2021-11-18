@@ -1,18 +1,22 @@
 package cn.battlehawk233.barberplatform.controller.filters;
 
 import cn.battlehawk233.barberplatform.bean.Response;
+import cn.battlehawk233.barberplatform.dao.TokenMapper;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.AllArgsConstructor;
+import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;
-import cn.battlehawk233.barberplatform.service.SessionService;
+import cn.battlehawk233.barberplatform.service.TokenService;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 @AllArgsConstructor
+@Component
 public class TokenInterceptor implements HandlerInterceptor {
-    private SessionService sessionService;
+    private TokenService tokenService;
+    private TokenMapper tokenMapper;
 
     @Override
     public boolean preHandle(HttpServletRequest req, HttpServletResponse resp, Object handler) throws Exception {
@@ -20,11 +24,13 @@ public class TokenInterceptor implements HandlerInterceptor {
             return true;
         }
         String token = req.getHeader("accessToken");
-        if (token == null || !sessionService.validateToken(token)) {
+        if (token == null || !tokenService.validateToken(token)) {
             return401(resp);
             return false;
         }
-        sessionService.updateLastAccessTime(token);
+        tokenService.updateLastAccessTime(token);
+        tokenMapper.updateIp(token, req.getRemoteAddr());
+        tokenMapper.updateUa(token, req.getRemoteUser());
         return true;
     }
 

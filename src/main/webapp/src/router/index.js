@@ -19,6 +19,15 @@ export const constantRoutes = [
     component: () => import('@/views/404'),
     hidden: true,
   },
+  {
+    name: 'firstTime',
+    path: '/firstTime',
+    component: () => import('@/views/firstTime'),
+    hidden: true,
+    meta: {
+      title: '初始化',
+    },
+  },
 ]
 export const asyncRoutes = [
   {

@@ -45,6 +45,7 @@
   import { dependencies, devDependencies } from '*/package.json'
   import { mapActions, mapGetters } from 'vuex'
   import { UserOutlined, LockOutlined } from '@ant-design/icons-vue'
+  import { firstTime } from '@/api/system'
 
   export default {
     name: 'Login',
@@ -77,12 +78,12 @@
         immediate: true,
       },
     },
-    mounted() {
+    async mounted() {
       this.form.username = 'admin'
       this.form.password = '123456'
-      /*  setTimeout(() => {
-        this.handleSubmit()
-      }, 3000) */
+      if ((await firstTime()).data === 'Yes') {
+        this.$router.push('/firstTime')
+      }
     },
     methods: {
       ...mapActions({
@@ -106,6 +107,7 @@
     height: 100vh;
     background: url('~@/assets/login_images/login_background.png');
     background-size: cover;
+
     &-form {
       width: calc(100% - 40px);
       height: 380px;
@@ -118,15 +120,18 @@
       border-radius: 10px;
       box-shadow: 0 2px 8px 0 rgba(7, 17, 27, 0.06);
     }
+
     &-hello {
       font-size: 32px;
       color: #fff;
     }
+
     &-title {
       margin-bottom: 30px;
       font-size: 20px;
       color: #fff;
     }
+
     &-tips {
       position: fixed;
       bottom: @vab-margin;
@@ -135,13 +140,16 @@
       color: rgba(255, 255, 255, 0.856);
       text-align: center;
     }
+
     .ant-col {
       width: 100%;
       padding: 0 10px 0 10px;
     }
+
     .ant-input {
       height: 35px;
     }
+
     .ant-btn {
       width: 100%;
       height: 45px;

@@ -29,7 +29,18 @@ export function getUserInfo(accessToken) {
 
 export function logout() {
   return request({
-    url: '/logout',
+    url: '/system/logout',
     method: 'post',
+  })
+}
+
+export function setLoginToken(username, password) {
+  return request({
+    url: '/system/setLoginToken',
+    method: 'post',
+    data: {
+      username: username,
+      password: password,
+    },
   })
 }

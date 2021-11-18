@@ -11,8 +11,12 @@ import java.util.Date;
 @Data
 @ToString
 public class Token implements Serializable {
-    String access_token;
-    int adminid;
-    Date login_time;
-    Date last_access;
+    String accessToken;
+    Date loginTime;
+    Date lastAccess;
+    String loginIp;
+    String accessIp;
+    String createUa;
+    String updateUa;
+    String createHost;
 }
