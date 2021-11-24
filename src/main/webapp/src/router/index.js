@@ -53,6 +53,38 @@ export const asyncRoutes = [
     ],
   },
   {
+    path: '/staff',
+    component: Layout,
+    redirect: '/staff',
+    meta: {
+      title: '管理员管理',
+      icon: 'home-4-line',
+      affix: true,
+    },
+    children: [
+      {
+        path: 'staffManage',
+        name: 'staffManage',
+        component: () => import('@/views/pages/AdminManage'),
+        meta: {
+          title: '管理员列表',
+          icon: 'home-4-line',
+          affix: true,
+        },
+      },
+      {
+        path: 'staffStatistics',
+        name: 'staffStatistics',
+        component: () => import('@/views/pages/AdminManage'),
+        meta: {
+          title: '管理员列表',
+          icon: 'home-4-line',
+          affix: true,
+        },
+      },
+    ],
+  },
+  {
     path: '/vab',
     component: Layout,
     redirect: '/vab/table',
