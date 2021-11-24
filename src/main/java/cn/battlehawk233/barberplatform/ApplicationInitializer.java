@@ -18,7 +18,7 @@ public class ApplicationInitializer implements ApplicationRunner {
     private final TokenService tokenService;
 
     private void clearOldSessions() {
-        logger.info("Clean Sessions...");
+        logger.info("Clean Tokens...");
         int cnt = 0;
         for (Token token : tokenService.getSessionList()) {
             if (!tokenService.validateToken(token.getAccessToken())) {
@@ -26,7 +26,7 @@ public class ApplicationInitializer implements ApplicationRunner {
                 cnt++;
             }
         }
-        logger.info(String.format("Clean Sessions Complete(%d cleared out).\n", cnt));
+        logger.info(String.format("Clean Tokens Complete(%d cleared out).\n", cnt));
     }
 
     @Override

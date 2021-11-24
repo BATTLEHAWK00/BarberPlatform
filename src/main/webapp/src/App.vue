@@ -7,6 +7,7 @@
 </template>
 <script>
   import zhCN from 'ant-design-vue/es/locale/zh_CN'
+  import websocket from '@/utils/websocket'
 
   export default {
     name: 'App',
@@ -14,6 +15,9 @@
       return {
         locale: zhCN,
       }
+    },
+    mounted() {
+      websocket.onMessage()
     },
   }
 </script>
