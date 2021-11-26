@@ -53,6 +53,11 @@ jobs:
           chmod 600 ~/.ssh/id_rsa
           chmod 700 ~/.ssh && chmod 700 ~/.ssh/*
           ls -l ~/.ssh/
+      - name: Download Artifact
+        uses: actions/download-artifact@v2
+        with:
+          name: agileconfig-ui
+          path: AgileConfig.Server.Apisite/wwwroot/ui
       - name: scp
         uses: garygrossgarten/github-action-scp@release
         with:
