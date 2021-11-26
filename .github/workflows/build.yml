@@ -11,9 +11,7 @@ on:
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
-
     steps:
     - uses: actions/checkout@v2
     - name: Set up JDK 11
@@ -38,3 +36,15 @@ jobs:
         key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
         restore-keys: |
           ${{ runner.os }}-node-
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: scp
+        uses: garygrossgarten/github-action-scp@release
+        with:
+          local: ./target/Barber-Platform.jar
+          remote: ${{ secrets.DEPLOY_PATH }}
+          host: ${{ secrets.SERVER_HOST }}
+          privateKey: ${{ secrets.ID_RSA }}
+          port: ${{ secrets.SERVER_PORT }}
