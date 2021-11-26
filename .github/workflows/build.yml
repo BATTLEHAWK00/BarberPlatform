@@ -57,7 +57,7 @@ jobs:
         uses: actions/download-artifact@v2
         with:
           name: Jar-Artifact
-          path: ./Barber-Platform.jar
+          path: ./target/Barber-Platform.jar
       - name: scp
         uses: garygrossgarten/github-action-scp@release
         with:
