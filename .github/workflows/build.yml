@@ -56,8 +56,8 @@ jobs:
       - name: Download Artifact
         uses: actions/download-artifact@v2
         with:
-          name: agileconfig-ui
-          path: AgileConfig.Server.Apisite/wwwroot/ui
+          name: Jar-Artifact
+          path: ./Barber-Platform.jar
       - name: scp
         uses: garygrossgarten/github-action-scp@release
         with:
