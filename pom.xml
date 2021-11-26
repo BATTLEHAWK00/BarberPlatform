@@ -91,6 +91,7 @@
     </dependencies>
 
     <build>
+        <finalName>Barber-Platform</finalName>
         <plugins>
             <plugin>
                 <groupId>com.github.eirslett</groupId>
