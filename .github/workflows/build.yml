@@ -47,9 +47,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Set Up SSH Environment
+        env:
+          private_key: ${{ secrets.ID_RSA }}
         run: |
           mkdir -p ~/.ssh/
-          echo "${{ secrets.ID_RSA }}" > ~/.ssh/id_rsa
+          echo "$private_key" > ~/.ssh/id_rsa
           chmod 600 ~/.ssh/id_rsa
           chmod 700 ~/.ssh && chmod 700 ~/.ssh/*
           ls -l ~/.ssh/
