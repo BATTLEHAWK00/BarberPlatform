@@ -123,7 +123,7 @@
                             <goal>npm</goal>
                         </goals>
                         <configuration>
-                            <arguments>ci --legacy-peer-deps</arguments>
+                            <arguments>i --legacy-peer-deps</arguments>
                         </configuration>
                     </execution>
                     <execution>
