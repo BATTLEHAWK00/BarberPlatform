@@ -40,6 +40,13 @@ jobs:
     needs: build
     runs-on: ubuntu-latest
     steps:
+      - name: Set Up SSH Environment
+        run: |
+          mkdir -p ~/.ssh/
+          echo "${{ secrets.ID_RSA }}" > ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
+          chmod 700 ~/.ssh && chmod 700 ~/.ssh/*
+          ls -l ~/.ssh/
       - name: scp
         uses: garygrossgarten/github-action-scp@release
         with:
