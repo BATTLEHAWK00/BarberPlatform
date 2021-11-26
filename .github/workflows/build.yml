@@ -67,11 +67,11 @@ jobs:
         uses: actions/download-artifact@v2
         with:
           name: Jar-Artifact
-          path: ./target/Barber-Platform.jar
+          path: ~/Barber-Platform.jar
       - name: scp
         uses: garygrossgarten/github-action-scp@release
         with:
-          local: ./target/Barber-Platform.jar
+          local: ~/Barber-Platform.jar
           remote: ${{ secrets.DEPLOY_PATH }}
           host: ${{ secrets.SERVER_HOST }}
           username: ${{ secrets.SERVER_USER }}
