@@ -68,6 +68,9 @@ jobs:
         with:
           name: Jar-Artifact
           path: ~/Barber-Platform.jar
+      - name: test
+        run: |
+          ls -l ~/
       - name: scp
         uses: garygrossgarten/github-action-scp@release
         with:
