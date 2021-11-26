@@ -5,9 +5,13 @@ let socket = null
 
 function startWebSocket() {
   socket = new WebSocket(wsuri)
+  //监听消息接收事件
   socket.addEventListener('message', onMessage)
+  //监听WebSocket连接事件
   socket.addEventListener('open', onOpen)
+  //监听WebSocket异常事件
   socket.addEventListener('error', onError)
+  //监听WebSockt关闭事件
   socket.addEventListener('close', onClose)
 }
 
@@ -15,7 +19,7 @@ function sendHeartBeat() {
   setTimeout(() => {
     console.log(socket.readyState)
     socket.send('ping')
-  }, 1000)
+  }, 5000)
 }
 
 function onOpen() {
@@ -40,11 +44,12 @@ function onClose(e) {
   console.log('WebSocket disconnected.', e)
 }
 
+function getReadyState() {
+  return socket.readyState
+}
+
 startWebSocket()
 
 export default {
-  onMessage,
-  onOpen,
-  onError,
-  onClose,
+  getReadyState,
 }

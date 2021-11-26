@@ -7,3 +7,4 @@ import 'ant-design-vue/dist/antd.css'
 import '@/vab'
 
 createApp(App).use(store).use(router).use(Antd).mount('#app')
+require('@/utils/websocket')

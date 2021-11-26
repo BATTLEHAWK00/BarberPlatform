@@ -17,18 +17,18 @@ const {
   build7z,
   donation,
 } = require('./src/config')
-const { webpackBarName, webpackBanner, donationConsole } = require('vab-config')
+// const { webpackBarName, webpackBanner, donationConsole } = require('vab-config')
 
-if (donation) donationConsole()
-const { version, author } = require('./package.json')
+// if (donation) donationConsole()
+const { version } = require('./package.json')
 const Webpack = require('webpack')
 const WebpackBar = require('webpackbar')
 const FileManagerPlugin = require('filemanager-webpack-plugin')
 const dayjs = require('dayjs')
 const date = dayjs().format('YYYY_M_D')
 const time = dayjs().format('YYYY-M-D HH:mm:ss')
-process.env.VUE_APP_TITLE = title || 'vue-admin-beautiful'
-process.env.VUE_APP_AUTHOR = author || 'chuzhixin'
+process.env.VUE_APP_TITLE = 'barber-platform'
+process.env.VUE_APP_AUTHOR = 'battlehawk'
 process.env.VUE_APP_UPDATE_TIME = time
 process.env.VUE_APP_VERSION = version
 
@@ -83,7 +83,7 @@ module.exports = {
       plugins: [
         new Webpack.ProvidePlugin(providePlugin),
         new WebpackBar({
-          name: webpackBarName,
+          name: 'barber-platform',
         }),
       ],
     }
@@ -113,17 +113,17 @@ module.exports = {
         chunks: 'all',
         cacheGroups: {
           libs: {
-            name: 'vue-admin-beautiful-libs',
+            name: 'libs',
             test: /[\\/]node_modules[\\/]/,
             priority: 10,
             chunks: 'initial',
           },
         },
       })
-      config
-        .plugin('banner')
-        .use(Webpack.BannerPlugin, [`${webpackBanner}${time}`])
-        .end()
+      // config
+      //   .plugin('banner')
+      //   .use(Webpack.BannerPlugin, [`${webpackBanner}${time}`])
+      //   .end()
       // config.module
       //   .rule('images')
       //   .use('image-webpack-loader')
