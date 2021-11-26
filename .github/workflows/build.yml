@@ -37,7 +37,7 @@ jobs:
     - name: Cache node_modules repository
       uses: actions/cache@v2
       with:
-        path: ./src/webapp/node_modules
+        path: ./src/main/webapp/node_modules
         key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
         restore-keys: |
           ${{ runner.os }}-node-
