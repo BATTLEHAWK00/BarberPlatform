@@ -27,10 +27,17 @@ jobs:
         key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
         restore-keys: |
           ${{ runner.os }}-maven-
+#     - name: Cache npm download cache
+#       uses: actions/cache@v2
+#       with:
+#         path: ~/.npm
+#         key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+#         restore-keys: |
+#           ${{ runner.os }}-node-
     - name: Cache node_modules repository
       uses: actions/cache@v2
       with:
-        path: ~/.npm
+        path: ./node_modules
         key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
         restore-keys: |
           ${{ runner.os }}-node-
@@ -55,6 +62,7 @@ jobs:
           chmod 600 ~/.ssh/id_rsa
           chmod 700 ~/.ssh && chmod 700 ~/.ssh/*
           ls -l ~/.ssh/
+          ls -l ./
       - name: Download Artifact
         uses: actions/download-artifact@v2
         with:
