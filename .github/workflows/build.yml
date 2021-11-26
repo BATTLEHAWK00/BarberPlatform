@@ -66,5 +66,6 @@ jobs:
           local: ./target/Barber-Platform.jar
           remote: ${{ secrets.DEPLOY_PATH }}
           host: ${{ secrets.SERVER_HOST }}
+          username: ${{ secrets.SERVER_USER }}
           privateKey: ${{ secrets.ID_RSA }}
           port: ${{ secrets.SERVER_PORT }}
