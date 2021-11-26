@@ -53,30 +53,35 @@ jobs:
     needs: build
     runs-on: ubuntu-latest
     steps:
-      - name: Set Up SSH Environment
-        env:
-          private_key: ${{ secrets.ID_RSA }}
-        run: |
-          mkdir -p ~/.ssh/
-          echo "$private_key" > ~/.ssh/id_rsa
-          chmod 600 ~/.ssh/id_rsa
-          chmod 700 ~/.ssh && chmod 700 ~/.ssh/*
-          ls -l ~/.ssh/
-          ls -l ./
+      - uses: actions/checkout@v2
+        with:
+          ref: 'artifact'
       - name: Download Artifact
         uses: actions/download-artifact@v2
         with:
           name: Jar-Artifact
           path: Barber-Platform.jar
-      - name: test
-        run: |
-          ls -l ~/
-      - name: scp
-        uses: garygrossgarten/github-action-scp@release
-        with:
-          local: Barber-Platform.jar
-          remote: ${{ secrets.DEPLOY_PATH }}
-          host: ${{ secrets.SERVER_HOST }}
-          username: ${{ secrets.SERVER_USER }}
-          privateKey: ${{ secrets.ID_RSA }}
-          port: ${{ secrets.SERVER_PORT }}
+      - run: |
+          git config user.name github-actions
+          git config user.email github-actions@github.com
+          git add Barber-Platform.jar
+          git commit -m "commit artifacts"
+          git push
+#       - name: Set Up SSH Environment
+#         env:
+#           private_key: ${{ secrets.ID_RSA }}
+#         run: |
+#           mkdir -p ~/.ssh/
+#           echo "$private_key" > ~/.ssh/id_rsa
+#           chmod 600 ~/.ssh/id_rsa
+#           chmod 700 ~/.ssh && chmod 700 ~/.ssh/*
+#           ls -l ~/.ssh/
+#       - name: scp
+#         uses: garygrossgarten/github-action-scp@release
+#         with:
+#           local: Barber-Platform.jar
+#           remote: ${{ secrets.DEPLOY_PATH }}
+#           host: ${{ secrets.SERVER_HOST }}
+#           username: ${{ secrets.SERVER_USER }}
+#           privateKey: ${{ secrets.ID_RSA }}
+#           port: ${{ secrets.SERVER_PORT }}
