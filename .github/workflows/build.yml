@@ -45,13 +45,6 @@ jobs:
         key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
         restore-keys: |
           ${{ runner.os }}-maven-
-#     - name: Cache npm download cache
-#       uses: actions/cache@v2
-#       with:
-#         path: ~/.npm
-#         key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
-#         restore-keys: |
-#           ${{ runner.os }}-node-
     - name: Cache node_modules repository
       uses: actions/cache@v2
       with:
@@ -65,26 +58,17 @@ jobs:
       uses: actions/upload-artifact@v2
       with:
         name: Jar-Artifact
-        path: ./target/Barber-Platform.jar
-          
+        path: ./target/Barber-Platform.jar  
   deploy:
     needs: [test, build]
     runs-on: self-hosted
     steps:
       - name: Download Artifact
         uses: actions/download-artifact@v2
+        timeout-minutes: 4
         with:
           name: Jar-Artifact
           path: Barber-Platform.jar
-#       - name: Set Up SSH Environment
-#         env:
-#           private_key: ${{ secrets.ID_RSA }}
-#         run: |
-#           mkdir -p ~/.ssh/
-#           echo "$private_key" > ~/.ssh/id_rsa
-#           chmod 600 ~/.ssh/id_rsa
-#           chmod 700 ~/.ssh && chmod 700 ~/.ssh/*
-#           ls -l ~/.ssh/
       - name: Copy Artifact
         uses: garygrossgarten/github-action-scp@release
         with:
