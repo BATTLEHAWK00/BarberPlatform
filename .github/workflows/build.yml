@@ -80,15 +80,14 @@ jobs:
     needs: deploy
     runs-on: self-hosted
     steps:
-    - uses: appleboy/ssh-action@master
+    - uses: garygrossgarten/github-action-ssh@release
       env:
         workdir: ${{ secrets.DEPLOY_PATH }}
       with:
         host: ${{ secrets.SERVER_HOST }}
         username: ${{ secrets.SERVER_USER }}
-        key: ${{ secrets.ID_RSA }}
-        port: ${{ secrets.SERVER_PORT }}
-        script: |
+        privateKey: ${{ secrets.ID_RSA}}
+        command: |
           cd $workdir
-          ll -h
+          ls -lh
     
