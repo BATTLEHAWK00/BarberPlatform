@@ -88,6 +88,7 @@ jobs:
         username: ${{ secrets.SERVER_USER }}
         privateKey: ${{ secrets.ID_RSA}}
         command: |
+          echo $DEPLOY_DIR
           cd $DEPLOY_DIR
           ls -lh
           sudo docker rm -f cicd-barberplatform
