@@ -68,7 +68,7 @@ jobs:
         path: ./target/Barber-Platform.jar
           
   deploy:
-    needs: build
+    needs: [test, build]
     runs-on: self-hosted
     steps:
       - name: Download Artifact
