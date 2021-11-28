@@ -1,5 +1,5 @@
-const wsuri = `ws://localhost:8080/message`
-// const wsuri = `ws://${window.location.host}/message`
+// const wsuri = `ws://localhost:8080/message`
+const wsuri = `ws://${window.location.host}/message`
 
 let socket = null
 
