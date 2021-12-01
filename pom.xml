@@ -110,30 +110,30 @@
                         </configuration>
                     </execution>
                     <execution>
-                        <id>change npm mirror</id>
+                        <id>install yarn</id>
                         <goals>
                             <goal>npm</goal>
                         </goals>
                         <configuration>
-                            <arguments>config set registry http://registry.npm.taobao.org/</arguments>
+                            <arguments>install yarn --no-save</arguments>
                         </configuration>
                     </execution>
                     <execution>
-                        <id>npm install</id>
+                        <id>yarn install</id>
                         <goals>
-                            <goal>npm</goal>
+                            <goal>yarn</goal>
                         </goals>
                         <configuration>
-                            <arguments>i --legacy-peer-deps</arguments>
+                            <arguments>install</arguments>
                         </configuration>
                     </execution>
                     <execution>
-                        <id>npm build</id>
+                        <id>yarn build</id>
                         <goals>
-                            <goal>npm</goal>
+                            <goal>yarn</goal>
                         </goals>
                         <configuration>
-                            <arguments>run build</arguments>
+                            <arguments>build</arguments>
                         </configuration>
                     </execution>
                 </executions>
