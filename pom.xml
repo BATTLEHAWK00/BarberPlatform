@@ -115,7 +115,7 @@
                             <goal>npm</goal>
                         </goals>
                         <configuration>
-                            <arguments>install yarn --no-save</arguments>
+                            <arguments>install yarn -g</arguments>
                         </configuration>
                     </execution>
                     <execution>
