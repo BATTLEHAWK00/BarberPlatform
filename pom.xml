@@ -121,19 +121,19 @@
                     <execution>
                         <id>yarn install</id>
                         <goals>
-                            <goal>yarn</goal>
+                            <goal>npm</goal>
                         </goals>
                         <configuration>
-                            <arguments>install</arguments>
+                            <arguments>exec yarn</arguments>
                         </configuration>
                     </execution>
                     <execution>
                         <id>yarn build</id>
                         <goals>
-                            <goal>yarn</goal>
+                            <goal>npm</goal>
                         </goals>
                         <configuration>
-                            <arguments>build</arguments>
+                            <arguments>exec yarn build</arguments>
                         </configuration>
                     </execution>
                 </executions>
