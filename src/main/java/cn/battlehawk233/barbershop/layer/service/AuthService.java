@@ -46,6 +46,7 @@ public class AuthService {
         loginLog.setAdmin(admin);
         loginLogRepo.save(loginLog);
 
+
         logger.info("管理员登录：{}", admin.getName());
         return jwt;
     }

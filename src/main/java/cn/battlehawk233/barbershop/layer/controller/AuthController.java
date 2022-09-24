@@ -7,6 +7,7 @@ import cn.battlehawk233.barbershop.pojo.Response;
 import cn.battlehawk233.barbershop.layer.service.AuthService;
 import cn.battlehawk233.barbershop.layer.service.UserService;
 import lombok.AllArgsConstructor;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -30,5 +31,11 @@ public class AuthController {
     ) {
         var ip = req.getRemoteAddr();
         return Response.OK_WITH_DATA(authService.login(username, password, ip, ua));
+    }
+
+    @GetMapping("/test")
+    @PreAuthorize("hasAuthority('login')")
+    public Response<String> test() {
+        return Response.OK_WITH_DATA("test");
     }
 }
