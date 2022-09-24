@@ -1,4 +1,4 @@
-package cn.battlehawk233.barbershop.entity;
+package cn.battlehawk233.barbershop.layer.entity;
 
 import lombok.Data;
 

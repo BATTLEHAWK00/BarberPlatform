@@ -1,9 +1,8 @@
-package cn.battlehawk233.barbershop.entity;
+package cn.battlehawk233.barbershop.layer.entity;
 
 import lombok.Data;
 
 import javax.persistence.*;
-import java.util.List;
 import java.util.Set;
 
 @Entity

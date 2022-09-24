@@ -1,6 +1,6 @@
 package cn.battlehawk233.barbershop.layer.dao;
 
-import cn.battlehawk233.barbershop.entity.Admin;
+import cn.battlehawk233.barbershop.layer.entity.Admin;
 import org.springframework.data.repository.PagingAndSortingRepository;
 
 import java.util.List;

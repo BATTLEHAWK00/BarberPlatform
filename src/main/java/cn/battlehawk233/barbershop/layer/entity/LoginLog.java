@@ -1,4 +1,4 @@
-package cn.battlehawk233.barbershop.entity;
+package cn.battlehawk233.barbershop.layer.entity;
 
 import lombok.Data;
 import org.springframework.data.annotation.CreatedDate;
@@ -28,5 +28,6 @@ public class LoginLog {
     String loginUa;
 
     @Column(columnDefinition = "tinyint", nullable = false)
-    Integer loginType;
+    @Enumerated
+    LoginType loginType;
 }
