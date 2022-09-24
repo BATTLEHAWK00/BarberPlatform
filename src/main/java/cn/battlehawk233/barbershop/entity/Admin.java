@@ -1,5 +1,6 @@
 package cn.battlehawk233.barbershop.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 import org.hibernate.annotations.DynamicUpdate;
 
@@ -8,16 +9,16 @@ import java.util.Date;
 
 @Data
 @Entity
-@Table(name = "bs_admin")
 @DynamicUpdate
-public class Admin {
+public class Admin extends BaseEntityWithTime {
     @Id
     @GeneratedValue
-    Integer adminId;
+    Integer id;
 
     @Column(unique = true, nullable = false, length = 32)
     String name;
 
+    @JsonIgnore
     @Column(nullable = false, length = 64)
     String passwd;
 
@@ -31,8 +32,6 @@ public class Admin {
 
     @Column(columnDefinition = "tinyint")
     Integer gender;
-
-    Date regTime;
 
     Date lastLogin;
 }

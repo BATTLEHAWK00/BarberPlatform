@@ -1,9 +1,12 @@
-
 spring:
+  application:
+    name: BarberShop
   jpa:
     hibernate:
       ddl-auto: update
-    show-sql: true
+      naming:
+        physical-strategy: cn.battlehawk233.barbershop.config.NamingStrategy
+    #    show-sql: true
     database-platform: org.hibernate.dialect.MySQL8Dialect
   datasource:
     url: jdbc:mysql://sv.battlehawk233.cn:10036/barbershop

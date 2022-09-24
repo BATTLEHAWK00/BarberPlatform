@@ -1,21 +1,20 @@
 package cn.battlehawk233.barbershop.entity;
 
-import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Data;
-import lombok.ToString;
 
-import java.io.Serializable;
-import java.util.Date;
+import javax.persistence.*;
 
+@Entity
 @Data
-@ToString
-@JsonInclude(JsonInclude.Include.NON_NULL)
-public class OrderItem implements Serializable {
-    int orderId;
-    int itemId;
-    int sponsorId;
-    String itemName;
-    int amount;
+public class OrderItem extends BaseEntityWithTime {
+    @Id
+    @GeneratedValue
+    Integer id;
+
+    @ManyToOne
+    BarberItem item;
+
+    Integer amount;
+
     String remark;
-    Date addTime;
 }

@@ -1,6 +1,6 @@
 package cn.battlehawk233.barbershop.pojo;
 
-import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+import com.fasterxml.jackson.annotation.*;
 import lombok.Data;
 
 @Data
@@ -8,6 +8,7 @@ import lombok.Data;
 public class Response<T> {
     int code = 200;
     String msg = "OK";
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     T data;
 
     public Response(T data) {

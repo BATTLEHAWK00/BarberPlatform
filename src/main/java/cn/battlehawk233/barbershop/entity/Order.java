@@ -1,28 +1,31 @@
 package cn.battlehawk233.barbershop.entity;
 
-import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Data;
-import lombok.ToString;
-import org.hibernate.annotations.DynamicUpdate;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
-import java.io.Serializable;
-import java.math.BigDecimal;
-import java.util.Date;
+import javax.persistence.*;
 import java.util.List;
+import java.util.Set;
 
-@Table(name = "bs_order")
 @Entity
-@DynamicUpdate
 @Data
-public class Order {
+public class Order extends BaseEntityWithTime {
     @Id
     @GeneratedValue
-    int oid;
-    int sponsorId;
-    int ownerId;
-    int state;
+    Integer id;
+
+    @ManyToOne(optional = false)
+    @JoinColumn(name = "createdBy")
+    Admin createdBy;
+
+    @ManyToOne(optional = false)
+    @JoinColumn(name = "customerId")
+    Customer customer;
+
+    @OneToMany
+    Set<OrderItem> items;
+
+    @Enumerated
+    OrderStatus status;
+
+    String remark;
 }

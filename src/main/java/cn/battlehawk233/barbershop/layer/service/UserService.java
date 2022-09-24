@@ -1,4 +1,4 @@
-package cn.battlehawk233.barbershop.service;
+package cn.battlehawk233.barbershop.layer.service;
 
 import lombok.AllArgsConstructor;
 import org.slf4j.Logger;
