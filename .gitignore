@@ -31,6 +31,3 @@ build/
 
 ### VS Code ###
 .vscode/
-
-### 前端构建文件 ###
-**/src/main/resources/static
