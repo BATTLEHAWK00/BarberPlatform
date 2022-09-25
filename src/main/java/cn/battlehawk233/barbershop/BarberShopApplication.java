@@ -7,9 +7,7 @@ import org.springframework.web.socket.config.annotation.EnableWebSocket;
 @SpringBootApplication
 @EnableWebSocket
 public class BarberShopApplication {
-
     public static void main(String[] args) {
         SpringApplication.run(BarberShopApplication.class, args);
     }
-
 }

@@ -15,10 +15,13 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.Collection;
+
 @Service
 @AllArgsConstructor
 public class AdminService {
-    private static final Logger logger = LoggerFactory.getLogger(AdminService.class);
+    private static final Logger logger = LoggerFactory.getLogger("AdminService");
     private final AdminRepo adminRepo;
     private final PasswordEncoder passwordEncoder;
 
@@ -29,6 +32,13 @@ public class AdminService {
         admin.setPasswd(digest);
         adminRepo.save(admin);
         logger.info("创建管理员：{}", admin.getName());
+    }
+
+    public Collection<Admin> search(String text) {
+        Collection<Admin> adminCollection = new ArrayList<>();
+        adminCollection.addAll(adminRepo.findByNameStartsWith(text));
+        adminCollection.addAll(adminRepo.findByPhoneStartsWith(text));
+        return adminCollection;
     }
 
     public void test() {
