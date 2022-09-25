@@ -1,6 +1,10 @@
 spring:
   application:
     name: BarberShop
+  data:
+    jpa:
+      repositories:
+        bootstrap-mode: lazy
   jpa:
     hibernate:
       ddl-auto: update
@@ -12,3 +16,8 @@ spring:
     url: jdbc:mysql://sv.battlehawk233.cn:10036/barbershop
     username: root
     password: yxl123456.
+    hikari:
+      maximum-pool-size: 4
+      minimum-idle: 1
+  main:
+    lazy-initialization: true

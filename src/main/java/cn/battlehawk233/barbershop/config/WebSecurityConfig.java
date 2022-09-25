@@ -60,7 +60,7 @@ public class WebSecurityConfig {
         return http
                 .authorizeRequests()
                 // 放行登录接口
-                .antMatchers("/auth/login", "/admin/register")
+                .antMatchers("/auth/login", "/admin/register", "/ws")
                 .permitAll()
                 // 除登录接口外，所有路径需要登录权限
                 .antMatchers("/**")
