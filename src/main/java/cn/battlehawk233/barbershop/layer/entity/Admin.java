@@ -1,7 +1,10 @@
 package cn.battlehawk233.barbershop.layer.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.experimental.Tolerate;
 import org.hibernate.annotations.DynamicUpdate;
 
 import javax.persistence.*;
@@ -9,6 +12,7 @@ import java.util.Date;
 
 @Data
 @Entity
+@Builder
 @DynamicUpdate
 public class Admin extends BaseEntityWithTime {
     @Id
@@ -22,7 +26,7 @@ public class Admin extends BaseEntityWithTime {
     @Column(nullable = false, length = 64)
     String passwd;
 
-    @Column(nullable = false, length = 16)
+    @Column(nullable = false, length = 32)
     String salt;
 
     @Column(unique = true, nullable = false, length = 32)
@@ -34,4 +38,8 @@ public class Admin extends BaseEntityWithTime {
     Integer gender;
 
     Date lastLogin;
+
+    @Tolerate
+    public Admin(){
+    }
 }

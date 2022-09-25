@@ -11,6 +11,8 @@ import lombok.AllArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -18,10 +20,11 @@ import org.springframework.stereotype.Service;
 public class AdminService {
     private static final Logger logger = LoggerFactory.getLogger(AdminService.class);
     private final AdminRepo adminRepo;
+    private final PasswordEncoder passwordEncoder;
 
     public void register(Admin admin, String passwd) {
         var salt = IdUtil.fastSimpleUUID();
-        var digest = DigestUtil.sha256Hex(passwd + salt);
+        var digest = passwordEncoder.encode(passwd + salt);
         admin.setSalt(salt);
         admin.setPasswd(digest);
         adminRepo.save(admin);
@@ -29,18 +32,7 @@ public class AdminService {
     }
 
     public void test() {
-
-        var admin = new Admin();
-        admin.setName("asd");
-        admin.setPhone("1239018239");
-        admin.setPasswd("asdfasdf");
-        admin.setSalt("asdfasfd");
-
-        try {
-            adminRepo.save(admin);
-
-        } catch (DataIntegrityViolationException e) {
-            throw new ServiceException("asdasd");
-        }
+        var admin = Admin.builder().name("asd").phone("1239018239").build();
+        register(admin, "123456");
     }
 }

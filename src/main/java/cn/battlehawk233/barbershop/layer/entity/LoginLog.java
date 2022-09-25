@@ -24,7 +24,7 @@ public class LoginLog {
     String loginIp;
 
 
-    @Column(length = 128, nullable = false)
+    @Column(length = 512, nullable = false)
     String loginUa;
 
     @Column(columnDefinition = "tinyint", nullable = false)

@@ -8,6 +8,7 @@ import cn.battlehawk233.barbershop.layer.service.AuthService;
 import cn.battlehawk233.barbershop.layer.service.UserService;
 import lombok.AllArgsConstructor;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -34,8 +35,8 @@ public class AuthController {
     }
 
     @GetMapping("/test")
-    @PreAuthorize("hasAuthority('login')")
     public Response<String> test() {
+        System.out.println(SecurityContextHolder.getContext().getAuthentication());
         return Response.OK_WITH_DATA("test");
     }
 }
