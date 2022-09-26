@@ -7,5 +7,6 @@ export abstract class BaseWindow {
 
     close() {
         this.window?.close();
+        this.window = undefined;
     }
 }

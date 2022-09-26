@@ -17,13 +17,18 @@ class ConnectionWindow extends BaseWindow {
         this.window = new BrowserWindow({
             width: 400,
             height: 300,
+            frame: false,
+            // transparent: true,
             webPreferences: {
+                devTools: false,
                 webSecurity: false,
                 nodeIntegration: true
             }
         })
         // this.window.setClosable(false);
-
+        this.window.setProgressBar(50, {
+            mode: 'indeterminate'
+        })
         this.window.setResizable(false);
         this.window.setMenuBarVisibility(false);
         this.titleAnimation();

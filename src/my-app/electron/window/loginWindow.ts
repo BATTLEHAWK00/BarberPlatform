@@ -16,6 +16,7 @@ class LoginWindow extends BaseWindow {
                 nodeIntegration: true
             },
         })
+        this.window.setMenuBarVisibility(false);
         this.window.once('ready-to-show', () => this.window?.show());
         await this.window.loadURL("https://baidu.com");
     }

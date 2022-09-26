@@ -62,7 +62,8 @@
   },
   "scripts": {
     "bstart": "tsc && electron dist/main.js",
-    "start": "electron-forge start",
+    "start": "electron dist/main.js",
+    "fstart": "electron-forge start",
     "build": "node scripts/build.js",
     "test": "node scripts/test.js",
     "package": "electron-forge package",

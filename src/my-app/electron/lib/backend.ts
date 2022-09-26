@@ -2,7 +2,7 @@ import childProcess, {ChildProcessWithoutNullStreams} from 'child_process';
 import path from "path";
 import {findFreePort} from "../util/port";
 import {setTimeout} from 'timers/promises';
-import WebSocketServer from "ws";
+import WebSocketServer, {CloseEvent} from "ws";
 
 const jarPath = path.resolve(__dirname, "../../electron/backend/");
 
@@ -11,7 +11,7 @@ function createWSConnection(
     onOpen: (event: WebSocketServer.Event) => void,
     onMessage: (event: WebSocketServer.MessageEvent) => void,
     onError: (event: WebSocketServer.ErrorEvent) => void,
-    onClose: (this: Window, ev: Event) => void
+    onClose: (event: CloseEvent) => void
 ) {
     const conn = new WebSocketServer(url);
     conn.onopen = onOpen;
@@ -42,7 +42,7 @@ class BarberShopBackend {
                 },
                 () => {
                 });
-            this.backend = childProcess.spawn("D:/Runtimes/graalvm-ce-java17-22.2.0/bin/java.exe", [
+            this.backend = childProcess.spawn("java.exe", [
                     "-Xms32M",
                     "-Xmx256M",
                     "-jar",

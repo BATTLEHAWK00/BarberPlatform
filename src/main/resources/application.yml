@@ -10,14 +10,18 @@ spring:
       ddl-auto: update
       naming:
         physical-strategy: cn.battlehawk233.barbershop.config.NamingStrategy
-        show-sql: true
-    database-platform: org.hibernate.dialect.MySQL8Dialect
+    database-platform: org.hibernate.dialect.H2Dialect
+#    show-sql: true
   datasource:
-    url: jdbc:mysql://sv.battlehawk233.cn:10036/barbershop
-    username: root
-    password: yxl123456.
+    url: jdbc:h2:file:./barbershop
     hikari:
-      maximum-pool-size: 4
+      maximum-pool-size: 2
       minimum-idle: 1
   main:
     lazy-initialization: true
+    banner-mode: off
+server:
+  undertow:
+    threads:
+      io: 1
+      worker: 2
