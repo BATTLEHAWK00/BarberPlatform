@@ -1,7 +1,7 @@
 package cn.battlehawk233.barbershop.layer.service;
 
-import cn.battlehawk233.barbershop.layer.dao.AdminRepo;
 import cn.battlehawk233.barbershop.layer.entity.Admin;
+import cn.battlehawk233.barbershop.layer.dao.AdminRepo;
 import cn.hutool.core.util.IdUtil;
 import lombok.AllArgsConstructor;
 import org.slf4j.Logger;

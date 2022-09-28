@@ -1,5 +1,5 @@
 {
-  "name": "barber-shop-frontend",
+  "name": "barbershop-frontend",
   "version": "0.1.0",
   "private": true,
   "main": "dist/main.js",

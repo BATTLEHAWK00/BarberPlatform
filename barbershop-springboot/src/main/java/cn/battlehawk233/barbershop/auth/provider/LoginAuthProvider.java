@@ -1,8 +1,8 @@
 package cn.battlehawk233.barbershop.auth.provider;
 
-import cn.battlehawk233.barbershop.auth.token.JWTAuthToken;
 import cn.battlehawk233.barbershop.layer.dao.AdminRepo;
 import cn.battlehawk233.barbershop.layer.entity.Admin;
+import cn.battlehawk233.barbershop.auth.token.JWTAuthToken;
 import cn.hutool.jwt.JWTUtil;
 import lombok.AllArgsConstructor;
 import org.springframework.security.authentication.AuthenticationProvider;
