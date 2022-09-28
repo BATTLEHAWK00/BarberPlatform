@@ -5,6 +5,13 @@ import {setTimeout} from 'timers/promises';
 import WebSocketServer, {CloseEvent} from "ws";
 
 const jarPath = path.resolve(__dirname, "../../electron/backend/");
+const jvmArgs: string[] = [
+    "-XX:+UseSerialGC",
+    "-Xms48M",
+    "-Xmx64M",
+    "-XX:NewRatio=1",
+    // "-XX:+PrintGC"
+];
 
 function createWSConnection(
     url: string,
@@ -30,6 +37,9 @@ class BarberShopBackend {
 
     async start() {
         this.port = await findFreePort();
+        const appArgs: string[] = [
+            `--server.port=${this.port}`
+        ];
 
         return new Promise<void>((resolve, reject) => {
             createWSConnection(
@@ -43,18 +53,21 @@ class BarberShopBackend {
                 () => {
                 });
             this.backend = childProcess.spawn("java.exe", [
-                    "-Xms32M",
-                    "-Xmx256M",
+                    ...jvmArgs,
                     "-jar",
                     "backend.jar",
-                    `--server.port=${this.port}`
+                    ...appArgs
                 ],
-                {
-                    cwd: jarPath
-                });
+                {cwd: jarPath});
             this.backend.stdout.on('data', (data) => {
                 // console.log(data.toString())
             });
+            this.backend.stderr.on('data', (data) => {
+                console.error(data.toString())
+            });
+            this.backend.once('exit', () => {
+                throw new Error("后端进程异常退出，请重启系统");
+            })
         })
     }
 

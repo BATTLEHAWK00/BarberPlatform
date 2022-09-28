@@ -6,6 +6,8 @@ import loginWindow from "./window/loginWindow";
 function registerEvents() {
     process.on('uncaughtException', (e) => {
         console.log(e);
+        dialog.showErrorBox("错误", e.message);
+        app.exit(1);
     })
     app.on('window-all-closed', () => {
         if (process.platform !== 'darwin') app.quit()

@@ -4,30 +4,18 @@ import cn.battlehawk233.barbershop.auth.AuthManager;
 import cn.battlehawk233.barbershop.auth.provider.JWTAuthProvider;
 import cn.battlehawk233.barbershop.auth.provider.LoginAuthProvider;
 import cn.battlehawk233.barbershop.filter.JWTAuthFilter;
-import cn.battlehawk233.barbershop.layer.dao.AdminRepo;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.config.Customizer;
-import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
-import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.config.annotation.web.configurers.ExceptionHandlingConfigurer;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
-import org.springframework.security.web.access.AccessDeniedHandler;
 import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
 
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
 import java.util.List;
 
 @Configuration
@@ -40,15 +28,11 @@ public class WebSecurityConfig {
     }
 
     @Bean
-    public AuthenticationManager authenticationManager(
-            JWTAuthProvider jwtAuthProvider,
-            LoginAuthProvider loginAuthProvider
-    ) {
-        var providers = List.of(
-                jwtAuthProvider,
-                loginAuthProvider
-        );
-        return new AuthManager(providers);
+    public AuthenticationManager authenticationManager(JWTAuthProvider jwtProvider, LoginAuthProvider loginProvider) {
+        return new AuthManager(List.of(
+                jwtProvider,
+                loginProvider
+        ));
     }
 
     @Bean
@@ -57,8 +41,7 @@ public class WebSecurityConfig {
             AuthenticationManager authenticationManager,
             JWTAuthFilter jwtAuthFilter
     ) throws Exception {
-        return http
-                .authorizeRequests()
+        return http.authorizeRequests()
                 // 放行登录接口
                 .antMatchers("/auth/login", "/admin/register", "/ws")
                 .permitAll()
@@ -74,9 +57,11 @@ public class WebSecurityConfig {
                 // 关闭CSRF
                 .csrf()
                 .disable()
+                // 使用无状态Session
                 .sessionManagement()
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
+                // 设置Auth Manager
                 .authenticationManager(authenticationManager)
                 .build();
     }

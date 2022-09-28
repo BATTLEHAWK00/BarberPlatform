@@ -1,7 +1,6 @@
 package cn.battlehawk233.barbershop;
 
 import cn.battlehawk233.barbershop.exception.BackendException;
-import cn.battlehawk233.barbershop.exception.ServiceException;
 import cn.battlehawk233.barbershop.pojo.Response;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

@@ -1,17 +1,11 @@
 package cn.battlehawk233.barbershop.layer.service;
 
 import cn.battlehawk233.barbershop.layer.dao.AdminRepo;
-import cn.battlehawk233.barbershop.layer.dao.MoneyFlowLogRepo;
 import cn.battlehawk233.barbershop.layer.entity.Admin;
-import cn.battlehawk233.barbershop.exception.ServiceException;
 import cn.hutool.core.util.IdUtil;
-import cn.hutool.core.util.RandomUtil;
-import cn.hutool.crypto.digest.DigestUtil;
 import lombok.AllArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.dao.DataIntegrityViolationException;
-import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
