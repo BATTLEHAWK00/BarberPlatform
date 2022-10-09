@@ -11,7 +11,8 @@ spring:
       naming:
         physical-strategy: cn.battlehawk233.barbershop.config.NamingStrategy
     database-platform: org.hibernate.dialect.H2Dialect
-#    show-sql: true
+    open-in-view: true
+  #    show-sql: true
   datasource:
     url: jdbc:h2:file:./barbershop
     hikari:
@@ -25,3 +26,20 @@ server:
     threads:
       io: 1
       worker: 2
+    direct-buffers: true
+logging:
+  level:
+    org.springframework: warn
+    io.undertow: warn
+    org.quartz: warn
+    org.xnio: warn
+    com.zaxxer.hikari: warn
+    org.hibernate: warn
+    org.jboss: warn
+    io.undertow.websockets.jsr: error
+springdoc:
+  swagger-ui:
+    path: /api-docs.html
+  api-docs:
+    path: /api-docs
+  packages-to-scan: cn.battlehawk233.controller

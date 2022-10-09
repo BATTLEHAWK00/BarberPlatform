@@ -47,7 +47,15 @@ public class WebSecurityConfig {
     ) throws Exception {
         return http.authorizeRequests()
                 // 放行登录接口
-                .antMatchers("/auth/login", "/admin/register", "/ws")
+                .antMatchers(
+                        "/auth/login",
+                        "/admin/register",
+                        "/ws",
+                        "/api-docs",
+                        "/api-docs.html",
+                        "/api-docs/*",
+                        "/swagger-ui/*"
+                )
                 .permitAll()
                 // 除登录接口外，所有路径需要登录权限
                 .antMatchers("/**")
