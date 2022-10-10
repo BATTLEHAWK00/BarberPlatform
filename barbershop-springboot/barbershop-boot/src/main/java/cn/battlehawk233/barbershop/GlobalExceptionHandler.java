@@ -12,18 +12,18 @@ public class GlobalExceptionHandler {
     public static final Logger logger = LoggerFactory.getLogger("ExceptionHandler");
 
     @ExceptionHandler(BackendException.class)
-    public Response<Object> handleServiceException(BackendException e) {
-        return Response.FAIL_WITH_MESSAGE(e.getStatus(), e.getMessage());
+    public JsonResponse<Object> handleServiceException(BackendException e) {
+        return JsonResponse.FAIL_WITH_MESSAGE(e.getStatus(), e.getMessage());
     }
 
     @ExceptionHandler(AccessDeniedException.class)
-    public Response<Object> handleUnauthorizedException(AccessDeniedException e) {
-        return Response.FAIL_WITH_MESSAGE(403, "你没有权限执行此操作");
+    public JsonResponse<Object> handleUnauthorizedException(AccessDeniedException e) {
+        return JsonResponse.FAIL_WITH_MESSAGE(403, "你没有权限执行此操作");
     }
 
     @ExceptionHandler(Exception.class)
-    public Response<Object> handleAll(Exception e) {
+    public JsonResponse<Object> handleAll(Exception e) {
         logger.error("Unhandled exception:", e);
-        return Response.FAIL_WITH_MESSAGE(500, "Internal Server Error");
+        return JsonResponse.FAIL_WITH_MESSAGE(500, "Internal Server Error");
     }
 }

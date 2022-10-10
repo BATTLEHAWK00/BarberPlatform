@@ -6,22 +6,25 @@ import lombok.Data;
 
 @Data
 @JsonPropertyOrder({"code", "msg", "data"})
-public class Response<T> {
+public class JsonResponse<T> implements IJsonResponse{
     int code = 200;
     String msg = "OK";
     @JsonInclude(JsonInclude.Include.NON_NULL)
     T data;
 
-    public Response(T data) {
+    public JsonResponse(T data) {
         this.data = data;
     }
 
-    public static <T> Response<T> OK_WITH_DATA(T data) {
-        return new Response<T>(data);
+    public static <T> JsonResponse<T> OK_WITH_DATA(T data) {
+        return new JsonResponse<T>(data);
+    }
+    public static IJsonResponse OK() {
+        return new JsonResponse<>(null);
     }
 
-    public static Response<Object> FAIL_WITH_MESSAGE(int code, String msg) {
-        var res = new Response<>(null);
+    public static JsonResponse<Object> FAIL_WITH_MESSAGE(int code, String msg) {
+        var res = new JsonResponse<>(null);
         res.setCode(code);
         res.setMsg(msg);
         return res;

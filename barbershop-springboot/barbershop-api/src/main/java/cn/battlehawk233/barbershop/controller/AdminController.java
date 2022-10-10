@@ -1,29 +1,45 @@
 package cn.battlehawk233.barbershop.controller;
 
+import cn.battlehawk233.barbershop.IJsonResponse;
 import cn.battlehawk233.barbershop.entity.Admin;
 import cn.battlehawk233.barbershop.service.AdminService;
-import cn.battlehawk233.barbershop.Response;
+import cn.battlehawk233.barbershop.JsonResponse;
+import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.AllArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import lombok.RequiredArgsConstructor;
+import org.springframework.web.bind.annotation.*;
 
+@Tag(name = "/admin", description = "管理员相关")
 @RestController
 @RequestMapping("/admin")
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class AdminController {
     private final AdminService adminService;
 
-    @Tag(name = "注册", description = "注册接口")
+    @Operation(summary = "管理员注册")
     @GetMapping("/register")
-    public Response<Object> register() {
+    public JsonResponse<Object> register() {
         var admin = Admin
                 .builder()
                 .name("test")
                 .phone("123456")
                 .build();
         adminService.register(admin, "123456");
-        return Response.OK_WITH_DATA(null);
+        return JsonResponse.OK_WITH_DATA(null);
+    }
+
+    // TODO: 2022/10/10
+    @Operation(summary = "模糊搜索管理员，返回列表")
+    @GetMapping("/fuzzySearch")
+    public IJsonResponse fuzzySearchAdmins(@RequestParam String query) {
+        return JsonResponse.OK_WITH_DATA(null);
+    }
+
+    // TODO: 2022/10/10
+    @Operation(summary = "修改管理员信息")
+    @PostMapping("/update/{adminId}")
+    public IJsonResponse updateAdmin(@PathVariable String adminId) {
+        return JsonResponse.OK();
     }
 }
