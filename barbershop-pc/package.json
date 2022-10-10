@@ -27,7 +27,7 @@
     "fstart": "electron-forge start",
     "build": "node scripts/build.js",
     "test": "node scripts/test.js",
-    "package": "electron-forge package",
+    "package": "tsc && electron-forge package",
     "make": "electron-forge make"
   },
   "eslintConfig": {
