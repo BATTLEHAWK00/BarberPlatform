@@ -1,4 +1,4 @@
-package cn.battlehawk233.barbershop.controller.log;
+package cn.battlehawk233.barbershop.controller.logs;
 
 import cn.battlehawk233.barbershop.IJsonResponse;
 import cn.battlehawk233.barbershop.JsonResponse;

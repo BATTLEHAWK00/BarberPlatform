@@ -2,37 +2,38 @@ import { Menu } from 'antd';
 import { ItemType } from 'antd/lib/menu/hooks/useItems';
 import { MenuClickEventHandler } from 'rc-menu/lib/interface';
 import React from 'react';
-
-const items: ItemType[] = [
-  {
-    key: 1,
-    label: 'test',
-  },
-  {
-    key: 2,
-    label: 'test',
-  },
-  {
-    type: 'divider',
-  },
-  {
-    key: 3,
-    label: 'test',
-  },
-  {
-    key: 5,
-    label: 'test',
-  },
-];
+import { RouteObjectWithInfo } from '../../routes';
+import routes from '../../routes/pages';
+import { useNavigate } from 'react-router-dom';
 
 function Nav() {
+  const navigate = useNavigate();
+
   const handleClick: MenuClickEventHandler = (info) => {
     info.key;
   };
 
+  function parseRoute(routes: RouteObjectWithInfo[], prefixPaths: string[] = []): ItemType[] {
+    return routes
+      .filter((route) => !route.hiddenInMenu)
+      .filter((route) => route.path !== undefined)
+      .map(({ path, menuIcon, menuName, children }) => {
+        const fullPath = [...prefixPaths, path].join('/');
+        return {
+          key: fullPath,
+          label: menuName,
+          icon: menuIcon,
+          children: children && parseRoute(children, [...prefixPaths, path as string]),
+          onClick: (e) => navigate(e.key),
+        };
+      });
+  }
+
+  const menuItems: ItemType[] = parseRoute(routes);
+
   return (
     <>
-      <Menu items={items} mode="vertical" onClick={handleClick} />
+      <Menu items={menuItems} mode="inline" onClick={handleClick} />
     </>
   );
 }

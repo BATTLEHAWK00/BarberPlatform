@@ -7,7 +7,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
-@Tag(name = "expenseItem", description = "经营支出项目相关")
+@Tag(name = "/expenseItem", description = "经营支出项目相关")
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/expenseItem")
@@ -34,12 +34,14 @@ public class ExpenseItemController {
         return JsonResponse.OK();
     }
 
+    // TODO: 2022/10/11  
     @Operation(summary = "模糊查询经营支出项目")
     @GetMapping("/fuzzySearch")
     public IJsonResponse fuzzySearchExpenseItem(@RequestParam String query){
         return JsonResponse.OK();
     }
 
+    // TODO: 2022/10/11
     @Operation(summary = "根据ID查询经营支出项目")
     @GetMapping("/byId/{itemId}")
     public IJsonResponse getExpenseItemById(@PathVariable String itemId){

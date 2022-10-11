@@ -13,10 +13,19 @@ function fromSrc(...paths) {
   return fromRoot('src/', ...paths);
 }
 
+const regex = {
+  nodeModules: /[\\/]node_modules[\\/]/,
+  antd: /[\\/]node_modules[\\/](antd|@ant-design|@antv)[\\/]/,
+  icons: /[\\/]node_modules[\\/](@icons|remixicon|@ant-design[\\/]icons(-svg)?)[\\/]/,
+  imageFile: /\.(png|jpg|gif|svg)$/i,
+  fontFile: /\.(eot|woff|woff2|ttf)$/i,
+};
+
 module.exports = {
   mode: 'development',
   entry: fromSrc('main.tsx'),
   output: {
+    filename: 'js/[name].[contenthash].js',
     path: fromRoot('dist/frontend'),
     clean: true,
   },
@@ -49,6 +58,9 @@ module.exports = {
             },
           },
         ],
+        generator: {
+          outputPath: 'js/',
+        },
       },
       {
         test: /\.less$/,
@@ -73,13 +85,25 @@ module.exports = {
         use: [MiniCssExtractPlugin.loader, 'css-loader'],
       },
       {
-        test: /\.(png|jpg|gif|svg)$/i,
+        test: regex.imageFile,
         type: 'asset/resource',
+        generator: {
+          outputPath: 'img/[hash][ext]',
+        },
+      },
+      {
+        test: regex.fontFile,
+        type: 'asset/resource',
+        generator: {
+          filename: 'font/[hash][ext]',
+        },
       },
     ],
   },
   plugins: [
-    new MiniCssExtractPlugin(),
+    new MiniCssExtractPlugin({
+      filename: 'css/[name].[contenthash].css',
+    }),
     new EslintWebpackPlugin({
       extensions: ['js', 'ts', 'tsx'],
       threads: true,
@@ -97,5 +121,35 @@ module.exports = {
         css: false,
       }),
     ],
+    splitChunks: {
+      automaticNameDelimiter: '-',
+      name: '[name].[hash]',
+      cacheGroups: {
+        default: {
+          minChunks: 2,
+          priority: -30,
+          reuseExistingChunk: true,
+        },
+        vendor: {
+          name: 'vendor.chunk',
+          chunks: 'all',
+          test: regex.nodeModules,
+          reuseExistingChunk: true,
+          priority: -20,
+        },
+        antd: {
+          name: 'antd.chunk',
+          chunks: 'all',
+          test: regex.antd,
+          priority: -10,
+        },
+        icons: {
+          name: 'icons.chunk',
+          chunks: 'all',
+          priority: -10,
+          test: regex.icons,
+        },
+      },
+    },
   },
 };

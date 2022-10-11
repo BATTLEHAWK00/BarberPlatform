@@ -11,7 +11,6 @@ const MainLayout: React.FC = () => {
   //   const breadcrumbs = useReactRouterBreadcrumbs();
   const navigate = useNavigate();
   const onBack = () => navigate(-1);
-
   return (
     <>
       <Layout className={styles.layout}>
@@ -24,7 +23,10 @@ const MainLayout: React.FC = () => {
         <Layout>
           <Layout.Header></Layout.Header>
           <Layout.Content className={styles.content}>
-            <PageContainer title="asdas" header={{ onBack }}>
+            <PageContainer
+              title="asdas"
+              header={{ onBack: history.length !== 1 ? onBack : undefined }}
+            >
               <Outlet />
             </PageContainer>
           </Layout.Content>
