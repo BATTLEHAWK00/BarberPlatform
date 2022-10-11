@@ -13,7 +13,8 @@ import {
 } from '@ant-design/icons';
 import React from 'react';
 import { RouteObjectWithInfo } from '..';
-import MainPage from '../../pages/main/index';
+import CreateCustomerOrder from '@pages/main/customerOrder/create';
+import MainPage from '@pages/main/index';
 
 const routes: RouteObjectWithInfo[] = [
   {
@@ -31,6 +32,7 @@ const routes: RouteObjectWithInfo[] = [
         path: 'create',
         menuName: '创建订单',
         menuIcon: <i className="ri-file-add-line" />,
+        element: <CreateCustomerOrder />,
       },
       {
         path: 'records',

@@ -1,8 +1,8 @@
 import React, { ReactNode } from 'react';
 import { RouteObject } from 'react-router-dom';
 import pageRoutes from './pages';
-import LoginPage from '../pages/login';
-import MainLayout from '../components/layout/main';
+import MainLayout from '@/components/layout/main';
+import LoginPage from '@/pages/login';
 
 export interface RouteObjectWithInfo extends RouteObject {
   hiddenInMenu?: boolean;

@@ -2,11 +2,11 @@ import { Menu } from 'antd';
 import { ItemType } from 'antd/lib/menu/hooks/useItems';
 import { MenuClickEventHandler } from 'rc-menu/lib/interface';
 import React from 'react';
-import { RouteObjectWithInfo } from '../../routes';
-import routes from '../../routes/pages';
 import { useNavigate } from 'react-router-dom';
+import routes from '@/routes/pages';
+import { RouteObjectWithInfo } from '@/routes';
 
-function Nav() {
+const Nav: React.FC = () => {
   const navigate = useNavigate();
 
   const handleClick: MenuClickEventHandler = (info) => {
@@ -36,5 +36,5 @@ function Nav() {
       <Menu items={menuItems} mode="inline" onClick={handleClick} />
     </>
   );
-}
+};
 export default Nav;

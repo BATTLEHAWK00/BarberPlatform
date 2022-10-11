@@ -1,7 +1,7 @@
+import auth from '@/api/auth';
 import { LockOutlined, UserOutlined } from '@ant-design/icons';
 import { Form, Layout, Input, Button } from 'antd';
 import React, { useState } from 'react';
-import auth from '../../api/auth';
 import styles from './index.module.less';
 
 interface LoginData {

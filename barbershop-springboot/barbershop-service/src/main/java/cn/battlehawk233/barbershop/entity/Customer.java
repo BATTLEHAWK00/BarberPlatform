@@ -41,4 +41,7 @@ public class Customer extends BaseEntityWithTime {
     BigDecimal balance;
 
     Date lastConsumeTime;
+
+    @Column(precision = 2)
+    BigDecimal lastConsumeAmount;
 }
