@@ -4,6 +4,7 @@ import cn.battlehawk233.barbershop.exception.BackendException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.security.access.AccessDeniedException;
+import org.springframework.web.bind.MissingServletRequestParameterException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
@@ -11,8 +12,13 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 public class GlobalExceptionHandler {
     public static final Logger logger = LoggerFactory.getLogger("ExceptionHandler");
 
+    @ExceptionHandler(MissingServletRequestParameterException.class)
+    public IJsonResponse handleMissingServletRequestParameterException(MissingServletRequestParameterException e) {
+        return JsonResponse.FAIL_WITH_MESSAGE(400, e.getMessage());
+    }
+
     @ExceptionHandler(BackendException.class)
-    public JsonResponse<Object> handleServiceException(BackendException e) {
+    public IJsonResponse handleServiceException(BackendException e) {
         return JsonResponse.FAIL_WITH_MESSAGE(e.getStatus(), e.getMessage());
     }
 

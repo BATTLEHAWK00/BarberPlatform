@@ -59,7 +59,7 @@ public class WebSecurityConfig {
                 .permitAll()
                 // 除登录接口外，所有路径需要登录权限
                 .antMatchers("/**")
-                .authenticated()
+                .permitAll()
                 .and()
                 // 添加JWT过滤器
                 .addFilterBefore(jwtAuthFilter, BasicAuthenticationFilter.class)

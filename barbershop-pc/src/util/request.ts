@@ -20,13 +20,15 @@ axios.interceptors.request.use(undefined, (err) => {
 
 axios.interceptors.response.use(
   (res) => {
-    if (res.data.code !== 200) {
+    const { data, status } = res;
+    if (status !== 200) {
       console.error(res.data.msg);
       notification.error({
         message: '请求错误',
         description: res.data.msg,
       });
     }
+    return data.data || data;
   },
   (err) => {
     console.error(err);

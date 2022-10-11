@@ -13,7 +13,12 @@ const Nav: React.FC = () => {
     info.key;
   };
 
-  function parseRoute(routes: RouteObjectWithInfo[], prefixPaths: string[] = []): ItemType[] {
+  function parseRoute(
+    routes: RouteObjectWithInfo[],
+    prefixPaths: string[] = [],
+    depth = 1
+  ): ItemType[] | undefined {
+    if (depth > 2) return undefined;
     return routes
       .filter((route) => !route.hiddenInMenu)
       .filter((route) => route.path !== undefined)
@@ -23,13 +28,13 @@ const Nav: React.FC = () => {
           key: fullPath,
           label: menuName,
           icon: menuIcon,
-          children: children && parseRoute(children, [...prefixPaths, path as string]),
+          children: children && parseRoute(children, [...prefixPaths, path as string], depth + 1),
           onClick: (e) => navigate(e.key),
         };
       });
   }
 
-  const menuItems: ItemType[] = parseRoute(routes);
+  const menuItems: ItemType[] = parseRoute(routes) as ItemType[];
 
   return (
     <>

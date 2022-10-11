@@ -15,6 +15,7 @@ import React from 'react';
 import { RouteObjectWithInfo } from '..';
 import CreateCustomerOrder from '@pages/main/customerOrder/create';
 import MainPage from '@pages/main/index';
+import CreateCustomerPage from '@/pages/main/customer/create';
 
 const routes: RouteObjectWithInfo[] = [
   {
@@ -60,6 +61,7 @@ const routes: RouteObjectWithInfo[] = [
         path: 'create',
         menuName: '顾客录入',
         menuIcon: <UserAddOutlined />,
+        element: <CreateCustomerPage />,
       },
     ],
   },
@@ -103,7 +105,7 @@ const routes: RouteObjectWithInfo[] = [
     ],
   },
   {
-    path: 'settings',
+    path: 'system',
     menuName: '内部配置',
     menuIcon: <ControlOutlined />,
     children: [
@@ -113,9 +115,15 @@ const routes: RouteObjectWithInfo[] = [
         menuIcon: <i className="ri-admin-line" />,
       },
       {
-        path: 'system',
+        path: 'settings',
         menuName: '系统设置',
         menuIcon: <SettingOutlined />,
+        children: [
+          {
+            path: 'backup',
+            menuName: 'asd',
+          },
+        ],
       },
     ],
   },
